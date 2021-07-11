@@ -20,9 +20,10 @@ describe('RequestCache', () => {
         send: 'hello world'
       }
     })
+    const timeStart = Date.now()
     const a = await checkToken.request()
-
     const b = await checkToken.request()
+    expect(Date.now() - timeStart).toBeLessThan(200)
     expect(mockFn).toBeCalledTimes(1)
     expect(a).toBe(b)
     expect(a).toHaveProperty('send')
@@ -36,14 +37,30 @@ describe('RequestCache', () => {
         send: 'hello world'
       }
     })
+
+    const timeStart = Date.now()
     const a = await checkToken.request()
-
     checkToken.clear()
-
     const b = await checkToken.request()
+    expect(Date.now() - timeStart).toBeGreaterThan(200)
+
     expect(mockFn).toBeCalledTimes(2)
     expect(a).not.toBe(b)
     expect(a).toEqual(b)
     expect(a).toHaveProperty('send')
+  })
+
+  test('处理错误', async () => {
+    const mockFn = jest.fn()
+    const checkToken = new RequestCache(async () => {
+      await timeoutAsync(100)
+      mockFn()
+      return Promise.reject(new Error())
+    })
+    const timeStart = Date.now()
+    await checkToken.request().catch(e => {})
+    await checkToken.request().catch(e => {})
+    expect(Date.now() - timeStart).toBeGreaterThan(200)
+    expect(mockFn).toBeCalledTimes(2)
   })
 })
