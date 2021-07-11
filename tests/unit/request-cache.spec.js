@@ -20,10 +20,8 @@ describe('RequestCache', () => {
         send: 'hello world'
       }
     })
-    const timeStart = Date.now()
     const a = await checkToken.request()
     const b = await checkToken.request()
-    expect(Date.now() - timeStart).toBeLessThan(200)
     expect(mockFn).toBeCalledTimes(1)
     expect(a).toBe(b)
     expect(a).toHaveProperty('send')
@@ -38,11 +36,9 @@ describe('RequestCache', () => {
       }
     })
 
-    const timeStart = Date.now()
     const a = await checkToken.request()
     checkToken.clear()
     const b = await checkToken.request()
-    expect(Date.now() - timeStart).toBeGreaterThan(200)
 
     expect(mockFn).toBeCalledTimes(2)
     expect(a).not.toBe(b)
@@ -57,10 +53,8 @@ describe('RequestCache', () => {
       mockFn()
       return Promise.reject(new Error())
     })
-    const timeStart = Date.now()
-    await checkToken.request().catch(e => {})
-    await checkToken.request().catch(e => {})
-    expect(Date.now() - timeStart).toBeGreaterThan(200)
+    await Promise.all([checkToken.request(), checkToken.request(), checkToken.request()]).catch(e => {})
+    await checkToken.request()
     expect(mockFn).toBeCalledTimes(2)
   })
 })
