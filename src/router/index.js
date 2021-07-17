@@ -19,7 +19,9 @@ const routes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes: routes.concat(
+    require('./demo.js').default
+  )
 })
 
 export default router
