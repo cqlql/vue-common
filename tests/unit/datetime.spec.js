@@ -21,5 +21,8 @@ describe('datet', () => {
     const dt2 = datet(new Date(2021, 0, 31))
     dt2.endOfDay()
     expect(dt2.format('YYYY-MM-DD')).toBe('2021-01-31')
+
+    const dt3 = datet('2021-01-31 12:13')
+    expect(dt3.format('YYYY-MM-DD')).toBe('2021-01-31')
   })
 })

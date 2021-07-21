@@ -35,6 +35,24 @@ class Datet {
   }
 }
 
+export function toDate (date) {
+  if (date instanceof Date) {
+    return date
+  }
+  // 2012,01,01
+  if (arguments.length > 1) {
+    return new Date(...arguments)
+  }
+  // 2021-01-01
+  if (typeof date === 'string') {
+    const args = date.replace(/[-:\s/]+/g, ',').split(',')
+    args[1] = args[1] - 1
+    return new Date(...args)
+  }
+  // 毫秒
+  return new Date(date)
+}
+
 export default function () {
-  return new Datet(new Date(...arguments))
+  return new Datet(toDate(...arguments))
 }
