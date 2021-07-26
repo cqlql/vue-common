@@ -1,0 +1,43 @@
+.cell {
+  display: flex;
+  line-height: 2;
+  padding: 10px 15px;
+  background-color: #fff;
+  color: #999;
+  font-size: 15px;
+
+  .c-title {
+    /* flex: 1; */
+    font-weight: bold;
+    color: #2e2e2e;
+    padding-right: 4px;
+  }
+
+  .c-value {
+    flex: 1;
+    text-align: right;
+  }
+
+  .c-arrow {
+    width: 16px;
+    height: 28px;
+    margin-left: 5px;
+    margin-top: 2px;
+    text-align: center;
+    transition: 0.3s;
+
+    /* background-color: #ddd; */
+  }
+
+  .c-arrow::before {
+    content: '>';
+    position: relative;
+    left: -3px;
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  .c-arrow.down {
+    transform: rotate(90deg);
+  }
+}
