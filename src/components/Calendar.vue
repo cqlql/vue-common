@@ -118,13 +118,6 @@ export default {
         wholeIndex++
       }
 
-      const head = ['一', '二', '三', '四', '五', '六']
-      if (this.sundayFirst) {
-        head.unshift('日')
-      } else {
-        head.push('日')
-      }
-
       return body
     }
   },
