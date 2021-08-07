@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import Calendar from '@/components/Calendar.vue'
+import Calendar from '@/components/Calendar/Calendar.vue'
 
 describe('Calendar', () => {
   test('props', async () => {

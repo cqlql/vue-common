@@ -1,6 +1,6 @@
 <template>
-  <div style="">
-    <div style="width:300px;margin:0 auto">
+  <div>
+    <div style="width: 300px; margin: 0 auto;">
       <CalendarVue
         :month="2"
       />
