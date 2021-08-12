@@ -13,6 +13,7 @@
   height: 100px;
   border-radius: 100%;
   text-align: center;
+  display: inline-block;
 
   .big-circle-btn-text {
     color: #fff;
