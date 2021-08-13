@@ -1,7 +1,7 @@
 <template>
   <div class="big-circle-btn">
-    <div class="big-circle-btn-text">上班打卡</div>
-    <div class="big-circle-btn-sub">12:22</div>
+    <div class="big-circle-btn__text">上班打卡</div>
+    <div class="big-circle-btn__sub">12:22</div>
   </div>
 </template>
 
@@ -15,19 +15,19 @@
   text-align: center;
   display: inline-block;
 
-  .big-circle-btn-text {
-    color: #fff;
-    font-size: 18px;
-    padding-top: 30px;
-  }
-
-  .big-circle-btn-sub {
-    color: #c8e7ff;
-  }
-
   &:active {
     opacity: 0.8;
   }
+}
+
+.big-circle-btn__text {
+  color: #fff;
+  font-size: 18px;
+  padding-top: 30px;
+}
+
+.big-circle-btn__sub {
+  color: #c8e7ff;
 }
 
 </style>
