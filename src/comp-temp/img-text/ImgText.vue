@@ -19,9 +19,10 @@
 <style scoped>
 .img-text {
   display: flex;
-  margin: 6px 0;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 6px;
+
+  /* margin: 6px 0; */
+
+  /* padding: 6px 10px; */
 }
 
 .img-text__img {

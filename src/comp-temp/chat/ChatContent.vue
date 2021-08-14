@@ -1,6 +1,6 @@
 <template>
   <div class="chart-content">
-    <!-- <div class="chart-content__time">星期四 16:04</div> -->
+    <div class="chart-content__time">星期四 16:04</div>
 
     <div class="chart-content__msg">
       <div class="chart-content__ava">
@@ -10,7 +10,7 @@
         >
       </div>
       <div class="chart-content__cont">
-        <div class="chart-content__name">闪亮小星星<span class="chart-content__t">星期四 16:04</span></div>
+        <div class="chart-content__name">闪亮小星星</div>
         <div class="chart-content__det">
           <span>
             我现在说起来蜻蜓公主的故事，很少会有人相信，她已经不像听起来那么神奇，也许就是一个与你擦肩而过的普通女孩。我有一本画册，记录了她每个成长的瞬间与心灵的侧影，我从来没向任何人展示过这本画册，大概至死都不会。
@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <!-- <div class="chart-content__time">星期四 16:04</div> -->
+    <div class="chart-content__time">星期四 16:04</div>
 
     <div class="chart-content__msg">
       <div class="chart-content__ava">
@@ -52,6 +52,7 @@
         </div>
       </div>
     </div>
+    <div class="chart-content__time r">星期四 16:04</div>
     <div class="chart-content__msg r">
       <div class="chart-content__ava">
         <img
@@ -60,7 +61,7 @@
         >
       </div>
       <div class="chart-content__cont">
-        <div class="chart-content__name"><span class="chart-content__t">星期四 16:04</span>闪亮小星星</div>
+        <div class="chart-content__name">闪亮小星星</div>
         <div class="chart-content__det">
           <span>
             我：好的
@@ -76,16 +77,20 @@
   padding: 10px;
 }
 
-.chart-content__t {
-  font-size: 12px;
-  color: #888;
-  padding-left: 6px;
-}
+// .chart-content__t {
+//   font-size: 12px;
+//   color: #888;
+//   padding-left: 6px;
+// }
 
 .chart-content__time {
-  text-align: center;
+  // text-align: center;
   font-size: 12px;
   color: #888;
+}
+
+.chart-content__time.r {
+  text-align: right;
 }
 
 .chart-content__msg {
@@ -149,9 +154,9 @@
     }
   }
 
-  .chart-content__t {
-    padding-left: 0;
-    padding-right: 6px;
-  }
+  // .chart-content__t {
+  //   padding-left: 0;
+  //   padding-right: 6px;
+  // }
 }
 </style>
