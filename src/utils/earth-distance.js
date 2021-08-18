@@ -2,7 +2,10 @@
  * 计算经纬坐标距离
  * 适用高德地图。应该也适用其他地图，待测
  * 高德地图测试：https://lbs.amap.com/demo/javascript-api/example/calcutation/calculate-distance-between-two-markers
- * @return Number 距离，单位米
+ *
+ * @param {number} lng1 点1经度
+ * @param {number} lag1 点1纬度
+ * @return {number} 距离，单位米
 */
 export default function earthDistance (lng1, lat1, lng2, lat2) {
   function rad (d) {
