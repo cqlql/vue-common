@@ -3,8 +3,6 @@
     <div class="ScrollLoadPlus-demo__box">
       <ScrollLoadPlus
         :get-list="getList"
-        :status-handle="statusHandle"
-        :result-handle="resultHandle"
       >
         <template #default="{list}">
           <p
@@ -21,8 +19,6 @@
       <h3>有 pages </h3>
       <ScrollLoadPlus
         :get-list="getHasPagesList"
-        :status-handle="statusHandle"
-        :result-handle="resultHandle"
       >
         <template #default="{list}">
           <p
@@ -38,8 +34,6 @@
       <h3>没有数据</h3>
       <ScrollLoadPlus
         :get-list="getNoDate"
-        :status-handle="statusHandle"
-        :result-handle="resultHandle"
       />
     </div>
   </div>
@@ -55,13 +49,7 @@ export default {
   methods: {
     getList,
     getHasPagesList,
-    getNoDate,
-    resultHandle (list) {
-      return list
-    },
-    statusHandle ({ list, allList, pages }) {
-
-    }
+    getNoDate
   }
 }
 </script>
