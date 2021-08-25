@@ -1,7 +1,7 @@
 <template>
-  <div class="ScrollTopLoadPlus-demo">
-    <!-- <div class="ScrollTopLoadPlus-demo__box">
-      <ScrollTopLoadPlus
+  <div class="ScrollLoadPlus-demo">
+    <div class="ScrollLoadPlus-demo__box">
+      <ScrollLoadPlus
         :get-list="getList"
         :status-handle="statusHandle"
         :result-handle="resultHandle"
@@ -14,12 +14,12 @@
             {{ v }}
           </p>
         </template>
-      </ScrollTopLoadPlus>
+      </ScrollLoadPlus>
     </div>
 
-    <div class="ScrollTopLoadPlus-demo__box">
-          <h3>有 pages </h3>
-      <ScrollTopLoadPlus
+    <div class="ScrollLoadPlus-demo__box">
+      <h3>有 pages </h3>
+      <ScrollLoadPlus
         :get-list="getHasPagesList"
         :status-handle="statusHandle"
         :result-handle="resultHandle"
@@ -32,11 +32,11 @@
             {{ v }}
           </p>
         </template>
-      </ScrollTopLoadPlus>
-    </div> -->
-    <div class="ScrollTopLoadPlus-demo__box">
+      </ScrollLoadPlus>
+    </div>
+    <div class="ScrollLoadPlus-demo__box">
       <h3>没有数据</h3>
-      <ScrollTopLoadPlus
+      <ScrollLoadPlus
         :get-list="getNoDate"
         :status-handle="statusHandle"
         :result-handle="resultHandle"
@@ -46,11 +46,11 @@
 </template>
 
 <script>
-import ScrollTopLoadPlus from './ScrollTopLoadPlus.vue'
+import ScrollLoadPlus from './ScrollLoadPlus.vue'
 import { getList, getHasPagesList, getNoDate } from './get-list.mock.js'
 export default {
   components: {
-    ScrollTopLoadPlus
+    ScrollLoadPlus
   },
   methods: {
     getList,
@@ -67,9 +67,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.ScrollTopLoadPlus-demo {}
+.ScrollLoadPlus-demo {}
 
-.ScrollTopLoadPlus-demo__box {
+.ScrollLoadPlus-demo__box {
   margin: 15px;
 }
 </style>
