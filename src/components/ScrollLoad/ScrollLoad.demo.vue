@@ -1,12 +1,13 @@
 <template>
-  <div class="ScrollTopLoad-demo">
+  <div class="ScrollLoad-demo">
     <button @click="scrollContainer.scrollTop=100">test</button>
     <div
       ref="container"
       class="container"
     >
-      <ScrollTopLoad
-        ref="vScrollTopLoad"
+      <ScrollLoad
+        ref="vScrollLoad"
+        is-top
         :scroll-container="scrollContainer"
         :load="load"
         :start-page="2"
@@ -22,11 +23,11 @@
 </template>
 
 <script>
-import ScrollTopLoad from './ScrollTopLoad.vue'
+import ScrollLoad from './ScrollLoad.vue'
 import { getList } from './get-list.mock.js'
 export default {
   components: {
-    ScrollTopLoad
+    ScrollLoad
   },
   data () {
     return {
@@ -40,32 +41,34 @@ export default {
     this.scrollContainer = this.$refs.container
     await this.load(1)
     this.$nextTick(() => {
-      this.$refs.vScrollTopLoad.init()
-      this.$refs.vScrollTopLoad.tryLoad()
+      this.$refs.vScrollLoad.init()
+      this.$refs.vScrollLoad.tryLoad()
     })
   },
   methods: {
     async load (page) {
       const list = await getList(page)
-      console.log(list)
-      const status = list.length < 10 ? 'finish' : ''
+
       let allList
       if (page === 1) { // 刷新
         allList = this.list = list
       } else {
         allList = this.list = list.concat(this.list)
       }
+      console.log(list)
       if (!allList.length) {
         return 'noData'
       }
-      return status
+      if (list.length < 10) {
+        return 'finish'
+      }
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.ScrollTopLoad-demo {
+.ScrollLoad-demo {
   margin: 15px;
 
   .container {

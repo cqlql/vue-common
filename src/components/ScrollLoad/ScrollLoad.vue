@@ -1,11 +1,6 @@
 <template>
   <div class="scroll-top-load">
-    <div
-      v-show="status === 'loading'"
-      class="scroll-top-load__loading"
-    >
-      <LoadIcon /><span class="scroll-top-load__loading-text">加载中</span>
-    </div>
+    <Loading v-show="status === 'loading'" />
     <div
       v-if="status === 'finish'"
       class="scroll-top-load__finish"
@@ -22,12 +17,14 @@
 </template>
 
 <script>
-import LoadIcon from './LoadIcon.vue'
+import Throttle from '@/utils/throttle.js'
+import Loading from '@/components/Loading/Loading.vue'
 export default {
   components: {
-    LoadIcon
+    Loading
   },
   props: {
+    isTop: Boolean,
     scrollContainer: {
       type: Object,
       default: null
@@ -44,8 +41,10 @@ export default {
   data () {
     return {
       page: null,
+      distance: 10,
       scrollBottom: 0,
-      status: ''
+      status: '',
+      throttle: new Throttle({ time: 300 })
     }
   },
   watch: {
@@ -56,27 +55,31 @@ export default {
       }
     }
   },
-  mounted () {
-
-  },
-  unmounted () {
-    this.unbind()
-  },
   methods: {
     init () {
       this.setScrollTop()
       this.unbind()
-      this.scrollContainer.addEventListener('scroll', this.tryLoad)
+      this.bind()
+    },
+    scroll () {
+      this.throttle.exec(() => {
+        this.tryLoad()
+      })
     },
     async tryLoad () {
       if (this.status === 'loading') return
-      const { scrollContainer } = this
-      this.scrollBottom = scrollContainer.scrollHeight - scrollContainer.clientHeight - scrollContainer.scrollTop
-      if (scrollContainer.scrollTop < 10) {
+
+      // 记录底部位置
+      this.setScrollBottom()
+
+      if (this.test()) {
         this.status = 'loading'
         const status = this.status = await this.load(this.page++)
         this.$nextTick(() => {
+          // dom 更新后将底部位置设置到 scrollTop
           this.setScrollTop()
+
+          this.status = status
           if (['noData', 'finish'].includes(status)) {
             this.unbind()
           } else {
@@ -85,12 +88,28 @@ export default {
         })
       }
     },
+    setScrollBottom () {
+      if (this.isTop) {
+        const { scrollContainer } = this
+        this.scrollBottom = scrollContainer.scrollHeight - scrollContainer.clientHeight - scrollContainer.scrollTop
+      }
+    },
     setScrollTop () {
+      if (this.isTop) {
+        const { scrollContainer } = this
+        scrollContainer.scrollTop = scrollContainer.scrollHeight - scrollContainer.clientHeight - this.scrollBottom
+      }
+    },
+    test () {
       const { scrollContainer } = this
-      scrollContainer.scrollTop = scrollContainer.scrollHeight - scrollContainer.clientHeight - this.scrollBottom
+      if (this.isTop) return scrollContainer.scrollTop < this.distance
+      return scrollContainer.scrollHeight - scrollContainer.clientHeight - scrollContainer.scrollTop < this.distance
+    },
+    bind () {
+      this.scrollContainer.addEventListener('scroll', this.scroll)
     },
     unbind () {
-      this.scrollContainer && this.scrollContainer.removeEventListener('scroll', this.tryLoad)
+      this.scrollContainer && this.scrollContainer.removeEventListener('scroll', this.scroll)
     }
   }
 }
@@ -108,13 +127,5 @@ export default {
 
 .scroll-top-load__loading {
 
-}
-
-.scroll-top-load__loading > * {
-  vertical-align: middle;
-}
-
-.scroll-top-load__loading-text {
-  padding-left: 4px;
 }
 </style>
