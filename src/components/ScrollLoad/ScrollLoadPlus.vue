@@ -85,7 +85,11 @@ export default {
         return 'noData'
       }
 
-      if ((!pages && list.length < 10) || (page >= pages.totalpages)) {
+      if (pages) {
+        if (page >= pages.totalpages) {
+          return 'finish'
+        }
+      } else if (list.length < 10) {
         return 'finish'
       }
     }
