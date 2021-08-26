@@ -13,6 +13,14 @@ module.exports = {
   rules: {
     'vue/singleline-html-element-content-newline': 'off',
 
+    'vue/max-attributes-per-line': [2, {
+      singleline: 2,
+      multiline: {
+        max: 1,
+        allowFirstLine: false
+      }
+    }],
+
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
   },
