@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     async load (page) {
-      const list = await getList(page)
+      const { list } = await getList(page)
 
       let allList
       if (page === 1) { // 刷新
