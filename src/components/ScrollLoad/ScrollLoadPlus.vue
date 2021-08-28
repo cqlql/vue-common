@@ -21,6 +21,10 @@
       :load="load"
       :start-page="startPage+1"
     />
+    <div v-size="size" class="ScrollCustom-demo__size">
+      <div class="ScrollCustom-demo__size-cont" />
+      <div class="ScrollCustom-demo__size-cont2" />
+    </div>
   </div>
 </template>
 
@@ -31,6 +35,19 @@ export default {
   components: {
     ScrollLoad,
     Loading
+  },
+  directives: {
+    size: {
+      mounted (el, { value }) {
+        el.scrollTop = el.scrollHeight
+        el.addEventListener('scroll', () => {
+          el.scrollTop = el.scrollHeight
+          value()
+        }, {
+          passive: true
+        })
+      }
+    }
   },
   props: {
     isTop: Boolean,
@@ -92,6 +109,9 @@ export default {
       } else if (list.length < 10) {
         return 'finish'
       }
+    },
+    size () {
+      this.$refs.vScrollLoad.setScrollTop()
     }
 
   }
@@ -105,5 +125,23 @@ export default {
   width: 300px;
   height: 300px;
   overflow: auto;
+  position: relative;
+}
+
+.ScrollCustom-demo__size-cont {
+  // transition: all 0s ease 0s;
+  // animation: 0s ease 0s 1 normal none running none;
+  width: 200%;
+  height: 200%;
+  background-color: #fff;
+}
+
+.ScrollCustom-demo__size-cont2 {
+  // transition: all 0s ease 0s;
+  // animation: 0s ease 0s 1 normal none running none;
+
+  width: 2.78e+06px;
+  height: 2e+06px;
+  background-color: #fff;
 }
 </style>

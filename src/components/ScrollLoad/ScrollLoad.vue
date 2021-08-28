@@ -62,6 +62,8 @@ export default {
       this.bind()
     },
     scroll () {
+      // 记录底部位置
+      this.setScrollBottom()
       this.throttle.exec(() => {
         this.tryLoad()
       })
@@ -69,15 +71,12 @@ export default {
     async tryLoad () {
       if (this.status === 'loading') return
 
-      // 记录底部位置
-      this.setScrollBottom()
-
       if (this.test()) {
         this.status = 'loading'
         const status = this.status = await this.load(this.page++)
         this.$nextTick(() => {
           // dom 更新后将底部位置设置到 scrollTop
-          this.setScrollTop()
+          // this.setScrollTop()
 
           this.status = status
           if (['noData', 'finish'].includes(status)) {
@@ -106,7 +105,9 @@ export default {
       return scrollContainer.scrollHeight - scrollContainer.clientHeight - scrollContainer.scrollTop < this.distance
     },
     bind () {
-      this.scrollContainer.addEventListener('scroll', this.scroll)
+      this.scrollContainer.addEventListener('scroll', this.scroll, {
+        passive: true
+      })
     },
     unbind () {
       this.scrollContainer && this.scrollContainer.removeEventListener('scroll', this.scroll)
