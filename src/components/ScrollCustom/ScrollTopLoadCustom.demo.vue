@@ -1,56 +1,70 @@
 <template>
-  <div class="ScrollLoad-demo">
-    <button @click="scrollContainer.scrollTop=100">test</button>
-    <div
-      ref="container"
-      class="container"
-    >
-      <ScrollLoad
-        ref="vScrollLoad"
+  <div class="ScrollLoadPlus-demo">
+    <div class="ScrollLoadPlus-demo__box">
+      <ScrollLoadPlus
+        :get-list="getList"
         is-top
-        :scroll-container="scrollContainer"
-        :load="load"
-        :start-page="2"
-      />
-      <p
-        v-for="(v,i) of list"
-        :key="i"
       >
-        {{ v }}
-        <img
-          v-if="v===11"
+        <template #default="{list}">
+          <p
+            v-for="(v,i) of list"
+            :key="i"
+          >
+            {{ v }}
+            <img
+              v-if="v===11"
 
-          :src="imgs[0]"
-          alt=""
-        >
-        <img
-          v-if="v===15"
-          :src="imgs[1]"
-          alt=""
-        >
-        <img
-          v-if="v===1"
-          :src="imgs[2]"
-          alt=""
-        >
-      </p>
+              :src="imgs[0]"
+              alt=""
+            >
+            <img
+              v-if="v===15"
+              :src="imgs[1]"
+              alt=""
+            >
+            <img
+              v-if="v===1"
+              :src="imgs[2]"
+              alt=""
+            >
+          </p>
+        </template>
+      </ScrollLoadPlus>
     </div>
+
+    <!-- <div class="ScrollLoadPlus-demo__box">
+      <h3>有 pages </h3>
+      <ScrollLoadPlus
+        :get-list="getHasPagesList"
+      >
+        <template #default="{list}">
+          <p
+            v-for="(v,i) of list"
+            :key="i"
+          >
+            {{ v }}
+          </p>
+        </template>
+      </ScrollLoadPlus>
+    </div>
+    <div class="ScrollLoadPlus-demo__box">
+      <h3>没有数据</h3>
+      <ScrollLoadPlus
+        :get-list="getNoDate"
+      />
+    </div> -->
   </div>
 </template>
 
 <script>
-import ScrollLoad from './ScrollTopLoad.vue'
-import { getList } from '../ScrollLoad/get-list.mock.js'
+import ScrollLoadPlus from './ScrollTopLoadCustom.vue'
+import { getList, getHasPagesList, getNoDate } from '../ScrollLoad/get-list.mock.js'
 export default {
   components: {
-    ScrollLoad
+    ScrollLoadPlus
   },
   data () {
     return {
-      page: 0,
-      scrollBottom: 0,
-      scrollContainer: null,
-      list: [],
       imgs: [
         '//img20.360buyimg.com/pop/s380x300_jfs/t1/166909/7/17418/87085/6073e5deE5159a884/76a2ff2bc18551bb.jpg.webp',
         '//img13.360buyimg.com/pop/s380x300_jfs/t1/56289/13/5487/99838/5d33f1d4E671cdc59/c341d1a3a0e4593d.png.webp',
@@ -58,46 +72,25 @@ export default {
       ]
     }
   },
-  async mounted () {
-    this.scrollContainer = this.$refs.container
-    await this.load(1)
-    this.$nextTick(() => {
-      this.$refs.vScrollLoad.init()
-      this.$refs.vScrollLoad.tryLoad()
-    })
-  },
   methods: {
-    async load (page) {
+    async getList (page) {
       const { list } = await getList(page)
-
-      let allList
-      if (page === 1) { // 刷新
-        allList = this.list = list
-      } else {
-        allList = this.list = list.concat(this.list)
-      }
-      console.log(list)
-      if (!allList.length) {
-        return 'noData'
-      }
-      if (list.length < 10) {
-        return 'finish'
-      }
-    }
+      return { list: list }
+    },
+    getHasPagesList,
+    getNoDate
   }
 }
 </script>
 
 <style scoped lang="scss">
-.ScrollLoad-demo {
-  margin: 15px;
-
-  .container {
-    border: 2px solid #aaa;
-    width: 300px;
-    height: 300px;
-    overflow: auto;
-  }
+.ScrollLoadPlus-demo {
+  height: 300px;
+  overflow: hidden;
+  border: 2px solid #ddd;
 }
 
+.ScrollLoadPlus-demo__box {
+  margin: 15px;
+}
 </style>

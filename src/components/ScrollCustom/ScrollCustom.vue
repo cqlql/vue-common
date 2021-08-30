@@ -1,5 +1,6 @@
 <template>
   <div class="scroll_custom">
+    <!-- <div style="position: absolute;">{{ scrollTop }}</div> -->
     <div
       ref="eContainer"
       class="scroll_custom__container"
@@ -14,6 +15,7 @@
       </div>
     </div>
     <ScrollBar
+      v-show="!noBar"
       ref="vScrollBar"
       :height="barHeight"
       :max-y="barMaxY"
@@ -31,17 +33,26 @@ export default {
     SizeListener,
     ScrollBar
   },
+  emits: ['scroll', 'scroll-top-change'],
   data () {
     return {
       barHeight: 0,
       barMaxY: 0,
       y: 0,
-      ratio: 0
+      ratio: 0,
+      scrollTop: 0,
+      noBar: true
+    }
+  },
+  watch: {
+    scrollTop (top) {
+      this.$emit('scroll-top-change', top)
     }
   },
   mounted () {
     const { vScrollBar } = this.$refs
     mouseWheel(this.$el, (e) => {
+      if (this.noBar) return
       let direction = 1
       if (e.deltaY > 0) {
         // 往下滚
@@ -60,7 +71,6 @@ export default {
       requestAnimationFrame(() => {
         this.wait = false
         this.updateBarSize()
-        console.log('元素尺寸有变化')
       })
       // setTimeout(() => {
       //   this.wait = false
@@ -69,23 +79,36 @@ export default {
     },
     updateBarSize () {
       const { eContainer, eContent } = this.$refs
-      const clientHeight = eContainer.clientHeight
+      const clientHeight = this.clientHeight = eContainer.clientHeight
       const scrollContainerHeight = clientHeight // 滚动条容器目前与内容容器同高
-      const contentHeight = eContent.clientHeight
-      // (容器/内容 比) * 滚动条容器高
-      let barHeight = clientHeight / contentHeight * scrollContainerHeight
-      if (barHeight < 50) {
-        barHeight = 50
+      const contentHeight = this.contentHeight = eContent.clientHeight
+      if (contentHeight <= clientHeight) {
+        this.noBar = true
+        return
       }
-      this.barHeight = barHeight
+      this.noBar = false
 
-      const barMaxY = this.barMaxY = scrollContainerHeight - barHeight
+      const { ratio } = this.$refs.vScrollBar.update({
+        clientHeight,
+        contentHeight,
+        scrollContainerHeight,
+        scrollBottom: this.y
+      })
 
       // 内容/滚动条 滚动距离比
-      this.ratio = (contentHeight - clientHeight) / barMaxY
+      this.ratio = ratio
+
+      this.updateScrollTop()
+    },
+    updateScrollTop  () {
+      this.scrollTop = this.contentHeight - this.clientHeight + this.y
     },
     move (y) {
-      this.y = -this.ratio * y
+      const newY = this.y = -this.ratio * y
+
+      this.updateScrollTop()
+
+      this.$emit('scroll', newY)
     }
   }
 }
@@ -93,10 +116,10 @@ export default {
 
 <style lang="scss">
 .scroll_custom {
-  width: 80%;
-  height: 500px;
-  border: 2px solid #ddd;
-  margin: 15px;
+  // width: 80%;
+  height: 100%;
+  // border: 2px solid #ddd;
+  // margin: 15px;
   position: relative;
   // overflow: auto;
 }

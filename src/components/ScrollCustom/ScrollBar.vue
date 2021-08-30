@@ -13,19 +13,21 @@
 import drag from '@/utils/drag/drag-plus2.js'
 export default {
   props: {
-    height: {
-      type: Number,
-      default: 0
-    },
-    maxY: {
-      type: Number,
-      default: 0
-    }
+    // height: {
+    //   type: Number,
+    //   default: 0
+    // },
+    // maxY: {
+    //   type: Number,
+    //   default: 0
+    // }
   },
   emits: ['move'],
   data () {
     return {
       y: 0,
+      height: 0,
+      maxY: 0,
       barClass: ''
     }
   },
@@ -60,6 +62,36 @@ export default {
       else if (y > this.maxY) y = this.maxY
       this.y = y
       return y
+    },
+    update ({
+      clientHeight,
+      contentHeight,
+      scrollContainerHeight,
+      scrollBottom
+    }) {
+      const minHeight = 30
+
+      // (容器/内容 比) * 滚动条容器高
+      let barHeight = clientHeight / contentHeight * scrollContainerHeight
+
+      if (barHeight < minHeight) {
+        barHeight = minHeight
+      }
+      this.height = barHeight
+
+      const maxY = this.maxY = scrollContainerHeight - barHeight
+
+      // 内容/滚动条 滚动距离比
+      const ratio = (contentHeight - clientHeight) / maxY
+
+      // if (barHeight === minHeight) {
+      this.drag.curr.y = -(this.y = -scrollBottom / ratio)
+      // }
+
+      return {
+        maxY,
+        ratio
+      }
     }
   }
 }

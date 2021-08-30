@@ -20,7 +20,7 @@ export function getList (page) {
     }
     setTimeout(() => {
       resolve({ list })
-    }, 300)
+    }, 1000)
   })
 }
 
