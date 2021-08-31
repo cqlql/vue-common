@@ -31,14 +31,8 @@ export default {
   },
   data () {
     return {
-      itemNums: 60,
       scrollTop: 0,
-      list: [],
-      imgs: [
-        '//img20.360buyimg.com/pop/s380x300_jfs/t1/166909/7/17418/87085/6073e5deE5159a884/76a2ff2bc18551bb.jpg.webp',
-        '//img13.360buyimg.com/pop/s380x300_jfs/t1/56289/13/5487/99838/5d33f1d4E671cdc59/c341d1a3a0e4593d.png.webp',
-        '//img11.360buyimg.com/babel/s380x300_jfs/t1/124193/7/20235/50643/5fc1b453Ede1ff346/4cfd67de0ee4869a.jpg.webp'
-      ]
+      list: []
     }
   },
   methods: {
