@@ -1,11 +1,15 @@
 <template>
   <div class="loading-demo">
+    <button @click="count++">test</button>
     <div class="loading-demo__box">
       <Loading
         text="拼命加载中"
       />
     </div>
-    <div v-loading class="loading-demo__box" />
+    <div
+      v-loading:[count]=""
+      class="loading-demo__box"
+    />
   </div>
 </template>
 
@@ -15,7 +19,15 @@ export default {
     loading: {
       mounted () {
 
+      },
+      updated () {
+        console.log('updated', arguments)
       }
+    }
+  },
+  data () {
+    return {
+      count: 0
     }
   }
 }
