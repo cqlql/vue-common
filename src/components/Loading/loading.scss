@@ -13,7 +13,7 @@
 .j-loading .circular {
   height: 42px;
   width: 42px;
-  animation: j-loading-rotate 2s linear infinite;
+  animation: j-rotate-circle 2s linear infinite;
 }
 
 .j-loading .path {
@@ -37,12 +37,6 @@
   color: #409eff;
   margin: 3px 0;
   font-size: 14px;
-}
-
-@keyframes j-loading-rotate {
-  to {
-    transform: rotate(1turn);
-  }
 }
 
 @keyframes j-loading-dash {

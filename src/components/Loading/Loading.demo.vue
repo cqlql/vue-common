@@ -21,8 +21,11 @@
       />
     </div>
     <div class="loading-demo__wrap">
+      <h2>文本</h2>
       <div class="loading-demo__box">
-        <i class="j-icon-loading" />
+        <p style="text-align: center;">
+          <load-text />
+        </p>
       </div>
     </div>
   </div>
