@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import Throttle from '@/utils/throttle.js'
+import { throttleInit } from '@/utils/perf/throttle.js'
 import Loading from '@/components/Loading/Loading.vue'
 export default {
   components: {
@@ -44,7 +44,7 @@ export default {
       distance: 10,
       scrollBottom: 0,
       status: '',
-      throttle: new Throttle({ time: 300 })
+      throttle: throttleInit()
     }
   },
   watch: {
@@ -64,7 +64,7 @@ export default {
     scroll () {
       // 记录底部位置
       this.setScrollBottom()
-      this.throttle.exec(() => {
+      this.throttle(() => {
         this.tryLoad()
       })
     },
