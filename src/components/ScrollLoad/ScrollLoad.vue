@@ -1,6 +1,9 @@
 <template>
   <div class="scroll-top-load">
-    <Loading v-show="status === 'loading'" />
+    <div
+      v-loading="status === 'loading'"
+      class="scroll-top-load__loading"
+    />
     <div
       v-if="status === 'finish'"
       class="scroll-top-load__finish"
@@ -18,15 +21,11 @@
 
 <script>
 import { throttleInit } from '@/utils/perf/throttle.js'
-import Loading from '@/components/Loading/Loading.vue'
 export default {
-  components: {
-    Loading
-  },
   props: {
     isTop: Boolean,
     scrollContainer: {
-      type: Object,
+      type: HTMLDivElement,
       default: null
     },
     load: {
@@ -47,36 +46,36 @@ export default {
       throttle: throttleInit()
     }
   },
-  watch: {
-    startPage: {
-      immediate: true,
-      handler () {
-        this.page = this.startPage
-      }
-    }
-  },
   methods: {
     init () {
-      this.setScrollTop()
+      this.page = this.startPage
+      this.status = ''
+      this.setScrollTop(0)
       this.unbind()
       this.bind()
     },
     scroll () {
-      // 记录底部位置
       this.setScrollBottom()
-      this.throttle(() => {
+      this.throttle.exec(() => {
         this.tryLoad()
       })
     },
     async tryLoad () {
       if (this.status === 'loading') return
 
+      // 记录底部位置
+      // let scrollBottom
+      // if (this.isTop) {
+      //   const { scrollContainer } = this
+      //   scrollBottom = scrollContainer.scrollHeight - scrollContainer.clientHeight - scrollContainer.scrollTop
+      // }
+
       if (this.test()) {
         this.status = 'loading'
         const status = this.status = await this.load(this.page++)
         this.$nextTick(() => {
           // dom 更新后将底部位置设置到 scrollTop
-          // this.setScrollTop()
+          this.setScrollTop()
 
           this.status = status
           if (['noData', 'finish'].includes(status)) {
@@ -93,10 +92,11 @@ export default {
         this.scrollBottom = scrollContainer.scrollHeight - scrollContainer.clientHeight - scrollContainer.scrollTop
       }
     },
-    setScrollTop () {
+    setScrollTop (scrollBottom = this.scrollBottom) {
       if (this.isTop) {
+        this.scrollBottom = scrollBottom
         const { scrollContainer } = this
-        scrollContainer.scrollTop = scrollContainer.scrollHeight - scrollContainer.clientHeight - this.scrollBottom
+        scrollContainer.scrollTop = scrollContainer.scrollHeight - scrollContainer.clientHeight - scrollBottom
       }
     },
     test () {
@@ -105,9 +105,7 @@ export default {
       return scrollContainer.scrollHeight - scrollContainer.clientHeight - scrollContainer.scrollTop < this.distance
     },
     bind () {
-      this.scrollContainer.addEventListener('scroll', this.scroll, {
-        passive: true
-      })
+      this.scrollContainer.addEventListener('scroll', this.scroll)
     },
     unbind () {
       this.scrollContainer && this.scrollContainer.removeEventListener('scroll', this.scroll)
@@ -116,7 +114,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .scroll-top-load {
   height: 28px;
   padding: 4px;
@@ -127,6 +125,6 @@ export default {
 }
 
 .scroll-top-load__loading {
-
+  height: 30px;
 }
 </style>

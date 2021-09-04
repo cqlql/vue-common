@@ -1,59 +1,56 @@
 <template>
   <div
+    v-loading="loading"
     class="scroll-load-plus"
   >
-    <Loading v-show="loading" />
-    <div v-if="empty">没有数据</div>
-    <ScrollLoad
-      v-if="isTop"
-      ref="vScrollLoad"
-
-      is-top
-      :scroll-container="scrollContainer"
-      :load="load"
-      :start-page="startPage+1"
-    />
-    <slot :list="list" />
-    <ScrollLoad
-      v-if="!isTop"
-      ref="vScrollLoad"
-      :scroll-container="scrollContainer"
-      :load="load"
-      :start-page="startPage+1"
-    />
-    <div v-size="size" class="ScrollCustom-demo__size">
-      <div class="ScrollCustom-demo__size-cont" />
-      <div class="ScrollCustom-demo__size-cont2" />
+    <div ref="eContainer" class="scroll-load-plus__container">
+      <div v-if="empty" class="scroll-load-plus__empty">
+        <j-empty />
+      </div>
+      <div class="scroll-load-plus__content">
+        <ScrollLoad
+          v-if="isTop"
+          ref="vScrollLoad"
+          is-top
+          :scroll-container="scrollContainer"
+          :load="load"
+          :start-page="scrollStartPage"
+        />
+        <slot :list="list" />
+        <ScrollLoad
+          v-if="!isTop"
+          ref="vScrollLoad"
+          :scroll-container="scrollContainer"
+          :load="load"
+          :start-page="scrollStartPage"
+        />
+        <SizeListener v-if="isTop" :size="size" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import ScrollLoad from './ScrollLoad.vue'
-import Loading from '@/components/Loading/Loading.vue'
+import SizeListener from '@/components/SizeListener/SizeListener.vue'
 export default {
   components: {
     ScrollLoad,
-    Loading
-  },
-  directives: {
-    size: {
-      mounted (el, { value }) {
-        el.scrollTop = el.scrollHeight
-        el.addEventListener('scroll', () => {
-          el.scrollTop = el.scrollHeight
-          value()
-        }, {
-          passive: true
-        })
-      }
-    }
+    SizeListener
   },
   props: {
     isTop: Boolean,
+    immediate: {
+      type: Boolean,
+      default: true
+    },
     getList: {
       type: Function,
       default () {}
+    },
+    pagesNum: {
+      type: Number,
+      default: 10
     }
   },
   data () {
@@ -68,28 +65,24 @@ export default {
   computed: {
     empty () {
       return this.status === 'noData'
+    },
+    scrollStartPage () {
+      return this.startPage + 1
     }
   },
   async mounted () {
-    this.scrollContainer = this.$el
-    this.loading = true
-    const status = this.status = await this.load(this.startPage).finally(() => {
-      this.loading = false
-    })
-    if (!status) {
-      this.$nextTick(() => {
-        this.$refs.vScrollLoad.init()
-        this.$refs.vScrollLoad.tryLoad()
-      })
+    this.scrollContainer = this.$refs.eContainer
+    if (this.immediate) {
+      this.restart()
     }
   },
   methods: {
     async load (page) {
-    // pages
-    // currentPage: 1
-    // totalNumber: 188
-    // totalpages: 19
-      const { list, pages } = await this.getList(page)
+      // pages
+      // currentPage: 1
+      // totalNumber: 188
+      // totalpages: 19
+      const { list, pages, status } = await this.getList(page)
 
       let allList
       if (page === this.startPage) { // 刷新
@@ -106,42 +99,57 @@ export default {
         if (page >= pages.totalpages) {
           return 'finish'
         }
-      } else if (list.length < 10) {
+      } else if (list.length < this.pagesNum) {
         return 'finish'
       }
+      return status
+    },
+    async restart () {
+      this.loading = true
+      const status = this.status = await this.load(this.startPage).finally(() => {
+        this.loading = false
+      })
+      const { vScrollLoad } = this.$refs
+      vScrollLoad.unbind()
+      this.$nextTick(() => {
+        if (status) {
+          if (this.isTop) {
+            vScrollLoad.setScrollTop(0)
+          }
+        } else {
+          vScrollLoad.init()
+          vScrollLoad.tryLoad()
+        }
+      })
     },
     size () {
-      this.$refs.vScrollLoad.setScrollTop()
+      const { vScrollLoad } = this.$refs
+      if (vScrollLoad) {
+        vScrollLoad.setScrollTop()
+      }
     }
-
   }
 }
 </script>
 
 <style scoped lang="scss">
 .scroll-load-plus {
-  margin: 15px;
-  border: 2px solid #aaa;
-  width: 300px;
-  height: 300px;
-  overflow: auto;
-  position: relative;
-}
+  height: 100%;
 
-.ScrollCustom-demo__size-cont {
-  // transition: all 0s ease 0s;
-  // animation: 0s ease 0s 1 normal none running none;
-  width: 200%;
-  height: 200%;
-  background-color: #fff;
-}
+  .scroll-load-plus__container {
+    overflow: auto;
+    height: 100%;
+  }
 
-.ScrollCustom-demo__size-cont2 {
-  // transition: all 0s ease 0s;
-  // animation: 0s ease 0s 1 normal none running none;
+  .scroll-load-plus__content {
+    position: relative;
+  }
 
-  width: 2.78e+06px;
-  height: 2e+06px;
-  background-color: #fff;
+  .scroll-load-plus__empty {
+    height: calc(100% - 28px);
+    display: flex;
+    align-items: center; /* 垂直 */
+    justify-content: center; /* 左右 */
+  }
 }
 </style>
