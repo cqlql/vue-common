@@ -27,6 +27,12 @@ export default {
     return {
       visible: true
     }
+  },
+  mounted () {
+    const parentEl = this.$el.parentElement
+    if (window.getComputedStyle(parentEl).position === 'static') {
+      parentEl.style.position = 'relative'
+    }
   }
 }
 </script>

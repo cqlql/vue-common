@@ -49,7 +49,8 @@ export default {
 <style scoped>
 .loading-demo__box {
   border: 2px solid #ddd;
-  position: relative;
+
+  /* position: relative; */
   height: 150px;
   width: 300px;
   margin: 15px;

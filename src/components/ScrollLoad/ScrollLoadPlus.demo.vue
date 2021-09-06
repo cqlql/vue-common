@@ -60,7 +60,10 @@ export default {
 
 .ScrollLoadPlus-demo__box {
   margin: 15px;
-  height: 300px;
-  border: 1px solid #ddd;
+
+  &::v-deep .scroll-load-plus {
+    height: 300px;
+    border: 1px solid #ddd;
+  }
 }
 </style>

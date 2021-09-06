@@ -2,7 +2,6 @@
   <div class="scroll-top-load">
     <div
       v-loading="status === 'loading'"
-      class="scroll-top-load__loading"
     />
     <div
       v-if="status === 'finish'"
@@ -56,7 +55,7 @@ export default {
     },
     scroll () {
       this.setScrollBottom()
-      this.throttle.exec(() => {
+      this.throttle(() => {
         this.tryLoad()
       })
     },
@@ -124,7 +123,4 @@ export default {
   color: #666;
 }
 
-.scroll-top-load__loading {
-  height: 30px;
-}
 </style>
