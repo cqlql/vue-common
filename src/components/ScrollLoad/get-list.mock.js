@@ -10,17 +10,21 @@ export function getNoDate () {
 export function getList (page) {
   const pageNum = 10
   return new Promise((resolve) => {
-    if (page >= 5) {
+    if (page >= 10 || page <= 0) {
       resolve({ list: [] })
       return
     }
     const list = []
     for (let i = (page - 1) * pageNum, len = pageNum * page; i < len; i++) {
-      list.unshift(i)
+      if (i % 10 === 2) {
+        list.unshift('//img30.360buyimg.com/babel/s380x300_jfs/t1/165019/40/8639/60165/603d92e5E1d9852b8/2006d88391f60fe8.jpg.webp')
+      } else {
+        list.unshift(i)
+      }
     }
     setTimeout(() => {
       resolve({ list })
-    }, 1000)
+    }, 200)
   })
 }
 
