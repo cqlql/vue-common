@@ -1,8 +1,10 @@
 <template>
   <div class="scroll-load-bar">
     <div
-      v-loading="status === 'loading'"
-    />
+      v-if="status === 'loading'"
+    >
+      <load-text />
+    </div>
     <div
       v-if="status === 'finish'"
       class="scroll-load-bar__finish"
