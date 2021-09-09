@@ -82,7 +82,7 @@ export default {
       // currentPage: 1
       // totalNumber: 188
       // totalpages: 19
-      const { list, pages, status } = await this.getList(page)
+      const { list = [], pages, status } = await this.getList(page)
 
       let allList
       if (page === this.startPage) { // 刷新
