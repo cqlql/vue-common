@@ -30,7 +30,7 @@
 
 <script>
 import ScrollLoadBoth from './ScrollLoadBoth.vue'
-import { getList } from './get-list.mock.js'
+import { getListScrollBoth } from './get-list.mock.js'
 export default {
   components: {
     ScrollLoadBoth
@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     load (page) {
-      return getList(page)
+      return getListScrollBoth(page)
     },
     restart () {
       this.vScrollLoadBoth.restart()
