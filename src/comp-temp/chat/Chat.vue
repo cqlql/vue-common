@@ -2,7 +2,7 @@
   <div class="chat-window">
     <div class="chat-window__nav">
       <div class="chat-window__nav-top">
-     search
+        search
       </div>
       <div class="chat-window__nav-list">
         <div class="chat-window__nav-item active">
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import ImgText from '../img-text/ImgText.vue'
+import ImgText from './ImgText.vue'
 import ChatContent from './ChatContent.vue'
 export default {
   components: {

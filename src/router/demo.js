@@ -19,8 +19,8 @@ function importAll (r) {
   })
 }
 
-importAll(require.context('@/components', true, /.+\.demo\.vue$/))
-// importAll(require.context('@/comp-temp', true, /.+\.demo\.vue$/))
+// importAll(require.context('@/components', true, /.+\.demo\.vue$/))
+importAll(require.context('@/comp-temp', true, /.+\.demo\.vue$/))
 // importAll(require.context('@/utils', true, /.+\.demo\.vue$/))
 
 routes.push({
