@@ -46,7 +46,7 @@ export default {
     }
   },
   methods: {
-    init () {
+    reset () {
       this.page = this.startPage
       this.status = ''
       this.setScrollTop(0)

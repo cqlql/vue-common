@@ -7,9 +7,19 @@
       <div v-if="empty" class="scroll-load-plus__empty">
         <j-empty />
       </div>
+      <div v-else-if="status===''" class="scroll-load-plus__empty">
+        <!-- 初始 initial 状态 -->
+        <template v-if="$slots.initial">
+          <slot name="initial" />
+        </template>
+        <j-empty v-else description="" />
+      </div>
+
+      <slot name="container" />
       <div class="scroll-load-plus__content">
         <ScrollLoad
           v-if="isTop"
+          v-show="hasContent"
           ref="vScrollLoad"
           is-top
           :scroll-container="scrollContainer"
@@ -19,6 +29,7 @@
         <slot :list="list" />
         <ScrollLoad
           v-if="!isTop"
+          v-show="hasContent"
           ref="vScrollLoad"
           :scroll-container="scrollContainer"
           :load="load"
@@ -46,7 +57,7 @@ export default {
     },
     getList: {
       type: Function,
-      default () {}
+      async default () { return {} }
     },
     pagesNum: {
       type: Number,
@@ -68,6 +79,13 @@ export default {
     },
     scrollStartPage () {
       return this.startPage + 1
+    },
+    isInitial () {
+      return this.status === ''
+    },
+    // 有内容情况，或者即将有内容情况
+    hasContent () {
+      return !(this.isInitial || this.empty)
     }
   },
   async mounted () {
@@ -83,7 +101,6 @@ export default {
       // totalNumber: 188
       // totalpages: 19
       const { list = [], pages, status } = await this.getList(page)
-
       let allList
       if (page === this.startPage) { // 刷新
         allList = this.list = list
@@ -117,7 +134,7 @@ export default {
             vScrollLoad.setScrollTop(0)
           }
         } else {
-          vScrollLoad.init()
+          vScrollLoad.reset()
           vScrollLoad.tryLoad()
         }
       })
@@ -127,6 +144,10 @@ export default {
       if (vScrollLoad) {
         vScrollLoad.setScrollTop()
       }
+    },
+    // 恢复初始状态
+    reset () {
+      this.status = ''
     }
   }
 }
@@ -134,7 +155,10 @@ export default {
 
 <style scoped lang="scss">
 .scroll-load-plus {
-  height: 100%;
+  // margin: 15px;
+  // border: 2px solid #aaa;
+  // width: 300px;
+  // height: 300px;
 
   .scroll-load-plus__container {
     overflow: auto;
@@ -146,7 +170,7 @@ export default {
   }
 
   .scroll-load-plus__empty {
-    height: calc(100% - 28px);
+    height: 100%;
     display: flex;
     align-items: center; /* 垂直 */
     justify-content: center; /* 左右 */
