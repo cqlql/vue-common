@@ -7,7 +7,7 @@
       <div v-if="empty" class="scroll-load-plus__empty">
         <j-empty />
       </div>
-      <div v-else-if="status===''" class="scroll-load-plus__empty">
+      <div v-else-if="isInitial" class="scroll-load-plus__empty">
         <!-- 初始 initial 状态 -->
         <template v-if="$slots.initial">
           <slot name="initial" />
