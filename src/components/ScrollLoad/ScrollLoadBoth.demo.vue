@@ -9,7 +9,7 @@
       <ScrollLoadBoth
         ref="vScrollLoadBoth"
         :load="load"
-        :start-page="4"
+        :start-page="3"
       >
         <template #default="{list}">
           <p

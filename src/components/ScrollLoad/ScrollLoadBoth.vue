@@ -173,7 +173,7 @@ export default {
       if (this.barLoading || this.topIsFinish) return
       const isTop = true
       if (this.test(isTop)) {
-        this.topStatus === 'loading'
+        this.topStatus = 'loading'
         this.barLoading = true
 
         const status = await this.loadSelf(--this.topPage, isTop)
