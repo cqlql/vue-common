@@ -2,13 +2,14 @@
   <div class="ScrollLoadBothDemo">
     <div class="ScrollLoadBothDemo__section">
       <button @click="restart">重新加载</button>
+      <span class="ScrollLoadBothDemo__value">status:{{ status }}</span>
       <span class="ScrollLoadBothDemo__value">topPage:{{ topPage }}</span>
       <span class="ScrollLoadBothDemo__value">bottomPage: {{ bottomPage }}</span>
 
       <ScrollLoadBoth
         ref="vScrollLoadBoth"
         :load="load"
-        :start-page="5"
+        :start-page="4"
       >
         <template #default="{list}">
           <p
@@ -21,6 +22,27 @@
               width="100"
               :src="v+'?'+i"
             >
+          </p>
+        </template>
+      </ScrollLoadBoth>
+    </div>
+    <div class="ScrollLoadBothDemo__section">
+      <h3>初始不加载</h3>
+      <div>
+        <button @click="demo2StartLoad">开始加载/重新加载</button>
+        <button @click="demo2Reset">恢复初始状态</button>
+      </div>
+      <ScrollLoadBoth
+        ref="vScrollLoadBothDemo2"
+        :load="load"
+        :immediate="false"
+      >
+        <template #default="{list}">
+          <p
+            v-for="(v,i) of list"
+            :key="i"
+          >
+            {{ v }}
           </p>
         </template>
       </ScrollLoadBoth>
@@ -38,7 +60,8 @@ export default {
   data () {
     return {
       topPage: '',
-      bottomPage: ''
+      bottomPage: '',
+      status: ''
     }
   },
   computed: {
@@ -65,6 +88,11 @@ export default {
     }, (v) => {
       this.bottomPage = v
     })
+    this.$watch(() => {
+      return vScrollLoadBoth.status
+    }, (v) => {
+      this.status = v
+    })
   },
   methods: {
     load (page) {
@@ -72,6 +100,12 @@ export default {
     },
     restart () {
       this.vScrollLoadBoth.restart()
+    },
+    demo2StartLoad () {
+      this.$refs.vScrollLoadBothDemo2.restart()
+    },
+    demo2Reset () {
+      this.$refs.vScrollLoadBothDemo2.reset()
     }
   }
 }

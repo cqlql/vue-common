@@ -54,16 +54,16 @@ export function getHasPagesList (page) {
 export function getListScrollBoth (page) {
   const pageNum = 10
   return new Promise((resolve) => {
-    if (page >= 10 || page <= 0) {
+    if (page >= 5 || page <= 0) {
       resolve({ list: [] })
       return
     }
     const list = []
     for (let i = (page - 1) * pageNum, len = pageNum * page; i < len; i++) {
       if (i % 10 === 2) {
-        list.unshift('//img30.360buyimg.com/babel/s380x300_jfs/t1/165019/40/8639/60165/603d92e5E1d9852b8/2006d88391f60fe8.jpg.webp?' + i)
+        list.push('//img30.360buyimg.com/babel/s380x300_jfs/t1/165019/40/8639/60165/603d92e5E1d9852b8/2006d88391f60fe8.jpg.webp?' + i)
       } else {
-        list.unshift(i)
+        list.push(i)
       }
     }
     setTimeout(() => {

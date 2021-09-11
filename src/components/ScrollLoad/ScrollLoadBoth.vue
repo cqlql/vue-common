@@ -7,11 +7,18 @@
       <div v-if="empty" class="scroll-load-both__empty">
         <j-empty />
       </div>
-      <div class="scroll-load-both__content">
+      <div v-else-if="isInitial" class="scroll-load-both__empty">
+        <!-- 初始 initial 状态 -->
+        <template v-if="$slots.initial">
+          <slot name="initial" />
+        </template>
+        <a-empty v-else description="" />
+      </div>
+      <div v-else class="scroll-load-both__content">
         <ScrollLoadBar :status="topStatus" />
         <slot :list="list" />
         <ScrollLoadBar :status="bottomStatus" />
-        <SizeListener :size="size" />
+        <SizeListener v-if="topNoFinish" :size="size" />
       </div>
     </div>
   </div>
@@ -33,6 +40,11 @@ export default {
       default: 1
     },
 
+    immediate: {
+      type: Boolean,
+      default: true
+    },
+
     load: {
       type: Function,
       default () {}
@@ -44,11 +56,11 @@ export default {
   },
   data () {
     return {
-      page: 1,
       topPage: 1,
       bottomPage: 1,
       list: [],
       loading: false,
+      barLoading: false,
       status: '',
       topStatus: '',
       bottomStatus: '',
@@ -61,10 +73,22 @@ export default {
   computed: {
     empty () {
       return this.status === 'noData'
+    },
+    isInitial () {
+      return this.status === ''
+    },
+    topIsFinish () {
+      return this.topStatus === 'finish'
+    },
+    topNoFinish () {
+      return !this.topIsFinish
     }
   },
   async mounted () {
-    this.restart()
+    this.scrollContainer = this.$refs.eContainer
+    if (this.immediate) {
+      this.restart()
+    }
   },
   methods: {
     async loadSelf (page, isTop) {
@@ -100,23 +124,28 @@ export default {
 
       this.loading = true
       this.status = await this.loadSelf(this.bottomPage).finally(() => {
-        this.$refs.eContainer.scrollTop = this.distance
         this.loading = false
       })
-      this.recordScrollBottom()
-      this.bind()
-      this.tryLoad()
+
+      this.$nextTick(() => {
+        this.scrollContainer.scrollTop = this.distance
+        this.bind()
+        this.tryLoad()
+      })
     },
     recordScrollBottom () {
-      const { eContainer } = this.$refs
-      this.scrollBottom = eContainer.scrollHeight - eContainer.clientHeight - eContainer.scrollTop
+      const { scrollContainer } = this
+      this.scrollBottom = scrollContainer.scrollHeight - scrollContainer.clientHeight - scrollContainer.scrollTop
     },
     scroll () {
-      const prev = this.scrollTop
-      const current = this.scrollTop = this.$refs.eContainer.scrollTop
-      const isTop = current < prev
-      // console.log('isTop', isTop)
-      this.recordScrollBottom()
+      let isTop = false
+      if (this.topNoFinish) {
+        const prev = this.scrollTop
+        const current = this.scrollTop = this.scrollContainer.scrollTop
+        isTop = current < prev
+        this.recordScrollBottom()
+      }
+
       this.throttle(() => {
         this.tryLoad(isTop)
       })
@@ -125,54 +154,91 @@ export default {
     // 滚动尝试加载
     // 先检测底部，再检测顶部
     async tryLoad (isTop) {
-      if (this.topStatus === 'finish' && this.topStatus === this.bottomStatus) {
-        // 都完成了，解绑事件
-        this.unbind()
-        return
-      }
-      if (['loading', 'finish'].includes(this.getScrollBarStatus(isTop))) return
-      if (this.test(isTop)) {
-        this.setScrollBarStatus(isTop, 'loading')
+      if (isTop) {
+        this.tryLoadTop()
+      } else {
+        /*
+        底部检测完成后，检测顶部：
+        1. 未满足底部加载的距离
+        2. 底部 finish
 
-        const status = await this.loadSelf(isTop ? --this.topPage : ++this.bottomPage, isTop)
-        this.isTop = false
-        this.$nextTick(() => {
-          // dom 更新后将底部位置设置到 scrollTop
-          if (isTop) this.setScrollTop()
-          this.isTop = isTop
-
-          this.setScrollBarStatus(isTop, status)
-          if (status === 'noData') {
-            this.unbind()
-          } else if (status === 'finish') {
-            if (!isTop) { // 如果是底部完成了，就开始检测顶部
-              this.tryLoad(true)
-            }
-          } else {
-            this.tryLoad(isTop)
-          }
-        })
-      } else if (!isTop) { // 底部检测完了再检测顶部
-        this.tryLoad(true)
+        不再检测顶部：
+        1.顶部 finish
+        */
+        this.tryLoadBottom()
       }
     },
 
+    async tryLoadTop () {
+      if (this.barLoading || this.topIsFinish) return
+      const isTop = true
+      if (this.test(isTop)) {
+        this.topStatus === 'loading'
+        this.barLoading = true
+
+        const status = await this.loadSelf(--this.topPage, isTop)
+          .finally(() => { this.barLoading = false })
+        this.isTop = true
+        this.$nextTick(() => {
+          // dom 更新后将底部位置设置到 scrollTop
+          this.setScrollTop()
+
+          this.topStatus = status
+          if (status === 'finish') {
+            this.isBothFinish()
+          } else {
+            this.tryLoadTop()
+          }
+        })
+      }
+    },
+    async tryLoadBottom () {
+      if (this.barLoading || this.bottomStatus === 'finish') return
+
+      if (this.test()) {
+        this.bottomStatus = 'loading'
+        this.barLoading = true
+        const status = await this.loadSelf(++this.bottomPage)
+          .finally(() => { this.barLoading = false })
+        this.isTop = false
+        this.$nextTick(() => {
+          this.bottomStatus = status
+          if (status === 'finish') {
+            if (!this.isBothFinish()) {
+              this.tryLoadTop()
+            }
+          } else {
+            this.tryLoadBottom()
+          }
+        })
+      } else { // 底部检测完了再检测顶部
+        this.tryLoadTop()
+      }
+    },
+    isBothFinish () {
+      if (this.topStatus + this.bottomStatus === 'finishfinish') {
+        // 都完成了
+        this.unbind() // 解绑事件
+        this.status = 'finish'
+        return true
+      }
+    },
     test (isTop) {
-      const { eContainer } = this.$refs
-      if (isTop) return eContainer.scrollTop < this.distance
-      return eContainer.scrollHeight - eContainer.clientHeight - eContainer.scrollTop < this.distance
+      const { scrollContainer } = this
+      if (isTop) return scrollContainer.scrollTop < this.distance
+      return scrollContainer.scrollHeight - scrollContainer.clientHeight - scrollContainer.scrollTop < this.distance
     },
 
     bind () {
-      const eContainer = this.$refs.eContainer
+      const scrollContainer = this.scrollContainer
 
       // 避免重复注册
-      this.unbind(eContainer)
+      this.unbind(scrollContainer)
 
-      eContainer.addEventListener('scroll', this.scroll)
+      scrollContainer.addEventListener('scroll', this.scroll)
     },
-    unbind (eContainer = this.$refs.eContainer) {
-      eContainer && eContainer.removeEventListener('scroll', this.scroll)
+    unbind (scrollContainer = this.scrollContainer) {
+      scrollContainer && scrollContainer.removeEventListener('scroll', this.scroll)
     },
     setScrollBarStatus (isTop, status) {
       if (isTop) {
@@ -189,11 +255,19 @@ export default {
     },
     setScrollTop (scrollBottom = this.scrollBottom) {
       this.scrollBottom = scrollBottom
-      const { eContainer } = this.$refs
-      eContainer.scrollTop = eContainer.scrollHeight - eContainer.clientHeight - scrollBottom
+      const { scrollContainer } = this
+      scrollContainer.scrollTop = scrollContainer.scrollHeight - scrollContainer.clientHeight - scrollBottom
     },
     size () {
       if (this.isTop) this.setScrollTop()
+    },
+    // 恢复初始状态
+    reset () {
+      this.unbind()
+      this.status = ''
+      this.topPage = this.bottomPage = this.startPage
+      // this.topStatus = this.bottomStatus = ''
+      // this.list = []
     }
   }
 }
@@ -213,7 +287,7 @@ export default {
   }
 
   .scroll-load-both__empty {
-    height: calc(100% - 28px);
+    height: 100%;
     display: flex;
     align-items: center; /* 垂直 */
     justify-content: center; /* 左右 */
