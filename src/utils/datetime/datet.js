@@ -39,13 +39,15 @@ export function toDate (date) {
   if (date instanceof Date) {
     return date
   }
-  // 2012,01,01
+  // datet(2012,01,01)
   if (arguments.length > 1) {
     return new Date(...arguments)
   }
-  // 2021-01-01
+  // datet('2021-01-01')
+  // datet('2021-07-23T14:21:00+08:00')
   if (typeof date === 'string') {
-    const args = date.replace(/[-:\s/]+/g, ',').split(',')
+    const args = date.replace(/\+\d\d:\d\d/, '').replace(/[-:\sT/]/g, ',').split(',')
+
     args[1] = args[1] - 1
     return new Date(...args)
   }
