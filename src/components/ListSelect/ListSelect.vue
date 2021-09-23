@@ -1,5 +1,8 @@
 <template>
-  <div class="list-box" tabindex="-1">
+  <div
+    class="list-box"
+    tabindex="-1"
+  >
     <ul>
       <li
         v-for="item of data"
@@ -17,8 +20,8 @@
 export default {
   props: {
     data: {
-      type: Object,
-      default: () => ({})
+      type: Array,
+      default: () => []
     },
     value: {
       type: String,
@@ -73,14 +76,18 @@ export default {
 
       if (clientY < 0) {
         $el.scrollTop = itemTop
-      } else
-      if (clientY > boxHeight) {
+      } else if (clientY > boxHeight) {
         $el.scrollTop = itemTop - boxHeight + itemHeight
       }
     },
     select (item) {
-      const value = this.selected = item.value
-      this.$emit('select', value, this.dict[value])
+      const { value } = item
+      const isChange = this.selected !== value
+      this.selected = value
+      this.$emit('select', value, {
+        ...this.dict[value],
+        isChange
+      })
     }
   }
 }
@@ -88,8 +95,8 @@ export default {
 
 <style lang="scss">
   .list-box {
-    border: 1px solid #ddd;
-    width: 200px;
+    // border: 1px solid #ddd;
+    // width: 200px;
     max-height: 34px * 7;
     overflow: auto;
     position: relative;

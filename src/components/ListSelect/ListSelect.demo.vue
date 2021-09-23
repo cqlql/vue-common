@@ -1,18 +1,23 @@
 <template>
   <div>
     <button @click="showValue">跳到显示第10项</button>
-    <ListSelect
-      ref="vListSelect"
-      :data="list"
-      @select="select"
-      @change="change"
-    />
+    <div class="ListSelect-demo__wrap">
+      <ListSelect
+        ref="vListSelect"
+        :data="list"
+        @select="select"
+        @change="change"
+      />
+    </div>
+
     <button @click="setValue">手动选中：{{ value }}</button>
-    <ListSelect
-      ref="vListSelect"
-      :data="list"
-      :value="value"
-    />
+    <div class="ListSelect-demo__wrap">
+      <ListSelect
+        ref="vListSelect"
+        :data="list"
+        :value="value"
+      />
+    </div>
   </div>
 </template>
 
@@ -52,3 +57,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .ListSelect-demo__wrap {
+    width: 300px;
+    border: 1px solid #ddd;
+  }
+</style>
