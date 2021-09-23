@@ -19,7 +19,8 @@ function importAll (r) {
   })
 }
 
-importAll(require.context('@/components/ScrollLoad', true, /.+\.demo\.vue$/))
+// importAll(require.context('@/components/ScrollLoad', true, /.+\.demo\.vue$/))
+importAll(require.context('@/components/ListSelect', true, /.+\.demo\.vue$/))
 // importAll(require.context('@/comp-temp', true, /.+\.demo\.vue$/))
 // importAll(require.context('@/utils', true, /.+\.demo\.vue$/))
 
