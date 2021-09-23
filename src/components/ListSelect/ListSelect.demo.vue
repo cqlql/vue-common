@@ -13,7 +13,6 @@
     <button @click="setValue">手动选中：{{ value }}</button>
     <div class="ListSelect-demo__wrap">
       <ListSelect
-        ref="vListSelect"
         :data="list"
         :value="value"
       />
