@@ -1,6 +1,6 @@
 /* https://github.com/stylelint/stylelint/blob/master/docs/user-guide/rules.md */
 module.exports = {
-  'rules': {
+  rules: {
     'color-no-invalid-hex': true, // 禁止无效的十六进制颜色。
 
     'font-family-no-duplicate-names': true, // 不允许重复的字体系列名称。
@@ -17,28 +17,41 @@ module.exports = {
 
     'keyframe-declaration-no-important': true,
 
-    'declaration-block-no-duplicate-properties': [true, {
-      ignore: ['consecutive-duplicates-with-different-values']
-    }],
+    'declaration-block-no-duplicate-properties': [
+      true,
+      {
+        ignore: ['consecutive-duplicates-with-different-values'],
+      },
+    ],
     'declaration-block-no-shorthand-property-overrides': true,
 
     // "block-no-empty": true, // 禁止空的选择器
-    'selector-pseudo-class-no-unknown': [true, {
-      ignorePseudoClasses: ['global']
-    }],
-    'selector-pseudo-element-no-unknown': [true, {
-      ignorePseudoElements: ['v-deep']
-    }],
+    'selector-pseudo-class-no-unknown': [
+      true,
+      {
+        ignorePseudoClasses: ['global'],
+      },
+    ],
+    'selector-pseudo-element-no-unknown': [
+      true,
+      {
+        ignorePseudoElements: ['v-deep'],
+      },
+    ],
     'selector-type-no-unknown': true,
 
     'media-feature-name-no-unknown': true,
 
-    'at-rule-no-unknown': [true, {
-      ignoreAtRules: [
-        // 允许 scss
-        'include', 'mixin'
-      ]
-    }],
+    'at-rule-no-unknown': [
+      true,
+      {
+        ignoreAtRules: [
+          // 允许 scss
+          'include',
+          'mixin',
+        ],
+      },
+    ],
 
     'comment-no-empty': true,
 
@@ -59,8 +72,8 @@ module.exports = {
       'always',
       {
         except: ['blockless-after-same-name-blockless', 'first-nested'],
-        ignore: ['after-comment']
-      }
+        ignore: ['after-comment'],
+      },
     ],
     'at-rule-name-case': 'lower',
     'at-rule-semicolon-newline-after': 'always',
@@ -77,16 +90,16 @@ module.exports = {
       'always',
       {
         except: ['first-nested'],
-        ignore: ['stylelint-commands']
-      }
+        ignore: ['stylelint-commands'],
+      },
     ],
     'comment-whitespace-inside': 'always',
     'custom-property-empty-line-before': [
       'always',
       {
         except: ['after-custom-property', 'first-nested'],
-        ignore: ['after-comment', 'inside-single-line-block']
-      }
+        ignore: ['after-comment', 'inside-single-line-block'],
+      },
     ],
     'declaration-bang-space-after': 'never',
     'declaration-bang-space-before': 'always',
@@ -102,8 +115,8 @@ module.exports = {
       'always',
       {
         except: ['after-declaration', 'first-nested'],
-        ignore: ['after-comment', 'inside-single-line-block']
-      }
+        ignore: ['after-comment', 'inside-single-line-block'],
+      },
     ],
     'function-comma-newline-after': 'always-multi-line',
     'function-comma-space-after': 'always-single-line',
@@ -134,8 +147,8 @@ module.exports = {
       'always-multi-line',
       {
         except: ['first-nested'],
-        ignore: ['after-comment']
-      }
+        ignore: ['after-comment'],
+      },
     ],
     'selector-attribute-brackets-space-inside': 'never',
     'selector-attribute-operator-space-after': 'never',
@@ -156,6 +169,6 @@ module.exports = {
     'value-list-comma-newline-after': 'always-multi-line',
     'value-list-comma-space-after': 'always-single-line',
     'value-list-comma-space-before': 'never',
-    'value-list-max-empty-lines': 0
-  }
+    'value-list-max-empty-lines': 0,
+  },
 }
