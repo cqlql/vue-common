@@ -6,24 +6,16 @@
   </div>
 </template>
 
-<script lang="ts">
-import { reactive, ref, toRefs } from "@vue/reactivity";
-export default {
-  setup() {
-    const count = ref(0);
-    const state = reactive({
-      msg: "hello"
-    });
-
-    console.log(state);
-    return {
-      count,
-      ...toRefs(state),
-      test() {
-        count.value += 1;
-        state.msg += ~~(Math.random() * 10);
-      }
-    };
-  }
-};
+<script lang="ts" setup>
+import { reactive, ref, toRefs } from '@vue/reactivity'
+const count = ref(0)
+const state = reactive({
+  msg: 'hello',
+})
+const { msg } = toRefs(state)
+console.log(state)
+function test() {
+  count.value += 1
+  state.msg += ~~(Math.random() * 10)
+}
 </script>

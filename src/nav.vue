@@ -1,10 +1,7 @@
 <template>
   <div>
     <h2>demos</h2>
-    <p
-      v-for="(route,key) of listSelf"
-      :key="key"
-    >
+    <p v-for="(route, key) of listSelf" :key="key">
       <router-link :to="route.path">
         {{ (route.meta && route.meta.title) || route.name || route.path }}
       </router-link>
@@ -12,20 +9,15 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    list: {
-      type: Array,
-      default: () => []
-    }
-  },
-  computed: {
-    listSelf () {
-      return this.list.slice(0, this.list.length - 1)
-    }
-  }
-}
+<script setup lang="ts">
+import { RouteRecordRaw } from 'vue-router'
+import { defineProps, computed } from 'vue'
+const props = defineProps<{
+  list: RouteRecordRaw[]
+}>()
+const listSelf = computed(function () {
+  return props.list.slice(0, props.list.length - 1)
+})
 </script>
 
 <style scoped>
