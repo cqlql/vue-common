@@ -2,6 +2,8 @@ interface RuleType {
   require?: boolean
   error?: () => void
   pattern?: RegExp
+
+  validator?: (val: string) => boolean
 }
 
 function validate(role: RuleType, formValue: any) {
@@ -20,13 +22,15 @@ function validate(role: RuleType, formValue: any) {
   if (role.pattern) {
     return tests.pattern(role.pattern, formValue)
   }
+  if (role.validator) {
+    return role.validator(formValue)
+  }
 }
 
 export default async function validator(
   rules: Record<string, RuleType | RuleType[]>,
   form: Record<string, any>,
 ): Promise<boolean | undefined> {
-  // ): void {
   // eslint-disable-next-line prefer-const
   for (let [field, roles] of Object.entries(rules)) {
     if (!Array.isArray(roles)) {

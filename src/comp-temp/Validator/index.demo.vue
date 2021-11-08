@@ -11,13 +11,28 @@ function errorMessage(msg: string) {
   console.error(msg)
 }
 const rules = {
-  address: {
+  name: {
     require: true,
-    // message: '地址必填'
     error() {
-      errorMessage('地址必填')
+      errorMessage('名称必填')
     },
   },
+  address: [
+    {
+      require: true,
+      error() {
+        errorMessage('地址必填')
+      },
+    },
+    {
+      validator(val: string) {
+        return val.length >= 2
+      },
+      error() {
+        errorMessage('不能少于2个字符')
+      },
+    },
+  ],
   mobilePhone: [
     {
       require: true,
