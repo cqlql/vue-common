@@ -1,15 +1,9 @@
 <template>
   <div>
-    <Empty />
+    <EmptyApplet />
   </div>
 </template>
 
-<script>
-import Empty from './Empty.vue'
-export default {
-  components: {
-    Empty
-  }
-
-}
+<script setup lang="ts">
+import EmptyApplet from './EmptyApplet.vue'
 </script>

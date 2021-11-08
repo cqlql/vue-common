@@ -20,7 +20,9 @@ function importAll(r: __WebpackModuleApi.RequireContext) {
 
 // importAll(require.context('@/components/ScrollLoad', true, /.+\.demo\.vue$/))
 // importAll(require.context('@/components/ListSelect', true, /.+\.demo\.vue$/))
-importAll(require.context('@/comp-temp/experiment', true, /.+\.demo\.vue$/))
+// importAll(require.context('@/comp-temp/experiment', true, /.+\.demo\.vue$/))
+// importAll(require.context('@/comp-temp/empty', true, /.+\.demo\.vue$/))
+importAll(require.context('@/comp-temp/Validator', true, /.+\.demo\.vue$/))
 // importAll(require.context('@/utils', true, /.+\.demo\.vue$/))
 
 routes.push({

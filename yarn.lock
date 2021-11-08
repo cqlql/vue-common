@@ -1009,14 +1009,14 @@
     yorkie "^2.0.0"
 
 "@vue/cli-plugin-unit-jest@~5.0.0-beta.7":
-  version "5.0.0-beta.6"
-  resolved "https://registry.npmmirror.com/@vue/cli-plugin-unit-jest/download/@vue/cli-plugin-unit-jest-5.0.0-beta.6.tgz?cache=0&sync_timestamp=1634195771850&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40vue%2Fcli-plugin-unit-jest%2Fdownload%2F%40vue%2Fcli-plugin-unit-jest-5.0.0-beta.6.tgz#a5173b2b3c392f28e4e95cc00848adac261a9a4d"
-  integrity sha1-pRc7Kzw5Lyjk6VzACEitrCYamk0=
+  version "5.0.0-beta.7"
+  resolved "https://registry.npmmirror.com/@vue/cli-plugin-unit-jest/download/@vue/cli-plugin-unit-jest-5.0.0-beta.7.tgz?cache=0&sync_timestamp=1635748135836&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40vue%2Fcli-plugin-unit-jest%2Fdownload%2F%40vue%2Fcli-plugin-unit-jest-5.0.0-beta.7.tgz#5a004944033594db8172c606040927e71fd6a408"
+  integrity sha1-WgBJRAM1lNuBcsYGBAkn5x/WpAg=
   dependencies:
     "@babel/core" "^7.12.16"
     "@babel/plugin-transform-modules-commonjs" "^7.15.0"
     "@types/jest" "^27.0.1"
-    "@vue/cli-shared-utils" "^5.0.0-beta.6"
+    "@vue/cli-shared-utils" "^5.0.0-beta.7"
     babel-jest "^27.1.0"
     deepmerge "^4.2.2"
     jest "^27.1.0"
@@ -1092,7 +1092,7 @@
     webpack-virtual-modules "^0.4.2"
     whatwg-fetch "^3.6.2"
 
-"@vue/cli-shared-utils@^5.0.0-beta.6", "@vue/cli-shared-utils@^5.0.0-beta.7":
+"@vue/cli-shared-utils@^5.0.0-beta.7":
   version "5.0.0-beta.7"
   resolved "https://registry.npmmirror.com/@vue/cli-shared-utils/download/@vue/cli-shared-utils-5.0.0-beta.7.tgz#b7dc167d6e7a66ae2e02065c2ff46acefe21b569"
   integrity sha1-t9wWfW56Zq4uAgZcL/Rqzv4htWk=
