@@ -9,7 +9,12 @@ import { RouteRecordRaw } from 'vue-router'
 let routes: RouteRecordRaw[] = []
 function importAll(r: __WebpackModuleApi.RequireContext) {
   r.keys().forEach((key: string) => {
-    const name = key.replace(/.*\/|\.\w+/g, '')
+    let name
+    if (/\/demo\/index\.vue$/.test(key)) {
+      name = key.replace(/^\.\/|\/demo\/index\.vue$/g, '')
+    } else {
+      name = key.replace(/.*\/|\.\w+/g, '')
+    }
     routes = routes.concat({
       path: '/' + name,
       name,
@@ -22,7 +27,8 @@ function importAll(r: __WebpackModuleApi.RequireContext) {
 // importAll(require.context('@/components/ListSelect', true, /.+\.demo\.vue$/))
 // importAll(require.context('@/comp-temp/experiment', true, /.+\.demo\.vue$/))
 // importAll(require.context('@/comp-temp/empty', true, /.+\.demo\.vue$/))
-importAll(require.context('@/comp-temp/Validator', true, /.+\.demo\.vue$/))
+// importAll(require.context('@/comp-temp/Validator', true, /.+\.demo\.vue$/))
+importAll(require.context('@/components', true, /demo\/.+\.vue$/))
 // importAll(require.context('@/utils', true, /.+\.demo\.vue$/))
 
 routes.push({
