@@ -10,8 +10,8 @@
 </template>
 
 <script lang="ts" setup>
-import { createSearchRegExp } from '@/utils/reg'
 import { ref } from 'vue'
+import createSearchRegExp from '@/utils/search/create-search-regExp'
 
 const keyword = ref('收')
 

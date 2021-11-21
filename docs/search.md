@@ -8,10 +8,10 @@ description: 页面的描述
 ## 搜索关键字
 
 <demo-box>
-  <searchDemo2 />
+  <CreateSearchRegExpDemo />
   <template #code>
 
-@[code{1-33} vue{13,27}](/src/utils/search/demo/index2.vue)
+@[code{1-33} vue{13,27}](/src/utils/search/demo/CreateSearchRegExpDemo.vue)
 
   </template>
 </demo-box>
@@ -19,27 +19,28 @@ description: 页面的描述
 ## 标记关键字
 
 <demo-box>
-  <searchDemo />
+  <SearShowKeyWrodDemo />
   <template #code>
 
-@[code{1-16} vue{10,14}](/src/utils/search/demo/index.vue)
+@[code{1-16} vue{10,14}](/src/utils/search/demo/ShowKeyWrodDemo.vue)
 
   </template>
 </demo-box>
 
 ## 结合使用
 
+<demo-box>
+<SearchDemo />
+<template #code>
+
+@[code{1-35} vue{12,13,25-32}](/src/utils/search/demo/SearchDemo.vue)
+
+  </template>
+</demo-box>
+
 <script setup>
-  import searchDemo from '@/utils/search/demo/index.vue'
-  import searchDemo2 from '@/utils/search/demo/index2.vue'
+  import SearShowKeyWrodDemo from '@/utils/search/demo/ShowKeyWrodDemo.vue'
+  import CreateSearchRegExpDemo from '@/utils/search/demo/CreateSearchRegExpDemo.vue'
+  import SearchDemo from '@/utils/search/demo/SearchDemo.vue'
 </script>
 
-<style scope>
-  demo-box {
-    border: 1px solid #3e4c5a5c;
-    border-radius: 2px;
-    padding: 10px;
-    display: block;
-    margin:10px 0;
-  }
-</style>

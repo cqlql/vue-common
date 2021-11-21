@@ -9,13 +9,26 @@
  * @param {number} options.time
  */
 
+type Options = {
+  callback?:()=>void,
+   time?:number,
+    immediate?:boolean
+}
+
 export default class Debounce {
-  constructor ({ callback, time = 300, immediate } = {}) {
-    this.cb = callback
+  cb:()=>void
+  time?:number
+  timeId?:number
+  isStart:boolean
+  
+  constructor ({ callback, time = 300, immediate }:Options = {}) {
+    this.cb = callback|| (()=>{})
     this.time = time
     // this.immediate = immediate
     this.isStart = false
   }
+
+  
 
   exec (cb = this.cb, time = this.time) {
     // immediate 立即执行暂时弃用，感觉没必要
@@ -33,16 +46,17 @@ export default class Debounce {
   }
 }
 
-export function debounceInit (options) {
-  if (typeof options === 'number') {
+export function debounceCreate (params?:Options|number) {
+  let options  = params
+  if (typeof params === 'number') {
     options = {
-      time: options
+      time: params
       // immediate: false
     }
   }
 
-  const debounce = new Debounce(options)
-  return function (cb, time) {
+  const debounce = new Debounce(options as Options)
+  return function (cb:()=>void, time:number) {
     debounce.exec(cb, time)
   }
 }

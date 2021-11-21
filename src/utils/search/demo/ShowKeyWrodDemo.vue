@@ -1,7 +1,7 @@
 <template>
-  <div class="SearchDemo">
+  <div class="ShowKeyWrodDemo">
     <input type="text" v-model="keyword" />
-    <div class="SearchDemo_result" v-html="result"> </div>
+    <div class="ShowKeyWrodDemo_result" v-html="result"> </div>
   </div>
 </template>
 
@@ -15,13 +15,13 @@ const result = computed(() => {
 })
 </script>
 <style lang="scss" scoped>
-.SearchDemo {
+.ShowKeyWrodDemo {
   padding: 10px;
 }
-.SearchDemo_result {
+.ShowKeyWrodDemo_result {
   padding: 10px 0;
 }
-.SearchDemo::v-deep b {
+.ShowKeyWrodDemo::v-deep b {
   background-color: yellow;
 }
 </style>
