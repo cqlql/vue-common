@@ -38,17 +38,6 @@ description: 页面的描述
   </template>
 </demo-box>
 
-## 结合使用
-
-<demo-box>
-  <SearShowKeyWrodDemo />
-  <template #code>
-
-@[code{1-16} vue{10,14}](/src/utils/search/demo/ShowKeyWrodDemo.vue)
-
-  </template>
-</demo-box>
-
 ## useSearch
 
 <demo-box>
