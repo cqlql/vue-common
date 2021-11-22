@@ -1,5 +1,5 @@
 const path = require('path')
-console.log(111111111111111, path.resolve(__dirname, '../../src/'))
+
 module.exports = {
   lang: 'zh-CN',
   title: '你好， VuePress ！',
@@ -16,7 +16,7 @@ module.exports = {
       },
     ],
     // https://v2.vuepress.vuejs.org/zh/reference/default-theme/config.html#sidebar
-    sidebar: ['/README.md', '/contributing.md', '/search.md'],
+    sidebar: ['/search.md', '/README.md', '/contributing.md'],
   },
   alias: {
     '@': path.resolve(__dirname, '../../src'),

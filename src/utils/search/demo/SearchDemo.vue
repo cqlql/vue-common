@@ -2,14 +2,14 @@
   <div class="SearchDemo">
     <input type="text" v-model="keyword" @input="onInput" />
     <ul>
-      <li v-for=" content of resultList" v-html="content"></li>
+      <li v-for="content of resultList" v-html="content"></li>
     </ul>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import Search from '../search'
+import Search from '@/utils/search/search'
 const s = new Search()
 let contentData = [
   '朋友带我去看一位收藏家的收藏',
