@@ -1,6 +1,5 @@
 ---
-title: 搜索
-description: 页面的描述
+title: search 搜索
 ---
 
 # 搜索

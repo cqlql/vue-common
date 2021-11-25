@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
   lang: 'zh-CN',
-  title: '你好， VuePress ！',
+  title: 'JSLibr Vue 组件库',
   description: '这是我的第一个 VuePress 站点',
 
   themeConfig: {
@@ -16,7 +16,15 @@ module.exports = {
       },
     ],
     // https://v2.vuepress.vuejs.org/zh/reference/default-theme/config.html#sidebar
-    sidebar: ['/search.md', '/README.md', '/contributing.md'],
+    sidebar: [
+      {
+        text: 'form',
+        children: ['/form/input.md', '/form/select.md'],
+      },
+      '/icon.md',
+      '/cell.md',
+      '/search.md',
+    ],
   },
   alias: {
     '@': path.resolve(__dirname, '../../src'),

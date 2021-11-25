@@ -1,11 +1,15 @@
 <template>
   <div class="demo-box">
-    <slot></slot>
-    <button @click="toggleCodeShow">
-      {{ codeVisible ? '隐藏' : '显示' }}代码
-    </button>
-    <div v-show="codeVisible">
-      <slot name="code"></slot>
+    <div class="demo-box_demo">
+      <slot></slot>
+    </div>
+    <div class="demo-box_code">
+      <button @click="toggleCodeShow">
+        {{ codeVisible ? '隐藏' : '显示' }}代码
+      </button>
+      <div v-show="codeVisible">
+        <slot name="code"></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -23,8 +27,15 @@ function toggleCodeShow() {
 .demo-box {
   border: 1px solid #3e4c5a5c;
   border-radius: 2px;
-  padding: 10px;
+  // padding: 10px;
   display: block;
   margin: 10px 0;
+}
+.demo-box_demo {
+  padding: 10px;
+}
+.demo-box_code {
+  border-top: 1px solid #3e4c5a5c;
+  padding: 10px;
 }
 </style>
