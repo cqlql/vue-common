@@ -1,13 +1,13 @@
 <template>
   <div>
-    <InputVue v-model="val"></InputVue>
+    <InputNumber :min="100" v-model="val"></InputNumber>
     <p>result: {{ val }}</p>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import InputVue from '../InputVue.vue'
+import InputNumber from '../InputNumber.vue'
 
 const val = ref('')
 </script>
