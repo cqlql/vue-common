@@ -34,7 +34,7 @@ function onInput() {
 onInput()
 </script>
 <style lang="scss" scoped>
-.SearchDemo::v-deep b {
+.SearchDemo :deep(b) {
   background-color: yellow;
 }
 </style>

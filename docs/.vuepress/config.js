@@ -1,4 +1,5 @@
 const path = require('path')
+const vuepressUtils = require('@vuepress/utils')
 
 module.exports = {
   lang: 'zh-CN',
@@ -40,9 +41,13 @@ module.exports = {
       '@vuepress/register-components',
       {
         components: {
-          DemoBox: path.resolve(__dirname, '../components/DemoBox.vue'),
+          DemoBox: path.resolve(__dirname, './components/DemoBox.vue'),
         },
       },
     ],
   ],
+  clientAppEnhanceFiles: vuepressUtils.path.resolve(
+    __dirname,
+    './clientAppEnhance.ts',
+  ),
 }

@@ -24,7 +24,8 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "src/**/*.vue",
-    "docs/**/*.md",
+    "docs/.vuepress/**/*.ts",
+    "docs/.vuepress/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],

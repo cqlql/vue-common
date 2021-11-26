@@ -21,7 +21,7 @@ const result = computed(() => {
 .ShowKeyWrodDemo_result {
   padding: 10px 0;
 }
-.ShowKeyWrodDemo::v-deep b {
+.ShowKeyWrodDemo :deep(b) {
   background-color: yellow;
 }
 </style>

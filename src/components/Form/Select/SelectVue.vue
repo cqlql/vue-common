@@ -1,11 +1,7 @@
 <template>
   <div class="cell" @click="popCampus">
-    <div class="icon">
-      <nut-icon
-        font-class-name="iconfont"
-        class-prefix="icon"
-        name="building"
-      />
+    <div v-if="icon" class="icon">
+      <IconFont name="location" />
     </div>
     <div class="cont">
       <span v-if="id">
@@ -14,13 +10,19 @@
       <span class="login-page_placeholder" v-else> 请选择学校 </span>
     </div>
     <div class="arrows">
-      <nut-icon name="right" size="12" />
+      <!-- <nut-icon name="right" size="12" /> -->
+      <IconFont name="arrow-right" />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import IconFont from '@/components/Icon/IconFont.vue'
+
+defineProps<{
+  icon?: string
+}>()
 
 function popCampus() {}
 const id = ref('')
@@ -32,35 +34,25 @@ const name = ref('')
   padding: 10px 0;
   border-bottom: 1px solid #eee;
 
-  input {
-    // border: 1px solid #ddd;
-    // height: 24px;
-    // line-height: 24px;
-  }
-
   .icon {
     width: 30px;
-    // border: 1px solid red;
     display: inline-flex;
     align-items: center;
     color: #8ab7fd;
+    // border: 1px solid red;
   }
 
   .cont {
     flex: 1;
-    // display: inline-flex;
-    // align-items: center;
     // border: 1px solid red;
-    // height: 24px;
-    // line-height: 24px;
+    line-height: 1.4;
   }
 
   .arrows {
-    // border: 1px solid red;
     display: inline-flex;
     align-items: center;
     color: #ddd;
-    // font-size: 12px;
+    // border: 1px solid red;
   }
 }
 </style>

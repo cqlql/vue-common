@@ -17,7 +17,11 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-const codeVisible = ref(false)
+const props = defineProps<{
+  defaultShowCode?: boolean
+}>()
+
+const codeVisible = ref(props.defaultShowCode)
 
 function toggleCodeShow() {
   codeVisible.value = !codeVisible.value

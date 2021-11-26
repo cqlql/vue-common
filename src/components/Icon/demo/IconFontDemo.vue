@@ -1,6 +1,13 @@
 <template>
   <div>
-    <IconFont></IconFont>
+    <IconFont
+      font-class-name="iconfont"
+      class-prefix="icon"
+      name="backspace"
+    ></IconFont>
+    <IconFont name="search"></IconFont>
+    <IconFont name="location"></IconFont>
+    <IconFont name="arrow-right"></IconFont>
   </div>
 </template>
 

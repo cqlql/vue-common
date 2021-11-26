@@ -1,5 +1,6 @@
 <template>
   <div class="SelectVueDemo">
+    <SelectVue icon="location"></SelectVue>
     <SelectVue></SelectVue>
   </div>
 </template>
