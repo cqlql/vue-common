@@ -10,17 +10,17 @@ module.exports = {
     logo: 'https://vuejs.org/images/logo.png',
 
     // https://v2.vuepress.vuejs.org/zh/reference/default-theme/config.html#navbar
-    navbar: [
-      {
-        text: 'Foo',
-        link: '/contributing.md',
-      },
-    ],
+    // navbar: [
+    //   {
+    //     text: 'Foo',
+    //     link: '/contributing.md',
+    //   },
+    // ],
     // https://v2.vuepress.vuejs.org/zh/reference/default-theme/config.html#sidebar
     sidebar: [
       {
         text: 'form',
-        children: ['/form/input.md', '/form/select.md'],
+        children: ['/form/form.md', '/form/input.md', '/form/select.md'],
       },
       '/icon.md',
       '/cell.md',

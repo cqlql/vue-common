@@ -31,7 +31,7 @@ function toggleCodeShow() {
 <style lang="scss" scoped>
 .demo-box {
   // border: 1px solid #3e4c5a5c;
-  border: 1px solid #ebebeb;
+  border: 1px solid var(--c-border);
   border-radius: 2px;
   // padding: 10px;
   display: block;
@@ -42,7 +42,7 @@ function toggleCodeShow() {
 }
 .demo-box_code {
   // border-top: 1px solid #3e4c5a5c;
-  border-top: 1px solid #ebebeb;
+  border-top: 1px solid var(--c-border);
   padding: 10px;
 }
 </style>
