@@ -17,10 +17,12 @@ const routes: RouteRecordRaw[] = [
   // }
 ]
 
+require('./demos.ts')
+
 const router = createRouter({
   history: createWebHashHistory(),
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  routes: routes.concat(require('./demo.ts').default),
+  routes: routes.concat(require('./demos.ts').default),
 })
 
 export default router
