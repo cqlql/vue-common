@@ -26,6 +26,7 @@ module.exports = {
       '/cell.md',
       '/search.md',
       '/timer.md',
+      '/DemoBox.md',
     ],
   },
   alias: {
