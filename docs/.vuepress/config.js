@@ -25,6 +25,7 @@ module.exports = {
       '/icon.md',
       '/cell.md',
       '/search.md',
+      '/timer.md',
     ],
   },
   alias: {
@@ -37,6 +38,7 @@ module.exports = {
     },
   },
   plugins: [
+    // 全局注册组件
     [
       '@vuepress/register-components',
       {
