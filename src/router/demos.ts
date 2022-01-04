@@ -4,6 +4,10 @@ import { RouteRecordRaw } from 'vue-router'
 
 const demos = [
   {
+    path: '/Skeleton',
+    component: import('@/components/Skeleton/SkeletonDemo.vue'),
+  },
+  {
     path: '/CountDown',
     component: import('@/components/CountDown/CountDown.vue'),
   },
