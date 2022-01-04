@@ -4,9 +4,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import VImage from './comps/Image.vue'
-import VText from './comps/Text.vue'
-import VCircle from './comps/Circle.vue'
+import VImage from './components/Image.vue'
+import VText from './components/Text.vue'
+import VCircle from './components/Circle.vue'
 export default defineComponent({
   components: {
     VImage,
