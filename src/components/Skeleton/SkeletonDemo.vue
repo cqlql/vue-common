@@ -8,6 +8,7 @@
         <VSkeletonItem />
         <VSkeletonItem style="width: 30%" />
         <VSkeletonItem />
+        <VSkeletonItem variant="circle" />
       </template>
       <p
         >天色有点阴暗，看着挺舒服的。有一点微风，树梢微微摇起。天上应该布满了云，不然怎么会一点蓝也看不见。</p

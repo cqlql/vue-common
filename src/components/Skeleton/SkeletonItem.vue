@@ -1,15 +1,17 @@
 <template>
-  <div class="v-skeleton-item">
-    <component :is="'v-' + variant"></component>
-  </div>
+  <component class="v-skeleton-item" :is="'v-' + variant"></component>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import image from './comps/Image.vue'
+import VImage from './comps/Image.vue'
+import VText from './comps/Text.vue'
+import VCircle from './comps/Circle.vue'
 export default defineComponent({
   components: {
-    VImage: image,
+    VImage,
+    VText,
+    VCircle,
   },
 })
 </script>
@@ -17,9 +19,14 @@ export default defineComponent({
 <script lang="ts" setup>
 // import VImage from './comps/Image.vue'
 
-defineProps<{
-  variant?: 'image'
-}>()
+withDefaults(
+  defineProps<{
+    variant?: 'text' | 'image' | 'circle'
+  }>(),
+  {
+    variant: 'text',
+  },
+)
 </script>
 <style lang="scss">
 .v-skeleton-item {
