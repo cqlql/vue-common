@@ -34,7 +34,7 @@ title: search 搜索
 
 @[code{1-35} vue{12,13,25-32}](/src/utils/search/demo/SearchDemo.vue)
 
-  </template>
+</template>
 </demo-box>
 
 ## useSearch

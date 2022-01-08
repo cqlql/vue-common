@@ -27,6 +27,8 @@ module.exports = {
       '/search.md',
       '/timer.md',
       '/DemoBox.md',
+      '/image.md',
+      '/skeleton.md',
     ],
   },
   alias: {
