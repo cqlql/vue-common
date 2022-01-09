@@ -3,13 +3,17 @@ import DemosNav from '@/views/DemosNav.vue'
 import { RouteRecordRaw } from 'vue-router'
 
 const demos = [
+  // {
+  //   path: '/Skeleton',
+  //   component: import('@/components/Skeleton/SkeletonDemo.vue'),
+  // },
+  // {
+  //   path: '/CountDown',
+  //   component: import('@/components/CountDown/CountDown.vue'),
+  // },
   {
-    path: '/Skeleton',
-    component: import('@/components/Skeleton/SkeletonDemo.vue'),
-  },
-  {
-    path: '/CountDown',
-    component: import('@/components/CountDown/CountDown.vue'),
+    path: '/TurntableView',
+    component: import('@/views/Turntable/TurntableView.vue'),
   },
 ]
 
