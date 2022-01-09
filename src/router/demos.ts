@@ -15,6 +15,12 @@ const demos = [
     path: '/TurntableView',
     component: import('@/views/Turntable/TurntableView.vue'),
   },
+  {
+    path: '/DigitalRandomAnimation',
+    component: import(
+      '@/views/DigitalRandomAnimation/DigitalRandomAnimationDemo.vue'
+    ),
+  },
 ]
 
 const routes: RouteRecordRaw[] = demos
