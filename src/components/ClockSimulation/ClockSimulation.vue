@@ -94,6 +94,7 @@ function dragInit(el: HTMLElement, type: 'hour' | 'minute') {
 </template>
 
 <style lang="scss">
+@use 'sass:math';
 .ClockSimulation {
   border: 1px solid #ddd;
 
@@ -103,12 +104,11 @@ function dragInit(el: HTMLElement, type: 'hour' | 'minute') {
 }
 
 $handWidth: 20px;
-
 .ClockSimulation_hand {
   width: $handWidth;
   height: 100%;
 
-  margin-left: -$handWidth/2;
+  margin-left: math.div(-$handWidth, 2);
   background-color: #ddd;
   position: absolute;
   left: 50%;
