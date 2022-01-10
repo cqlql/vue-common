@@ -1,19 +1,4 @@
-// 解决新版 chrome 不支持阻止默认窗口滚动事件
-// https://www.chromestatus.com/feature/5093566007214080
-// https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/addEventListener
-// https://segmentfault.com/a/1190000007913386
-let passiveIsSupport = function () {
-  passiveIsSupport = () => false
-  try {
-    var opts = Object.defineProperty({}, 'passive', {
-      get () {
-        passiveIsSupport = () => true
-      }
-    })
-    window.addEventListener('test', null, opts)
-  } catch (e) {}
-  return passiveIsSupport()
-}
+import passiveIsSupport from './passiveIsSupport'
 
 /**
  * 拖动基础-移动端
@@ -33,16 +18,16 @@ let passiveIsSupport = function () {
  *  在onDown 中可以阻止，勿在onStart中阻止
  *
  */
-export default function dragMobile ({
+export default function dragMobile({
   elem,
   onMove,
   onDown = function () {},
   onStart = function () {},
-  onEnd = function () {}
+  onEnd = function () {},
 }) {
   let isStart = false
 
-  function touchstart (e) {
+  function touchstart(e) {
     if (onDown(e) === false) {
       isStart = false
       return
@@ -50,11 +35,11 @@ export default function dragMobile ({
     isStart = true
     onStart(e)
   }
-  function touchmove (e) {
+  function touchmove(e) {
     if (isStart === false) return
     onMove(e)
   }
-  function touchend (e) {
+  function touchend(e) {
     if (isStart === false) return
     let touches = e.touches
     if (touches.length === 0) {
@@ -63,17 +48,16 @@ export default function dragMobile ({
       onStart(e)
     }
   }
-  function touchcancel (e) {
+  function touchcancel() {
     onEnd()
   }
-
+  let opt = passiveIsSupport() ? { passive: false } : false
   if (elem === document) {
-    let opt = passiveIsSupport() ? { passive: false } : false
     elem.addEventListener('touchstart', touchstart, opt)
     elem.addEventListener('touchmove', touchmove, opt)
   } else {
-    elem.addEventListener('touchstart', touchstart)
-    elem.addEventListener('touchmove', touchmove)
+    elem.addEventListener('touchstart', touchstart, opt)
+    elem.addEventListener('touchmove', touchmove, opt)
   }
 
   elem.addEventListener('touchend', touchend)

@@ -13,13 +13,17 @@ const demos = [
   // },
   {
     path: '/TurntableView',
-    component: import('@/views/Turntable/TurntableView.vue'),
+    component: () => import('@/views/Turntable/TurntableView.vue'),
   },
   {
     path: '/DigitalRandomAnimation',
-    component: import(
-      '@/views/DigitalRandomAnimation/DigitalRandomAnimationDemo.vue'
-    ),
+    component: () =>
+      import('@/views/DigitalRandomAnimation/DigitalRandomAnimationDemo.vue'),
+  },
+  {
+    path: '/ClockView',
+    component: () =>
+      import('@/views/ClockSimulationDemo/ClockSimulationDemo.vue'),
   },
 ]
 
@@ -37,5 +41,3 @@ routes.push({
 })
 
 export default routes
-
-console.log(demos)

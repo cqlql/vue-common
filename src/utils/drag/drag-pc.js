@@ -7,12 +7,12 @@
  *
  * @param onDown 可通过 return false 阻止拖动发送
  */
-export default function drag ({
+export default function drag({
   elem,
   onMove,
   onDown = function () {},
   onStart = function () {},
-  onEnd = function () {}
+  onEnd = function () {},
 }) {
   // 避免没阻止浏览器默认动作，重复注册
   // 比如拖动拖蓝情况会触发 mousedown 但不触发 mouseup
@@ -20,7 +20,7 @@ export default function drag ({
 
   let unbindOther = function () {}
 
-  function down (e) {
+  function down(e) {
     if (isDarg || onDown(e) === false) return
     isDarg = true
 
@@ -37,11 +37,11 @@ export default function drag ({
       isDarg = false
     }
 
-    function mousemove (e) {
+    function mousemove(e) {
       onMove(e)
     }
 
-    function mouseup () {
+    function mouseup() {
       onEnd()
       unbindOther()
     }

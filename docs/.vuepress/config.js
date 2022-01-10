@@ -29,6 +29,7 @@ module.exports = {
       '/DemoBox.md',
       '/image.md',
       '/skeleton.md',
+      '/clock.md',
     ],
   },
   alias: {
