@@ -17,13 +17,11 @@ const demos = [
   },
   {
     path: '/DigitalRandomAnimation',
-    component: () =>
-      import('@/views/DigitalRandomAnimation/DigitalRandomAnimationDemo.vue'),
+    component: () => import('@/views/demo/DigitalRandomAnimation.vue'),
   },
   {
     path: '/ClockView',
-    component: () =>
-      import('@/views/ClockSimulationDemo/ClockSimulationDemo.vue'),
+    component: () => import('@/views/demo/ClockSimulation.vue'),
   },
 ]
 

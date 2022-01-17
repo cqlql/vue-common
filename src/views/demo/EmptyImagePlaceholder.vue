@@ -1,6 +1,7 @@
 <script lang="ts" setup></script>
 <template>
   <div>
+    <h1>图片占位</h1>
     <img class="empty-img-bg" width="590" height="470" />
   </div>
 </template>

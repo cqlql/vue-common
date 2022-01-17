@@ -9,12 +9,12 @@ title: image
 
 <template #code>
 
-@[code](/src/demos/ImageDemo.vue)
+@[code](/src/views/demo/EmptyImagePlaceholder.vue)
 
   </template>
 </demo-box>
 
 <script setup>
-import ImageDemo from '@/demos/ImageDemo.vue'
+import ImageDemo from '@/views/demo/EmptyImagePlaceholder.vue'
 
 </script>
