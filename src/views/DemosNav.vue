@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { RouteRecordRaw } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 import { defineProps, computed } from 'vue'
 const props = defineProps<{
   list: RouteRecordRaw[]

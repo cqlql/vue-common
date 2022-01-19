@@ -1,5 +1,13 @@
 /* https://github.com/stylelint/stylelint/blob/master/docs/user-guide/rules.md */
 module.exports = {
+  customSyntax: 'postcss-html',
+  ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts'],
+  overrides: [
+    {
+      files: ['**/*.vue'],
+      extends: ['stylelint-config-html'],
+    },
+  ],
   rules: {
     'color-no-invalid-hex': true, // 禁止无效的十六进制颜色。
 
@@ -38,7 +46,12 @@ module.exports = {
         ignorePseudoElements: ['v-deep'],
       },
     ],
-    'selector-type-no-unknown': true,
+    'selector-type-no-unknown': [
+      true,
+      {
+        ignoreTypes: ['page'],
+      },
+    ],
 
     'media-feature-name-no-unknown': true,
 
@@ -58,7 +71,7 @@ module.exports = {
     // "no-descending-specificity": true,
     'no-duplicate-at-import-rules': true, // 禁止@import样式表中的重复规则
     'no-duplicate-selectors': true, // 不允许重复的选择器
-    'no-empty-source': true, // 禁止空的来源
+    'no-empty-source': true, // 禁止空的 <style>
     'no-extra-semicolons': true, // 不允许多余的分号。
     // "no-invalid-double-slash-comments": true, //...CSS不支持的双斜线注释（）。
 
@@ -107,7 +120,10 @@ module.exports = {
     'declaration-block-semicolon-space-after': 'always-single-line',
     'declaration-block-semicolon-space-before': 'never',
     'declaration-block-single-line-max-declarations': 1,
-    'declaration-block-trailing-semicolon': 'always',
+
+    // 交给 prittier
+    // 'declaration-block-trailing-semicolon': 'always',
+
     'declaration-colon-newline-after': 'always-multi-line',
     'declaration-colon-space-after': 'always-single-line',
     'declaration-colon-space-before': 'never',

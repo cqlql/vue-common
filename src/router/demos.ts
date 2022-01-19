@@ -1,6 +1,6 @@
 import { h } from 'vue'
 import DemosNav from '@/views/DemosNav.vue'
-import { RouteRecordRaw } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 
 const demos = [
   // {
@@ -22,6 +22,10 @@ const demos = [
   {
     path: '/ClockView',
     component: () => import('@/views/demo/ClockSimulation.vue'),
+  },
+  {
+    path: '/DemoJSX',
+    component: () => import('@/views/demo/DemoJSX/DemoJSX.vue'),
   },
 ]
 
