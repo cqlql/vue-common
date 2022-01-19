@@ -21,8 +21,8 @@ let angle = reactive({
 
 const props = withDefaults(
   defineProps<{
-    hour: number
-    minute: number
+    hour?: number
+    minute?: number
   }>(),
   {
     hour: 0,
