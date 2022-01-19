@@ -1,6 +1,6 @@
 <script lang="ts">
 import drag from '@/utils/drag/drag'
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, watch } from 'vue'
 export default defineComponent({
   name: 'ClockSimulation',
   directives: {
@@ -19,7 +19,20 @@ let angle = reactive({
   minute: 0,
 })
 
-setClock(11.5, 55)
+const props = withDefaults(
+  defineProps<{
+    hour: number
+    minute: number
+  }>(),
+  {
+    hour: 0,
+    minute: 0,
+  },
+)
+
+watch([() => props.hour, () => props.minute], () => {
+  setClock(props.hour, props.minute)
+})
 
 /**
  * 设置时钟
@@ -95,40 +108,89 @@ function dragInit(el: HTMLElement, type: 'hour' | 'minute') {
 
 <style lang="scss">
 @use 'sass:math';
-.ClockSimulation {
-  border: 1px solid #ddd;
 
-  width: 300px;
-  height: 300px;
+$size: 320px;
+$handWidth: 12px;
+$hourHandWidth: 16px;
+
+$centerSize: 30px;
+
+.ClockSimulation {
+  // border: 1px solid #ddd;
+  width: $size;
+  height: $size;
   position: relative;
+  background: url(@/assets/ClockDial.png) no-repeat;
+  background-size: 100% auto;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: $centerSize;
+    height: $centerSize;
+    margin-top: math.div(-$centerSize, 2);
+    margin-left: math.div(-$centerSize, 2);
+    background-color: #445157;
+    border-radius: 100%;
+    box-sizing: border-box;
+    border: 8px solid #5f6c72;
+  }
 }
 
-$handWidth: 20px;
 .ClockSimulation_hand {
   width: $handWidth;
-  height: 100%;
-
+  height: 80%;
   margin-left: math.div(-$handWidth, 2);
-  background-color: #ddd;
+  // background-color: #ddd;
   position: absolute;
   left: 50%;
+  top: 10%;
+  pointer-events: none;
+
   .hand {
     width: 100%;
-    height: 50%;
+    height: 38%;
     background-color: #000;
+    position: relative;
+    margin-top: 30px;
+    border-radius: 50px;
+    z-index: 1;
+    pointer-events: all;
+
+    // &::after {
+    //   content: '';
+    //   border-style: solid;
+    //   border-width: 0 $handWidth $handWidth * 2 $handWidth;
+    //   border-color: transparent transparent #d66c62 transparent;
+    //   position: absolute;
+    //   top: -$handWidth;
+    //   left: math.div($handWidth, -2);
+    // }
   }
 }
 
 .ClockSimulation_hour {
-  // transform: rotate(45deg);
+  width: $hourHandWidth;
+  margin-left: math.div(-$hourHandWidth, 2);
+
   .hand {
-    background-color: #000;
+    background-color: #d66c62;
+    margin-top: 60px;
+    height: 28%;
   }
 }
+
 .ClockSimulation_minute {
   transform: rotate(45deg);
+
   .hand {
-    background-color: red;
+    background-color: #4ab2bf;
+
+    &::after {
+      border-color: transparent transparent #4ab2bf transparent;
+    }
   }
 }
 </style>

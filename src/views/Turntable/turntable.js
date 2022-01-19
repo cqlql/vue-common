@@ -1,7 +1,7 @@
 import Animation from './animation'
-import autoPrefix from './autoprefix'
+import autoprefix from '@/utils/css/autoprefix'
 
-let transform = autoPrefix('transform')
+let transform = autoprefix('transform')
 export default class {
   init({ el, complete, count = 6, offsetDeg = 0 }) {
     this.animation = new Animation()
