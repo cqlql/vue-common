@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "docs:dev": "cd ./docs&&npm run docs:dev",
+    "docs:build": "cd ./docs&&npm run docs:build"
   },
   "dependencies": {
     "@ant-design/colors": "^6.0.0",

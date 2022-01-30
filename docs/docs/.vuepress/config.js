@@ -33,12 +33,12 @@ module.exports = {
     ],
   },
   alias: {
-    '@': path.resolve(__dirname, '../../src'),
+    '@': path.resolve(__dirname, '../../../src'),
   },
   markdown: {
     importCode: {
       handleImportPath: (str) =>
-        str.replace(/^\/src/, path.resolve(__dirname, '../../src')),
+        str.replace(/^\/src/, path.resolve(__dirname, '../../../src')),
     },
   },
   plugins: [
