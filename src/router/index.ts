@@ -1,6 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHashHistory } from 'vue-router'
 // import Home from '../views/Home.vue'
+import demos from './demos'
 
 const routes: RouteRecordRaw[] = [
   // {
@@ -18,12 +19,10 @@ const routes: RouteRecordRaw[] = [
   // }
 ]
 
-require('./demos.ts')
-
 const router = createRouter({
   history: createWebHashHistory(),
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  routes: routes.concat(require('./demos.ts').default),
+  routes: routes.concat(demos),
 })
 
 export default router

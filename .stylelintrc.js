@@ -37,7 +37,7 @@ module.exports = {
     'selector-pseudo-class-no-unknown': [
       true,
       {
-        ignorePseudoClasses: ['global'],
+        ignorePseudoClasses: ['global', '/:deep/'],
       },
     ],
     'selector-pseudo-element-no-unknown': [
@@ -62,6 +62,7 @@ module.exports = {
           // 允许 scss
           'include',
           'mixin',
+          'use',
         ],
       },
     ],
