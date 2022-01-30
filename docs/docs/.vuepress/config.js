@@ -30,6 +30,7 @@ module.exports = {
       '/image.md',
       '/skeleton.md',
       '/clock.md',
+      '/ProgressBar.md',
     ],
   },
   alias: {
