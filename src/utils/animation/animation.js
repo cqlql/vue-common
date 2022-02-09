@@ -36,7 +36,7 @@ export default class Animation {
     cancelAnimationFrame(this.stopId)
   }
 
-  // 缓动类型：可进行更换
+  // 缓动类型：可更换
   // easeOutQuad
   easing(x, t, b, c, d) {
     return -c * (t /= d) * (t - 2) + b
