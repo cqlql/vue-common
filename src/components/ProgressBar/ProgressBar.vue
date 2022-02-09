@@ -50,7 +50,7 @@ $barBcActive: #73c0de;
     // flex: 1;
     background-color: $barBc;
     border-radius: $barSize;
-    padding: 0 $barSize/2;
+    padding: 0 calc($barSize / 2);
     position: relative;
     height: $barSize;
 
@@ -86,7 +86,7 @@ $barBcActive: #73c0de;
     border-radius: $barSize;
     background-color: #12ac70;
     position: absolute;
-    right: -$barSize/2;
+    right: calc($barSize / -2);
     z-index: 1;
     outline: 2px solid #fff;
   }
