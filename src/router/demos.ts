@@ -13,19 +13,38 @@ const demos = [
   // },
   {
     path: '/TurntableView',
+    meta: {
+      title: 'TurntableView - 转盘抽奖',
+    },
     component: () => import('@/views/Turntable/TurntableView.vue'),
   },
   {
     path: '/DigitalRandomAnimation',
+    meta: {
+      title: 'DigitalRandomAnimation - 随机数抽奖',
+    },
     component: () => import('@/views/demo/DigitalRandomAnimation.vue'),
   },
   {
     path: '/ClockView',
+    meta: {
+      title: 'ClockView - 可拖动时钟',
+    },
     component: () => import('@/views/demo/ClockSimulation.vue'),
   },
   {
     path: '/DemoJSX',
+    meta: {
+      title: 'DemoJSX - JSX 语法实验',
+    },
     component: () => import('@/views/demo/DemoJSX/DemoJSX.vue'),
+  },
+  {
+    path: '/PieChartCss',
+    meta: {
+      title: 'PieChartCss - css饼图',
+    },
+    component: () => import('@/views/demo/PieChartCss/PieChartCss.vue'),
   },
 ]
 
