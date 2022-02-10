@@ -23,14 +23,15 @@ const demos = [
     meta: {
       title: 'DigitalRandomAnimation - 随机数抽奖',
     },
-    component: () => import('@/views/demo/DigitalRandomAnimation.vue'),
+    component: () =>
+      import('@/views/demo/DigitalRandomAnimation/DigitalRandomAnimation.vue'),
   },
   {
     path: '/ClockView',
     meta: {
       title: 'ClockView - 可拖动时钟',
     },
-    component: () => import('@/views/demo/ClockSimulation.vue'),
+    component: () => import('@/views/demo/ClockSimulation/ClockSimulation.vue'),
   },
   {
     path: '/DemoJSX',
