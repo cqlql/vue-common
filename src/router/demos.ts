@@ -47,6 +47,13 @@ const demos = [
     },
     component: () => import('@/views/demo/PieChartCss/PieChartCss.vue'),
   },
+  {
+    path: '/Resume',
+    meta: {
+      title: 'Resume',
+    },
+    component: () => import('@/views/demo/Resume/ResumeIndex.vue'),
+  },
 ]
 
 const routes: RouteRecordRaw[] = demos
