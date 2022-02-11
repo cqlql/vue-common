@@ -88,8 +88,8 @@ webview 页面开发，配合 App，实现原生难以实现，或者能显著�
 }
 </script>
 <template>
-  <div class="text-base mx-4 my-2">
-    <div class="Resume_header">
+  <div class="text-true-gray-900 text-base mx-4 my-2">
+    <div class="">
       <h1 class="text-2xl">
         <span>{{ data.name }}</span>
       </h1>
@@ -116,12 +116,12 @@ webview 页面开发，配合 App，实现原生难以实现，或者能显著�
 
     <ResumeItem class="Resume_work" name="工作经历">
       <div v-for="(item, key) of data.workExperience" :key="key">
-        <div class="Resume_work-title font-bold"
+        <div class="font-bold"
           >{{ item.dateRange }}
           <span class="pl-2 pr-2">{{ item.companyName }}</span>
           {{ item.position }}
         </div>
-        <div class="Resume_work-content whitespace-pre-line">
+        <div class="whitespace-pre-line">
           {{ item.work.trim() }}
         </div>
       </div>
@@ -136,7 +136,7 @@ webview 页面开发，配合 App，实现原生难以实现，或者能显著�
 
     <ResumeItem class="Resume_project" name="项目经历">
       <div v-for="(item, index) of data.projectExperience" :key="index">
-        <div class="Resume_project-title">{{ item.name }}</div>
+        <div class="text-xl font-bold">{{ item.name }}</div>
 
         <div class="whitespace-pre-line"
           ><b>项目概述：</b>{{ item.overview }}</div
@@ -165,19 +165,3 @@ webview 页面开发，配合 App，实现原生难以实现，或者能显著�
     <ResumeItem name="教育背景"> </ResumeItem>
   </div>
 </template>
-
-<style lang="scss">
-.Resume_header {
-}
-
-.Resume_work-title {
-}
-
-.Resume_work-content {
-}
-
-.Resume_project-title {
-  font-size: 18px;
-  font-weight: bold;
-}
-</style>
