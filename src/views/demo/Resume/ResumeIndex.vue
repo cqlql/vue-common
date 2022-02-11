@@ -13,7 +13,7 @@ let data = {
   baseInfo: {
     phone: {
       label: '手机',
-      value: '13923401527',
+      value: '+86 13923401527',
     },
     email: {
       label: '邮箱',
@@ -31,8 +31,6 @@ let data = {
   professionalSkills: [
     '熟练掌握 html css js es6 ts。熟练使用 div + css 布局，ps切图。能定制复杂交互效果/功能模块',
 
-    '熟练使用 ajax 跟后端数据交互。',
-
     '熟练使用 vuejs 框架，能独立开发组件。',
 
     '熟练使用 webpack 等工程化工具，可不使用官方 vue-cli等，根据项目具体需求搭建前端开发环境，最大程度优化前端代码。',
@@ -48,7 +46,7 @@ let data = {
     {
       dateRange: '2014/12--2019/10',
       companyName: '深圳深度未来教育有限公司',
-      position: '前端工程师',
+      position: '高级前端工程师',
       work: `
 配合后端，完成pc/移动端网站的前端开发
 webview 页面开发，配合 App，实现原生难以实现，或者能显著提高开发效率的页面开发。
@@ -90,24 +88,26 @@ webview 页面开发，配合 App，实现原生难以实现，或者能显著�
 }
 </script>
 <template>
-  <div class="ResumeIndex">
+  <div class="text-base mx-4 my-2">
     <div class="Resume_header">
-      <h1>
+      <h1 class="text-2xl">
         <span>{{ data.name }}</span>
       </h1>
-
-      <span>{{ data.profession }}</span>
-      <span>{{ data.workingYears }}年工作经验</span>
+      <div class="text-gray-600">
+        <span class="mr-1">{{ data.baseInfo.phone.value }}</span> |
+        <span class="mx-1">{{ data.profession }}</span> |
+        <span class="ml-1">{{ data.workingYears }}年工作经验</span>
+      </div>
     </div>
 
-    <ResumeItem name="基本信息">
+    <!-- <ResumeItem name="基本信息">
       <div v-for="item of data.baseInfo" :key="item.value">
         <span>{{ item.label }}</span>
         <span>{{ item.value }}</span>
       </div>
-    </ResumeItem>
+    </ResumeItem> -->
     <ResumeItem name="专业技能">
-      <ul>
+      <ul class="list-disc pl-6">
         <li v-for="(content, key) of data.professionalSkills" :key="key">
           {{ content }}
         </li>
@@ -116,32 +116,42 @@ webview 页面开发，配合 App，实现原生难以实现，或者能显著�
 
     <ResumeItem class="Resume_work" name="工作经历">
       <div v-for="(item, key) of data.workExperience" :key="key">
-        <div class="Resume_work-title"
-          >{{ item.dateRange }} {{ item.companyName }} {{ item.position }}
+        <div class="Resume_work-title font-bold"
+          >{{ item.dateRange }}
+          <span class="pl-2 pr-2">{{ item.companyName }}</span>
+          {{ item.position }}
         </div>
-        <div class="Resume_work-content">
+        <div class="Resume_work-content whitespace-pre-line">
           {{ item.work.trim() }}
         </div>
       </div>
     </ResumeItem>
-    <ResumeItem name="自我评价">
+    <!-- <ResumeItem name="自我评价">
       <ul>
         <li v-for="(content, key) of data.selfEvaluation" :key="key">
           {{ content }}
         </li>
       </ul>
-    </ResumeItem>
+    </ResumeItem> -->
 
     <ResumeItem class="Resume_project" name="项目经历">
       <div v-for="(item, index) of data.projectExperience" :key="index">
         <div class="Resume_project-title">{{ item.name }}</div>
 
-        <div><b>项目概述：</b>{{ item.overview }}</div>
-        <div><b>负责内容：</b>{{ item.responsible }}</div>
+        <div class="whitespace-pre-line"
+          ><b>项目概述：</b>{{ item.overview }}</div
+        >
+        <div class="whitespace-pre-line"
+          ><b>负责内容：</b>{{ item.responsible }}</div
+        >
         <div
           ><b>项目难点：</b>
-          <ul>
-            <li v-for="(cont, childIndex) of item.difficulty" :key="childIndex">
+          <ul class="list-disc pl-6">
+            <li
+              v-for="(cont, childIndex) of item.difficulty"
+              :key="childIndex"
+              class="whitespace-pre-line"
+            >
               {{ cont }}
             </li>
           </ul>
@@ -152,14 +162,11 @@ webview 页面开发，配合 App，实现原生难以实现，或者能显著�
         </div>
       </div>
     </ResumeItem>
+    <ResumeItem name="教育背景"> </ResumeItem>
   </div>
 </template>
 
 <style lang="scss">
-.ResumeIndex {
-  font-size: 16px;
-}
-
 .Resume_header {
 }
 

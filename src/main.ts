@@ -1,3 +1,4 @@
+import 'virtual:windi.css'
 import './styles/animation.scss'
 import { createApp } from 'vue'
 import App from './App.vue'
