@@ -37,7 +37,7 @@ module.exports = {
     'selector-pseudo-class-no-unknown': [
       true,
       {
-        ignorePseudoClasses: ['global', '/:deep/'],
+        ignorePseudoClasses: ['global', 'deep'],
       },
     ],
     'selector-pseudo-element-no-unknown': [

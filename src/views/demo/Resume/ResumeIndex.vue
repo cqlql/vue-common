@@ -132,7 +132,26 @@ webview 页面开发，配合 App，实现原生难以实现，或者能显著�
       </ul>
     </ResumeItem>
 
-    <ResumeItem name="项目经历"> </ResumeItem>
+    <ResumeItem class="Resume_project" name="项目经历">
+      <div v-for="(item, index) of data.projectExperience" :key="index">
+        <div class="Resume_project-title">{{ item.name }}</div>
+
+        <div><b>项目概述：</b>{{ item.overview }}</div>
+        <div><b>负责内容：</b>{{ item.responsible }}</div>
+        <div
+          ><b>项目难点：</b>
+          <ul>
+            <li v-for="(cont, childIndex) of item.difficulty" :key="childIndex">
+              {{ cont }}
+            </li>
+          </ul>
+        </div>
+        <div>
+          <b>使用技术：</b>
+          {{ item.technology }}
+        </div>
+      </div>
+    </ResumeItem>
   </div>
 </template>
 
@@ -148,5 +167,10 @@ webview 页面开发，配合 App，实现原生难以实现，或者能显著�
 }
 
 .Resume_work-content {
+}
+
+.Resume_project-title {
+  font-size: 18px;
+  font-weight: bold;
 }
 </style>
