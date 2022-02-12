@@ -122,7 +122,7 @@ webview 页面开发，配合 App，实现原生难以实现，或者能显著�
       </ul>
     </ResumeItem>
 
-    <ResumeItem class="Resume_work" name="工作经历">
+    <ResumeItem name="工作经历">
       <div v-for="(item, key) of data.workExperience" :key="key">
         <div class="font-bold"
           >{{ item.dateRange }}
@@ -142,15 +142,15 @@ webview 页面开发，配合 App，实现原生难以实现，或者能显著�
       </ul>
     </ResumeItem> -->
 
-    <ResumeItem class="Resume_project" name="项目经历">
+    <ResumeItem name="项目经历">
       <div v-for="(item, index) of data.projectExperience" :key="index">
         <div class="text-xl font-bold">{{ item.name }}</div>
 
         <div class="whitespace-pre-line"
-          ><b>项目概述：</b>{{ item.overview }}</div
+          ><b>项目概述：</b>{{ item.overview.trim() }}</div
         >
         <div class="whitespace-pre-line"
-          ><b>负责内容：</b>{{ item.responsible }}</div
+          ><b>负责内容：</b>{{ item.responsible.trim() }}</div
         >
         <div
           ><b>项目难点：</b>
