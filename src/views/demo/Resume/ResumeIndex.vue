@@ -85,18 +85,26 @@ webview 页面开发，配合 App，实现原生难以实现，或者能显著�
       technology: 'vue + webpack + es6',
     },
   ],
+  education: {
+    name: '湖南航空工业职工工学院',
+    education: '大专',
+    professional: '计算机应用',
+  },
 }
 </script>
 <template>
-  <div class="text-true-gray-900 text-base mx-4 my-2">
+  <div class="text-dark-900 text-base mx-4 my-2">
     <div class="">
-      <h1 class="text-2xl">
+      <h1 class="text-2xl mb-1">
         <span>{{ data.name }}</span>
+        <span class="text-base leading-none ml-3">{{ data.profession }}</span>
       </h1>
       <div class="text-gray-600">
-        <span class="mr-1">{{ data.baseInfo.phone.value }}</span> |
-        <span class="mx-1">{{ data.profession }}</span> |
-        <span class="ml-1">{{ data.workingYears }}年工作经验</span>
+        <span>{{ data.baseInfo.phone.value }}</span>
+        <span class="text-true-gray-300 mx-2">|</span>
+        <span>{{ data.baseInfo.email.value }}</span>
+        <span class="text-true-gray-300 mx-2">|</span>
+        <span>{{ data.workingYears }}年工作经验</span>
       </div>
     </div>
 
@@ -162,6 +170,10 @@ webview 页面开发，配合 App，实现原生难以实现，或者能显著�
         </div>
       </div>
     </ResumeItem>
-    <ResumeItem name="教育背景"> </ResumeItem>
+    <ResumeItem name="教育背景">
+      <span>{{ data.education.name }}</span>
+      <span class="px-5">{{ data.education.professional }}</span>
+      <span>{{ data.education.education }}</span>
+    </ResumeItem>
   </div>
 </template>
