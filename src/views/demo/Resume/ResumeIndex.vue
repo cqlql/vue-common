@@ -1,9 +1,3 @@
-<!--<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'ResumeIndex',
-})
-</script>-->
 <script lang="ts" setup>
 import ResumeItem from './comp/ResumeItem.vue'
 let data = {
