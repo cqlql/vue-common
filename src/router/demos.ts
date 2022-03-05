@@ -54,6 +54,13 @@ const demos = [
     },
     component: () => import('@/views/demo/Resume/ResumeIndex.vue'),
   },
+  {
+    path: '/temp',
+    meta: {
+      title: '临时实验',
+    },
+    component: () => import('@/views/demo/Temp/TempIndex.vue'),
+  },
 ]
 
 const routes: RouteRecordRaw[] = demos
