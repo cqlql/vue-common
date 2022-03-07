@@ -1,3 +1,4 @@
+import type { App } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHashHistory } from 'vue-router'
 // import Home from '../views/Home.vue'
@@ -19,10 +20,13 @@ const routes: RouteRecordRaw[] = [
   // }
 ]
 
-const router = createRouter({
+export const router = createRouter({
   history: createWebHashHistory(),
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   routes: routes.concat(demos),
 })
 
-export default router
+// config router
+export function setupRouter(app: App<Element>) {
+  app.use(router)
+}

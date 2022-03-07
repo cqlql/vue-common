@@ -61,6 +61,13 @@ const demos = [
     },
     component: () => import('@/views/demo/Temp/TempIndex.vue'),
   },
+  {
+    path: '/I18n',
+    meta: {
+      title: 'I18n',
+    },
+    component: () => import('@/views/demo/I18n/I18nIndex.vue'),
+  },
 ]
 
 const routes: RouteRecordRaw[] = demos
