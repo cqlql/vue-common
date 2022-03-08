@@ -1,16 +1,11 @@
 <template>
-  <svg
-    :class="[prefixCls, $attrs.class, spin && 'svg-icon-spin']"
-    :style="getStyle"
-    aria-hidden="true"
-  >
+  <svg :class="[prefixCls, $attrs.class, type, spin && 'svg-icon-spin']" aria-hidden="true">
     <use :xlink:href="symbolId" />
   </svg>
 </template>
 <script lang="ts">
-import type { CSSProperties } from 'vue'
 import { defineComponent, computed } from 'vue'
-
+import { oneOf } from 'vue-types'
 export default defineComponent({
   name: 'SvgIcon',
   props: {
@@ -22,40 +17,35 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    size: {
-      type: [Number, String],
-      default: 16,
-    },
     spin: {
       type: Boolean,
       default: false,
     },
+    // 图标类型，目前可用类型： line 线性
+    type: oneOf(['line']).def(''),
   },
   setup(props) {
     const symbolId = computed(() => `#${props.prefix}-${props.name}`)
 
-    const getStyle = computed((): CSSProperties => {
-      const { size } = props
-      let s = `${size}`
-      s = `${s.replace('px', '')}px`
-      return {
-        width: s,
-        height: s,
-      }
-    })
-    return { symbolId, prefixCls: '', getStyle }
+    return { symbolId, prefixCls: 'svg-icon' }
   },
 })
 </script>
 <style lang="scss" scoped>
-$namespace: vben;
-$prefix-cls: #{$namespace}-svg-icon;
+$prefix-cls: svg-icon;
 
 .#{$prefix-cls} {
   display: inline-block;
   overflow: hidden;
   vertical-align: -0.15em;
   fill: currentcolor;
+
+  width: 1em;
+  height: 1em;
+
+  &.line {
+    stroke: currentColor;
+  }
 }
 
 .svg-icon-spin {
