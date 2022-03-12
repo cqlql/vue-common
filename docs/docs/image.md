@@ -15,6 +15,6 @@ title: image
 </demo-box>
 
 <script setup>
-import ImageDemo from '@/views/demo/EmptyImagePlaceholder.vue'
+import ImageDemo from '@/views/demo/EmptyImagePlaceholder/EmptyImagePlaceholder.vue'
 
 </script>

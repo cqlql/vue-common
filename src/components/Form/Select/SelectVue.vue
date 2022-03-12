@@ -18,7 +18,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import IconFont from '@/components/Icon/IconFont.vue'
+import IconFont from '@/components/IconFont/IconFont.vue'
 
 defineProps<{
   icon?: string

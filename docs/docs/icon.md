@@ -6,11 +6,11 @@ title: icon 图标
   <IconFontDemo />
   <template #code>
 
-@[code{1-} vue{3-10,15}](/src/components/Icon/demo/IconFontDemo.vue)
+@[code{1-} vue{3-10,15}](/src/components/IconFont/demo/IconFontDemo.vue)
 
   </template>
 </demo-box>
 
 <script setup>
-  import IconFontDemo from '@/components/Icon/demo/IconFontDemo.vue'
+  import IconFontDemo from '@/components/IconFont/demo/IconFontDemo.vue'
 </script>
