@@ -5,7 +5,7 @@ const { t } = useI18n()
 </script>
 <template>
   <div>
-    <AppLocalePicker />
+    <AppLocalePicker class="border-2 px-2 border-blue-500" />
 
     <p>
       {{ t('sys.login.loginSuccessDesc') }}

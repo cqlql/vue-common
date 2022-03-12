@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="DemosNav">
     <h2>demos</h2>
     <p v-for="(route, key) of listSelf" :key="key">
       <router-link :to="route.path">
@@ -20,20 +20,24 @@ const listSelf = computed(function () {
 })
 </script>
 
-<style scoped>
-h2 {
-  /* padding: 20px 0 0; */
-  font-size: 16px;
-}
+<style lang="scss" scoped>
+.DemosNav {
+  h2 {
+    font-size: 20px;
+    padding-bottom: 6px;
+  }
 
-a {
-  padding-left: 3px;
-  font-size: 12px;
-  font-weight: bold;
-  color: #2c3e50;
+  a {
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #2c3e50;
+    display: block;
 
-  &.router-link-exact-active {
-    color: #42b983;
+    &:hover {
+      color: #1890ff;
+      background: #f3f3f3;
+    }
   }
 }
 </style>
