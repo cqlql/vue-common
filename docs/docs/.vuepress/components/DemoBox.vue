@@ -4,12 +4,14 @@
       <slot></slot>
     </div>
     <div class="demo-box_code">
-      <button v-if="!showCode" @click="toggleCodeShow">
-        {{ codeVisible ? '隐藏' : '显示' }}代码
-      </button>
       <div v-show="codeVisible || showCode">
         <slot name="code"></slot>
       </div>
+    </div>
+    <div class="demo-box_footer">
+      <button v-if="!showCode" @click="toggleCodeShow">
+        {{ codeVisible ? '隐藏' : '显示' }}代码
+      </button>
     </div>
   </div>
 </template>
@@ -37,12 +39,20 @@ function toggleCodeShow() {
   display: block;
   margin: 10px 0;
 }
+
 .demo-box_demo {
   padding: 10px;
 }
+
 .demo-box_code {
   // border-top: 1px solid #3e4c5a5c;
   border-top: 1px solid var(--c-border);
   padding: 10px;
+  padding-bottom: 0;
+}
+
+.demo-box_footer {
+  text-align: center;
+  padding-bottom: 15px;
 }
 </style>

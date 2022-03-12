@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import DemosNav from '@/views/DemosNav.vue'
+import DemosNav from '@/views/demo/comp/DemosNav.vue'
 import type { RouteRecordRaw } from 'vue-router'
 
 const demos = [
@@ -16,7 +16,7 @@ const demos = [
     meta: {
       title: 'TurntableView - 转盘抽奖',
     },
-    component: () => import('@/views/Turntable/TurntableView.vue'),
+    component: () => import('@/views/demo/Turntable/TurntableView.vue'),
   },
   {
     path: '/DigitalRandomAnimation',
