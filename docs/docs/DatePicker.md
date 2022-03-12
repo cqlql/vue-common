@@ -3,14 +3,14 @@ title: DatePicker 日期选择
 ---
 
 <demo-box showCode>
-  <DataPickerDemo />
+  <DatePickerDemo />
   <template #code>
 
-@[code](/src/views/demo/DataPickerDemo/DataPickerDemo.vue)
+@[code](/src/views/demo/DatePickerDemo/DatePickerDemo.vue)
 
   </template>
 </demo-box>
 
 <script setup>
-  import DataPickerDemo from '@/views/demo/DataPickerDemo/DataPickerDemo.vue'
+  import DatePickerDemo from '@/views/demo/DatePickerDemo/DatePickerDemo.vue'
 </script>

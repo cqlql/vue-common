@@ -68,6 +68,20 @@ const demos = [
     },
     component: () => import('@/views/demo/I18n/I18nIndex.vue'),
   },
+  {
+    path: '/Calendar',
+    meta: {
+      title: 'Calendar 日历',
+    },
+    component: () => import('@/components/Calendar/Calendar.demo.vue'),
+  },
+  {
+    path: '/DatePicker',
+    meta: {
+      title: 'DatePicker 日期选择',
+    },
+    component: () => import('@/views/demo/DatePickerDemo/DatePickerDemo.vue'),
+  },
 ]
 
 const routes: RouteRecordRaw[] = demos
