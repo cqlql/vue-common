@@ -3,6 +3,13 @@ import DemosNav from '@/views/demo/comp/DemosNav.vue'
 import type { RouteRecordRaw } from 'vue-router'
 
 const demos = [
+  {
+    path: '/all',
+    meta: {
+      title: '所有常用组件',
+    },
+    component: () => import('@/views/demo/AllComp/index.vue'),
+  },
   // {
   //   path: '/Skeleton',
   //   component: import('@/components/Skeleton/SkeletonDemo.vue'),
@@ -82,6 +89,13 @@ const demos = [
     },
     component: () =>
       import('@/views/demo/OneWeekPickerDemo/OneWeekPickerDemo.vue'),
+  },
+  {
+    path: '/VideoAdd',
+    meta: {
+      title: 'VideoAdd 视频增加',
+    },
+    component: () => import('@/views/demo/VideoAdd/index.vue'),
   },
 ]
 

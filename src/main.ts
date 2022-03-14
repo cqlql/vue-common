@@ -7,7 +7,7 @@ import { router, setupRouter } from './router'
 import { setupStore } from './store'
 import { setupRouterGuard } from './router/guard'
 import { setupI18n } from './locales/setupI18n'
-// import globalRegister from './global-register' // 注册组件为全局
+import registerGlobComp from './registerGlobComp' // 注册组件为全局
 
 async function bootstrap() {
   const app = createApp(App)
@@ -24,6 +24,8 @@ async function bootstrap() {
 
   // router-guard
   setupRouterGuard(router)
+
+  registerGlobComp(app)
 
   app.mount('#app')
 }
