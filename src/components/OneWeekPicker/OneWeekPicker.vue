@@ -51,10 +51,11 @@ function handleSelect(item: DateItem) {
 
   .c-cell-content {
     display: inline-block;
-    width: 40px;
-    height: 40px;
-    border-radius: 40px;
+    width: 38px;
+    height: 38px;
+    border-radius: 38px;
     padding: 4px;
+    border: 1px solid #fff;
     box-sizing: content-box;
     cursor: pointer;
 
@@ -63,7 +64,7 @@ function handleSelect(item: DateItem) {
     }
 
     &.today {
-      outline: 1px solid #4baaff;
+      border-color: #4baaff;
     }
 
     &.selected {
