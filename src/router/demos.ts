@@ -76,11 +76,12 @@ const demos = [
     component: () => import('@/components/Calendar/Calendar.demo.vue'),
   },
   {
-    path: '/DatePicker',
+    path: '/OneWeekPicker',
     meta: {
-      title: 'DatePicker 日期选择',
+      title: 'OneWeekPicker 日期选择',
     },
-    component: () => import('@/views/demo/DatePickerDemo/DatePickerDemo.vue'),
+    component: () =>
+      import('@/views/demo/OneWeekPickerDemo/OneWeekPickerDemo.vue'),
   },
 ]
 
