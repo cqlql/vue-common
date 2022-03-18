@@ -10,38 +10,62 @@
         v-for="item of row"
         :key="item.value"
         class="c-cell"
-        :class="item.class"
+        :class="{
+          other: item.notCurrentMonth,
+          today: item.isToday,
+          selected: item.selected,
+        }"
+        @click="onSelect(item)"
       >
-        {{ item.value }}
+        <div class="v">
+          {{ item.value }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-let todayDate = new Date()
 export default {
   name: 'CalendarVue',
 }
 </script>
 <script lang="ts" setup>
 import { computed } from 'vue'
+import type { DateItem } from './typing'
 
 const props = withDefaults(
   defineProps<{
-    year?: number
-    month?: number //  月份 (一月 0， 十二月 11)
     sundayFirst?: boolean
+    selectedDate: Date
+    displayedDate?: Date
+    todayDate?: Date
+    /**可以通过修改 dateItem 更改当前显示 */
+    dateHandle?: (dateItem: DateItem) => void
   }>(),
-
   {
-    year: todayDate.getFullYear(),
-    month: todayDate.getMonth(),
+    todayDate: () => new Date(),
+    displayedDate: () => new Date(),
   },
 )
 
+const emits = defineEmits<{
+  (e: 'select', dateItem: DateItem): void
+}>()
+
+const displayedYear = computed(() => props.displayedDate.getFullYear())
+const displayedMonth = computed(() => props.displayedDate.getMonth())
+
 function getDateInstanceLast(year: number, month: number) {
   return new Date(year, month, 0)
+}
+
+function isEqual(d1: Date, d2: Date) {
+  return (
+    d1.getFullYear() === d2.getFullYear() &&
+    d1.getMonth() === d2.getMonth() &&
+    d1.getDate() === d2.getDate()
+  )
 }
 
 // 上月天要显示总数
@@ -64,17 +88,17 @@ const dayTotal = computed(() => {
 const firstWeekDay = computed(() => {
   return dateFirst.value.getDay()
 })
-// 当前date，第一天
+// 当月 date，第一天
 const dateFirst = computed(() => {
-  return new Date(props.year, props.month, 1)
+  return new Date(displayedYear.value, displayedMonth.value, 1)
 })
 // 当月 date，最后一天
 const dateLast = computed(() => {
-  return getDateInstanceLast(props.year, props.month + 1)
+  return getDateInstanceLast(displayedYear.value, displayedMonth.value + 1)
 })
 // 上月 date，最后一天
 const lastMonthDateLast = computed(() => {
-  return getDateInstanceLast(props.year, props.month)
+  return getDateInstanceLast(displayedYear.value, displayedMonth.value)
 })
 const head = computed(() => {
   const head = ['一', '二', '三', '四', '五', '六']
@@ -89,42 +113,67 @@ const head = computed(() => {
 const rows = computed(() => {
   let wholeIndex = 0
 
-  const body: any[] = [[], [], [], [], [], []]
+  const body: DateItem[][] = [[], [], [], [], [], []]
 
   let lastMonthDayTotalValue = lastMonthDayTotal.value
   let lastMonthDayTotalFullValue = lastMonthDayTotalFull.value
   let dayTotalValue = dayTotal.value
   let nextMonthDayTotalValue = nextMonthDayTotal.value
 
+  let { todayDate, selectedDate, displayedDate, dateHandle } = props
+  let displayedYear = displayedDate.getFullYear()
+  let displayedMonth = displayedDate.getMonth()
+
+  // 显示:部分上月
   for (let index = 0; index < lastMonthDayTotalValue; index++) {
+    let value = lastMonthDayTotalFullValue - lastMonthDayTotalValue + index + 1
     body[0].push({
-      class: 'other',
-      value: lastMonthDayTotalFullValue - lastMonthDayTotalValue + index + 1,
+      notCurrentMonth: true,
+      value,
+      date: new Date(displayedYear, displayedMonth - 1, value),
     })
     wholeIndex++
   }
 
+  // 显示:当前月
   for (let index = 0; index < dayTotalValue; index++) {
-    body[~~(wholeIndex / 7)].push({
-      class: '',
-      value: index + 1,
-    })
+    let value = index + 1
+    let displayedMoment = new Date(displayedYear, displayedMonth, value)
+    let dateItem = {
+      value,
+      isToday: isEqual(todayDate, displayedMoment),
+      selected: isEqual(selectedDate, displayedMoment),
+      date: displayedMoment,
+    }
+    if (dateHandle) {
+      dateHandle(dateItem)
+    }
+    body[~~(wholeIndex / 7)].push(dateItem)
     wholeIndex++
   }
 
+  // 显示:部分下月
   for (let index = 0; index < nextMonthDayTotalValue; index++) {
+    let value = index + 1
     body[~~(wholeIndex / 7)].push({
-      class: 'other',
-      value: index + 1,
+      notCurrentMonth: true,
+      value,
+      date: new Date(displayedYear, displayedMonth + 1, value),
     })
     wholeIndex++
   }
 
   return body
 })
+
+function onSelect(dateItem: DateItem) {
+  emits('select', dateItem)
+}
 </script>
 
 <style lang="scss">
+$color: #3aa6ff;
+
 .calendar-contain {
   border: 1px solid #ddd;
 
@@ -141,8 +190,31 @@ const rows = computed(() => {
     align-items: center;
     justify-content: center;
 
+    .v {
+      width: 30px;
+      height: 30px;
+      box-sizing: border-box;
+      line-height: 30px;
+      text-align: center;
+      border: solid 1px #fff;
+      border-radius: 30px;
+    }
+
     &.other {
       color: #aaa;
+    }
+
+    &.today {
+      .v {
+        border: solid 1px $color;
+      }
+    }
+
+    &.selected {
+      .v {
+        background-color: $color;
+        color: #fff;
+      }
     }
   }
 }

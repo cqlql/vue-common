@@ -2,43 +2,56 @@
 import CalendarView from './CalendarView.vue'
 import dayjs from 'dayjs'
 import { computed, ref } from 'vue'
-const currentDate = ref(dayjs())
+import type { DateItem } from './typing'
+const displayedDate = ref(dayjs())
 
-const currentDateText = computed(() => {
-  return currentDate.value.format('YYYY年M月D日')
+const displayedDateText = computed(() => {
+  return displayedDate.value.format('YYYY年M月D日')
 })
 
-const displayedYearMonth = computed(() => {
-  let d = currentDate.value
-  return {
-    year: d.get('y'),
-    month: d.get('M'),
-  }
+const displayedDateNative = computed(() => {
+  console.log(
+    '🚀 -- displayedDateNative -- displayedDateNative',
+    displayedDateNative,
+  )
+  return displayedDate.value.toDate()
 })
 
-const selectedDate = ref('')
+const selectedDate = ref(new Date())
 
 function onPrevMonth() {
-  currentDate.value = currentDate.value.subtract(1, 'M')
+  displayedDate.value = displayedDate.value.subtract(1, 'M')
 }
 function onNextMonth() {
-  currentDate.value = currentDate.value.add(1, 'M')
+  displayedDate.value = displayedDate.value.add(1, 'M')
+}
+
+function onToToday() {
+  displayedDate.value = dayjs()
+}
+function dateHandle(dateItem: DateItem) {
+  // console.log('🚀 -- dateHandle -- args', params)
+}
+function onSelect(dateItem: DateItem) {
+  selectedDate.value = dateItem.date
+  if (dateItem.notCurrentMonth) {
+    displayedDate.value = dayjs(dateItem.date)
+  }
 }
 </script>
 <template>
   <div>
     <v-button @click="onPrevMonth">上月</v-button>
     <v-button @click="onNextMonth">下月</v-button>
-    {{ currentDateText }}
+    <v-button @click="onToToday">今天</v-button>
+    {{ displayedDateText }}
     <CalendarView
-      :displayedDate="displayedYearMonth"
       :selectedDate="selectedDate"
-      :displayedYear="displayedYearMonth.year"
-      :displayedMonth="displayedYearMonth.year"
-      :year="displayedYearMonth.year"
-      :month="displayedYearMonth.month"
+      :displayedDate="displayedDateNative"
+      :dateHandle="dateHandle"
+      @select="onSelect"
     ></CalendarView>
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<!-- <style lang="scss" scoped></style> -->
