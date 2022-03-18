@@ -1,8 +1,14 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import BoxView from './comp/BoxView.vue'
+import Calendar from '../../../components/Calendar/Calendar.vue'
+</script>
 <template>
-  <div>
+  <BoxView>
     <v-button>确认</v-button>
-  </div>
+  </BoxView>
+  <BoxView>
+    <Calendar></Calendar>
+  </BoxView>
 </template>
 
 <style lang="scss"></style>
