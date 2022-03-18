@@ -35,8 +35,8 @@ const props = withDefaults(
   }>(),
 
   {
-    year: (() => todayDate.getFullYear())(),
-    month: (() => todayDate.getMonth() + 1)(),
+    year: todayDate.getFullYear(),
+    month: todayDate.getMonth(),
   },
 )
 
