@@ -13,7 +13,15 @@
   ></span>
 </template>
 <script lang="ts">
-import { defineComponent, ref, watch, onMounted, nextTick, unref, computed } from 'vue'
+import {
+  defineComponent,
+  ref,
+  watch,
+  onMounted,
+  nextTick,
+  unref,
+  computed,
+} from 'vue'
 import SvgIcon from './SvgIcon.vue'
 import Iconify from '@purge-icons/generated'
 import { propTypes } from '@/utils/propTypes'
@@ -36,14 +44,16 @@ export default defineComponent({
     spin: propTypes.bool.def(false),
     prefix: propTypes.string.def(''),
     // 图标类型，用于 SvgIcon 组件，目前可用类型： line 线性
-    type: oneOf(['line']).def(''),
+    type: oneOf(['', 'line']).def(''),
   },
   setup(props) {
     const elRef = ref<ElRef>(null)
 
     const isSvgIcon = computed(() => props.icon?.endsWith(SVG_END_WITH_FLAG))
     const getSvgIcon = computed(() => props.icon.replace(SVG_END_WITH_FLAG, ''))
-    const getIconRef = computed(() => `${props.prefix ? props.prefix + ':' : ''}${props.icon}`)
+    const getIconRef = computed(
+      () => `${props.prefix ? props.prefix + ':' : ''}${props.icon}`,
+    )
 
     const update = async () => {
       if (unref(isSvgIcon)) return

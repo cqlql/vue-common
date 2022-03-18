@@ -1,5 +1,8 @@
 <template>
-  <svg :class="[prefixCls, $attrs.class, type, spin && 'svg-icon-spin']" aria-hidden="true">
+  <svg
+    :class="[prefixCls, $attrs.class, type, spin && 'svg-icon-spin']"
+    aria-hidden="true"
+  >
     <use :xlink:href="symbolId" />
   </svg>
 </template>
@@ -22,7 +25,7 @@ export default defineComponent({
       default: false,
     },
     // 图标类型，目前可用类型： line 线性
-    type: oneOf(['line']).def(''),
+    type: oneOf(['', 'line']).def(''),
   },
   setup(props) {
     const symbolId = computed(() => `#${props.prefix}-${props.name}`)
