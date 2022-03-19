@@ -23,9 +23,13 @@ watch(el, (elem) => {
 })
 </script>
 <template>
-  <div ref="el" style="width: 300px; height: 300px; background: #ddd">
-    SwipeX
-  </div>
+  <div class="SwipeX" ref="el"> SwipeX </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.SwipeX {
+  width: 300px;
+  height: 300px;
+  background: #ddd;
+}
+</style>

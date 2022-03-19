@@ -2,7 +2,7 @@ import drag from './drag'
 
 interface SwipeOptions {
   elem: HTMLElement
-  onDown?(e: TouchEvent | MouseEvent): void // 可在此处终止滑动开始
+  onDown?(e: TouchEvent | MouseEvent): void | boolean // 可在此处终止滑动开始
   onStart?(e: TouchEvent | MouseEvent): void
   onEnd?(): void
   onMove(xlen: number, e: TouchEvent | MouseEvent): void
