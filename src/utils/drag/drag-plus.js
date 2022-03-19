@@ -1,49 +1,43 @@
 /**
- * 此处使用了点点相加处理，如需更加灵活
+ * 拖动常用封装
+ * 此处区别于点点相加。解决点点相加边界限制时可脱离事件原始位置
  *
- * 兼容性：ie9+
- *
- * 一般使用示例：
-    let lenX = 0
-    let lenY = 0
-    drag({
-      elem: this.$el,
-      onMove: ({ lx, ly }) => {
-        lenX += lx
-        lenY += ly
-        this.d.x = lenX
-        this.d.y = lenY
-      },
-      onStart: () => {
-        lenX = this.d.x
-        lenY = this.d.y
-      },
-      onDown: e => {
-        e.preventDefault()
-      }
-    })
  */
 
 import drag from './drag'
 
 export default function ({ elem, onMove, onDown, onStart = () => {}, onEnd }) {
+  const curr = {
+    x: 0,
+    y: 0
+  }
+  let startX
+  let startY
   let prevX
   let prevY
-  drag({
+  const unbind = drag({
     elem,
     onMove (e) {
-      let { pageX, pageY } = e.touches ? e.touches[0] : e
-      onMove({ lx: pageX - prevX, ly: pageY - prevY, e })
-      prevX = pageX
-      prevY = pageY
+      const { pageX, pageY } = e.touches ? e.touches[0] : e
+      const x = pageX - startX + prevX
+      const y = pageY - startY + prevY
+      onMove({ lx: x, ly: y, e })
+      curr.x = x
+      curr.y = y
     },
     onDown,
     onStart (e) {
       onStart(e)
-      let { pageX, pageY } = e.touches ? e.touches[0] : e
-      prevX = pageX
-      prevY = pageY
+      const { pageX, pageY } = e.touches ? e.touches[0] : e
+      startX = pageX
+      startY = pageY
+      prevX = curr.x
+      prevY = curr.y
     },
     onEnd
   })
+  return {
+    curr,
+    unbind
+  }
 }
