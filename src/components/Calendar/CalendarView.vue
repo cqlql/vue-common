@@ -51,6 +51,9 @@ const props = withDefaults(
 
 const emits = defineEmits<{
   (e: 'select', dateItem: DateItem): void
+  (e: 'change', dateItem: DateItem): void
+  (e: 'update:selectedDate', date: Date): void
+  (e: 'update:displayedDate', date: Date): void
 }>()
 
 const displayedYear = computed(() => props.displayedDate.getFullYear())
@@ -167,6 +170,14 @@ const rows = computed(() => {
 })
 
 function onSelect(dateItem: DateItem) {
+  if (!isEqual(props.selectedDate, dateItem.date)) {
+    emits('change', dateItem)
+    emits('update:selectedDate', dateItem.date)
+    if (dateItem.notCurrentMonth) {
+      emits('update:displayedDate', dateItem.date)
+    }
+  }
+
   emits('select', dateItem)
 }
 </script>
@@ -189,6 +200,7 @@ $color: #3aa6ff;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 
     .v {
       width: 30px;
@@ -207,6 +219,12 @@ $color: #3aa6ff;
     &.today {
       .v {
         border: solid 1px $color;
+      }
+    }
+
+    &:hover {
+      .v {
+        color: $color;
       }
     }
 

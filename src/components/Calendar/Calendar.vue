@@ -1,42 +1,38 @@
 <script lang="ts" setup>
 import CalendarView from './CalendarView.vue'
 import dayjs from 'dayjs'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import type { DateItem } from './typing'
-const displayedDate = ref(dayjs())
-
-const displayedDateText = computed(() => {
-  return displayedDate.value.format('YYYY年M月D日')
-})
-
-const displayedDateNative = computed(() => {
-  console.log(
-    '🚀 -- displayedDateNative -- displayedDateNative',
-    displayedDateNative,
-  )
-  return displayedDate.value.toDate()
-})
-
+const displayedDate = ref(new Date())
+const displayedDatePlus = ref(dayjs(displayedDate.value))
 const selectedDate = ref(new Date())
 
+const selectedDateText = computed(() => {
+  return dayjs(selectedDate.value).format('YYYY年M月D日')
+})
+
+watch(displayedDate, (value) => {
+  displayedDatePlus.value = dayjs(value)
+})
+
 function onPrevMonth() {
-  displayedDate.value = displayedDate.value.subtract(1, 'M')
+  displayedDate.value = displayedDatePlus.value.subtract(1, 'M').toDate()
 }
 function onNextMonth() {
-  displayedDate.value = displayedDate.value.add(1, 'M')
+  displayedDate.value = displayedDatePlus.value.add(1, 'M').toDate()
 }
 
 function onToToday() {
-  displayedDate.value = dayjs()
+  displayedDate.value = new Date()
 }
 function dateHandle(dateItem: DateItem) {
   // console.log('🚀 -- dateHandle -- args', params)
 }
 function onSelect(dateItem: DateItem) {
-  selectedDate.value = dateItem.date
-  if (dateItem.notCurrentMonth) {
-    displayedDate.value = dayjs(dateItem.date)
-  }
+  console.log('🚀 -- onSelect -- dateItem', dateItem)
+}
+function onChange(dateItem: DateItem) {
+  console.log('🚀 -- onChange -- dateItem', dateItem)
 }
 </script>
 <template>
@@ -44,12 +40,13 @@ function onSelect(dateItem: DateItem) {
     <v-button @click="onPrevMonth">上月</v-button>
     <v-button @click="onNextMonth">下月</v-button>
     <v-button @click="onToToday">今天</v-button>
-    {{ displayedDateText }}
+    {{ selectedDateText }}
     <CalendarView
-      :selectedDate="selectedDate"
-      :displayedDate="displayedDateNative"
+      v-model:selectedDate="selectedDate"
+      v-model:displayedDate="displayedDate"
       :dateHandle="dateHandle"
       @select="onSelect"
+      @change="onChange"
     ></CalendarView>
   </div>
 </template>
