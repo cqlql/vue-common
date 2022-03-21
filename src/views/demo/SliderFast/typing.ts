@@ -1,1 +1,1 @@
-export type SlideClass = '' | 'slideInRight' | 'slideInLeft'
+export type SlideClass = '' | 'slideInRight' | 'slideInLeft' | 'slideRestore'

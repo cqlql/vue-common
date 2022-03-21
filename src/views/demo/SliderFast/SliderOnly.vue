@@ -2,7 +2,7 @@
 import { computed, ref, watch } from 'vue'
 import type { SlideClass } from './typing'
 
-const list = ref([1, 2, 3])
+// const list = ref([1, 2, 3])
 const slideValue = ref(0)
 
 const props = defineProps<{
@@ -11,6 +11,7 @@ const props = defineProps<{
 
 const emits = defineEmits<{
   (e: 'update:slideClass', slideClass: SlideClass): void
+  (e: 'end', direction: string): void
 }>()
 
 const restoreClass = computed(() => {
@@ -31,12 +32,19 @@ watch(
 )
 
 function transitionend() {
+  // if (slideValue.value > 0) {
+  //   list.value.push(list.value.shift() as number)
+  // } else if (slideValue.value < 0) {
+  //   list.value.unshift(list.value.pop() as number)
+  // }
+  let direction = ''
   if (slideValue.value > 0) {
-    list.value.push(list.value.shift() as number)
+    direction = 'right'
   } else if (slideValue.value < 0) {
-    list.value.unshift(list.value.pop() as number)
+    direction = 'left'
   }
 
+  emits('end', direction)
   emits('update:slideClass', '')
 }
 </script>
@@ -47,15 +55,16 @@ function transitionend() {
       :class="[slideClass, restoreClass]"
       @transitionend="transitionend"
     >
-      <div class="SliderOnly_item" v-for="v of list" :key="v"
+      <slot></slot>
+      <!-- <div class="SliderOnly_item" v-for="v of list" :key="v"
         ><slot :name="'item' + v"></slot
-      ></div>
+      ></div> -->
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-$width: 100px;
+$width: auto;
 $height: 100px;
 $transition: transform 0.3s ease;
 
@@ -72,17 +81,17 @@ $transition: transform 0.3s ease;
 
   &.slideInRight {
     transition: $transition;
-    transform: translateX(-100%);
+    transform: translateX(-100%) !important;
   }
 
   &.slideInLeft {
     transition: $transition;
-    transform: translateX(100%);
+    transform: translateX(100%) !important;
   }
 
   &.slideRestore {
     transition: $transition;
-    transform: translateX(0);
+    transform: translateX(0) !important;
   }
 
   &.slideInRight.restore,
@@ -91,7 +100,7 @@ $transition: transform 0.3s ease;
   }
 }
 
-.SliderOnly_item {
+.SliderOnly_list > :deep(div) {
   border: 1px solid #ddd;
   position: absolute;
   inset: 0;

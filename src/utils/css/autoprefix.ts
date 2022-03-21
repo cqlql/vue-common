@@ -3,16 +3,7 @@ interface Propertys {
   css: string
 }
 
-interface Dir {
-  [key: string]: Propertys
-}
-
-enum Types {
-  js = 'js',
-  css = 'css',
-}
-
-const cache: Dir = {}
+type ValueType = 'js' | 'css'
 
 /**
  * 自动加前缀
@@ -26,7 +17,7 @@ const cache: Dir = {}
  */
 export default function autoprefix(
   cssPropertyName: string,
-  type = Types.js,
+  type: ValueType = 'js',
 ): string | undefined {
   // 检测 cssPropertyName
   if (process.env.NODE_ENV !== 'production') {
@@ -36,8 +27,7 @@ export default function autoprefix(
   }
 
   // 如果有直接返回
-  let propertyName = cache[cssPropertyName]
-  if (propertyName) return propertyName[type]
+  let propertyName: Propertys | undefined
 
   const humpName = minusHump(cssPropertyName)
 
