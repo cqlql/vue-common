@@ -1,7 +1,11 @@
 import axios from 'axios'
-import { MessageBox } from 'element-ui'
-function checkUpdate(cb: () => void) {
-  function getNewHtmlContent() {
+
+const settings = {
+  // 抓取 hash 的正则
+  hashReg: /app\.([^.]+)\.js/,
+
+  // 抓取新的 index.html 内容
+  getNewHtmlContent() {
     // if (process.env.NODE_ENV !== 'production') {
     //   return new Promise((resolve, reject) => {
     //     resolve(
@@ -23,8 +27,25 @@ function checkUpdate(cb: () => void) {
       .then(({ data }: { data: string }) => {
         return data
       })
-  }
-  const hashReg = /app\.([^.]+)\.js/
+  },
+
+  // 有更新情况执行
+  withUpdateCallback() {
+    if (confirm('是否进行清缓存刷新？')) {
+      location.reload(true)
+    }
+  },
+}
+
+interface settings {
+  hashReg: RegExp
+  getNewHtmlContent: () => Promise<string>
+  withUpdateCallback: () => void
+}
+
+function checkUpdate(settings: settings) {
+  const { hashReg, getNewHtmlContent, withUpdateCallback } = settings
+
   function getHash(str: string) {
     const res = str.match(hashReg)
     if (res) {
@@ -54,17 +75,10 @@ function checkUpdate(cb: () => void) {
     const newHtmlContent = await getNewHtmlContent()
     const newHash = getHash(newHtmlContent)
     if (newHash && newHash !== hash) {
-      cb()
+      withUpdateCallback()
     }
   })
 }
 setTimeout(() => {
-  checkUpdate(() => {
-    MessageBox.confirm('是否进行清缓存刷新？', '有新版本', {
-      confirmButtonText: '是',
-      cancelButtonText: '否',
-    }).then(() => {
-      location.reload(true)
-    })
-  })
+  checkUpdate(settings)
 }, 10)
