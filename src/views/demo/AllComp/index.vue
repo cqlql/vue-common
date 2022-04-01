@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import BoxView from './comp/BoxView.vue'
-import Calendar from '../../../components/Calendar/Calendar.vue'
+import Calendar from '@/components/Calendar/Calendar.vue'
 import SwipeX from '../SwipeX/SwipeX.vue'
-import SliderFast from '../SliderFast/SliderFast.vue'
+import SliderFast from '@/components/SliderFast/SliderFast.vue'
 </script>
 <template>
   <BoxView>

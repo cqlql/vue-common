@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import type { DefineComponent } from 'vue'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import Icon from '@/components/Icon/src/Icon.vue'
 import SliderOnly from './SliderOnly.vue'
 import useSliderFast from './hooks/useSliderFast'
@@ -33,12 +32,12 @@ function handleTransitionend(direction: string) {
 }
 </script>
 <template>
-  <v-button @click="inLeft">
+  <button @click="inLeft">
     <Icon icon="ic:twotone-keyboard-arrow-left"></Icon>
-  </v-button>
-  <v-button @click="inRight"
+  </button>
+  <button @click="inRight"
     ><Icon icon="ic:twotone-keyboard-arrow-right"></Icon
-  ></v-button>
+  ></button>
   <SliderOnly
     ref="vSliderOnly"
     v-model:slideClass="slideClass"

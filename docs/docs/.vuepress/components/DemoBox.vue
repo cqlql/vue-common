@@ -3,16 +3,18 @@
     <div class="demo-box_demo">
       <slot></slot>
     </div>
-    <div class="demo-box_code">
-      <div v-show="codeVisible || showCode">
-        <slot name="code"></slot>
+    <template v-if="$slots.code">
+      <div class="demo-box_code">
+        <div v-show="codeVisible || showCode">
+          <slot name="code"></slot>
+        </div>
       </div>
-    </div>
-    <div class="demo-box_footer">
-      <button v-if="!showCode" @click="toggleCodeShow">
-        {{ codeVisible ? '隐藏' : '显示' }}代码
-      </button>
-    </div>
+      <div class="demo-box_footer">
+        <button v-if="!showCode" @click="toggleCodeShow">
+          {{ codeVisible ? '隐藏' : '显示' }}代码
+        </button>
+      </div>
+    </template>
   </div>
 </template>
 
