@@ -32,6 +32,7 @@ module.exports = {
       '/clock.md',
       '/ProgressBar.md',
       '/DatePicker.md',
+      '/utils.md',
     ],
   },
   alias: {
