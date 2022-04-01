@@ -6,11 +6,11 @@ title: DatePicker 日期选择
   <DatePickerDemo />
   <template #code>
 
-@[code](/src/views/demo/DatePickerDemo/DatePickerDemo.vue)
+@[code](/src/components/Calendar/Calendar.demo.vue)
 
   </template>
 </demo-box>
 
 <script setup>
-  import DatePickerDemo from '@/views/demo/DatePickerDemo/DatePickerDemo.vue'
+  import DatePickerDemo from '@/components/Calendar/Calendar.demo.vue'
 </script>

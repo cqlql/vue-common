@@ -22,7 +22,7 @@ const { keyword, search, resultList } = useSearch(searchList)
 search()
 </script>
 <style lang="scss" scoped>
-.UseSearchDemo::v-deep b {
+.UseSearchDemo :deep(b) {
   background-color: yellow;
 }
 </style>
