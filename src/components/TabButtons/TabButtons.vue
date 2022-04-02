@@ -45,6 +45,7 @@ function onSelect(index: number) {
   // z-index: 1;
   display: flex;
   height: 36px;
+  background-color: #f8f8f8;
 
   & > .item {
     flex: 1;
@@ -96,5 +97,23 @@ function onSelect(index: number) {
   // 滚动条
   // max-height: 80px;
   // overflow: auto;
+
+  & > .item > .item_smile {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    // transition-property: height;
+  }
+
+  & > .item.active {
+    background-color: #fff;
+    font-weight: bold;
+    color: inherit;
+
+    & > .item_smile {
+      height: 100%;
+      width: 4px;
+    }
+  }
 }
 </style>
