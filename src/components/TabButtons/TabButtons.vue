@@ -46,29 +46,29 @@ function onSelect(index: number) {
   display: flex;
   height: 36px;
 
-  .item {
+  & > .item {
     flex: 1;
     text-align: center;
     line-height: 36px;
     position: relative;
+
+    & > .item_smile {
+      transition: width 0.3s ease;
+      overflow: hidden;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%);
+      width: 0;
+      height: 0;
+      background-color: #ffb21f;
+    }
   }
 
-  .item_smile {
-    transition: width 0.3s ease;
-    overflow: hidden;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%);
-    width: 0;
-    height: 0;
-    background-color: #ffb21f;
-  }
-
-  .item.active {
+  & > .item.active {
     font-weight: bold;
 
-    .item_smile {
+    & > .item_smile {
       width: 100%;
       height: 4px;
     }

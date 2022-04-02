@@ -23,8 +23,27 @@ const tabList = ref([
 </script>
 <template>
   <div>
-    <TabButtons v-model="tabValue" :list="tabList"></TabButtons>
+    <TabButtons
+      style="margin-bottom: 10px"
+      v-model="tabValue"
+      :list="tabList"
+    ></TabButtons>
+
+    <TabButtons
+      class="vertical"
+      v-model="tabValue"
+      :list="tabList"
+    ></TabButtons>
   </div>
 </template>
 
-<!-- <style lang="scss" scoped></style> -->
+<style lang="scss" scoped>
+.TabButtons.vertical {
+  display: block;
+  height: auto;
+  width: 80px;
+  // 滚动条
+  // max-height: 80px;
+  // overflow: auto;
+}
+</style>
