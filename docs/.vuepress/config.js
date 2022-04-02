@@ -33,6 +33,7 @@ module.exports = {
       '/ProgressBar.md',
       '/DatePicker.md',
       '/utils.md',
+      '/TabButtons.md',
     ],
   },
   alias: {
