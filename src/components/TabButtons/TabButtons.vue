@@ -66,7 +66,8 @@ function onSelect(index: number) {
   }
 
   & > .item.active {
-    font-weight: bold;
+    // font-weight: bold;
+    color: #ffb21f;
 
     & > .item_smile {
       width: 100%;
@@ -80,7 +81,7 @@ function onSelect(index: number) {
   white-space: nowrap;
   overflow-x: auto;
   // overflow-y: hidden;
-  height: 50px;
+  height: auto;
 
   & > .item {
     display: inline-block;
