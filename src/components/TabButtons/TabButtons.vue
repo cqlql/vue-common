@@ -39,7 +39,7 @@ function onSelect(index: number) {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .TabButtons {
   position: relative;
   // z-index: 1;
@@ -73,5 +73,27 @@ function onSelect(index: number) {
       height: 4px;
     }
   }
+}
+
+.TabButtons.scroll {
+  display: block;
+  white-space: nowrap;
+  overflow-x: auto;
+  // overflow-y: hidden;
+  height: 50px;
+
+  & > .item {
+    display: inline-block;
+    padding: 0 10px;
+  }
+}
+
+.TabButtons.vertical {
+  display: block;
+  height: auto;
+  width: 80px;
+  // 滚动条
+  // max-height: 80px;
+  // overflow: auto;
 }
 </style>

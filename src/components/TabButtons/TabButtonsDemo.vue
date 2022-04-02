@@ -20,14 +20,31 @@ const tabList = ref([
     value: 'card',
   },
 ])
+
+const tabValue2 = ref('0')
+let list = []
+for (let index = 0; index < 30; index++) {
+  const element = {
+    label: 'Tab' + String(index),
+    value: String(index),
+  }
+  list.push(element)
+}
+const tabList2 = ref(list)
 </script>
 <template>
   <div>
+    <TabButtons v-model="tabValue" :list="tabList"></TabButtons>
+
+    <div class="line"></div>
+
     <TabButtons
-      style="margin-bottom: 10px"
-      v-model="tabValue"
-      :list="tabList"
+      class="scroll"
+      v-model="tabValue2"
+      :list="tabList2"
     ></TabButtons>
+
+    <div class="line"></div>
 
     <TabButtons
       class="vertical"
@@ -38,12 +55,9 @@ const tabList = ref([
 </template>
 
 <style lang="scss" scoped>
-.TabButtons.vertical {
-  display: block;
-  height: auto;
-  width: 80px;
-  // 滚动条
-  // max-height: 80px;
-  // overflow: auto;
+.line {
+  height: 2px;
+  background: #ebebeb;
+  margin: 20px 0;
 }
 </style>
