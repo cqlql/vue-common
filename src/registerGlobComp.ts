@@ -1,7 +1,7 @@
 import type { App, Plugin } from 'vue'
 // 全局组件
 import VNodes from '@/components/VNodes'
-import Button from '@/components/Button/Button.vue'
+import Button from '@/components/Button/ButtonVue.vue'
 import Icon from '@/components/Icon'
 // import JRow from '@/components/Layout/JRow'
 // import JCol from '@/components/Layout/JCol.vue'
