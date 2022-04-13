@@ -4,9 +4,13 @@ import Calendar from '@/components/Calendar/Calendar.vue'
 import SwipeX from '../SwipeX/SwipeX.vue'
 import SliderFast from '@/components/SliderFast/SliderFast.vue'
 import TabButtonsDemo from '@/components/TabButtons/TabButtonsDemo.vue'
+import CheckboxPlus from '@/components/CheckboxPlus/CheckboxPlusDemo.vue'
 </script>
 <template>
-  <BoxView>
+  <BoxView title="CheckboxPlus">
+    <CheckboxPlus> </CheckboxPlus>
+  </BoxView>
+  <BoxView title="TabButtons">
     <TabButtonsDemo></TabButtonsDemo>
   </BoxView>
   <BoxView>
