@@ -7,8 +7,12 @@ import TabButtonsDemo from '@/components/TabButtons/TabButtonsDemo.vue'
 import CheckboxPlus from '@/components/CheckboxPlus/CheckboxPlusDemo.vue'
 import ButtonVue from '@/components/Button/ButtonVue.vue'
 import ButtonGreen from '@/components/Button/ButtonGreen.vue'
+import LoadingDemo from '../LoadingDemo/LoadingDemo.vue'
 </script>
 <template>
+  <BoxView title="Loading">
+    <LoadingDemo></LoadingDemo>
+  </BoxView>
   <BoxView title="ButtonGreen">
     <ButtonGreen> Button </ButtonGreen>
   </BoxView>
