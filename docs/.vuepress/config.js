@@ -22,6 +22,10 @@ module.exports = {
         text: 'form',
         children: ['/form/form.md', '/form/input.md', '/form/select.md'],
       },
+      {
+        text: 'animation 动画',
+        children: ['/animation.md'],
+      },
       '/icon.md',
       '/cell.md',
       '/search.md',
