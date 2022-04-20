@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import DemosNav from '@/views/demo/comp/DemosNav.vue'
+import DemosNav from '@/views/comp/DemosNav.vue'
 import type { RouteRecordRaw } from 'vue-router'
 
 const demos = [
@@ -8,7 +8,14 @@ const demos = [
     meta: {
       title: '所有常用组件',
     },
-    component: () => import('@/views/demo/AllComp/index.vue'),
+    component: () => import('@/views/AllComp/index.vue'),
+  },
+  {
+    path: '/animation',
+    meta: {
+      title: 'animation - 动画',
+    },
+    component: () => import('@/views/Animation/AnimationView.vue'),
   },
   // {
   //   path: '/Skeleton',
@@ -23,7 +30,7 @@ const demos = [
     meta: {
       title: 'TurntableView - 转盘抽奖',
     },
-    component: () => import('@/views/demo/Turntable/TurntableView.vue'),
+    component: () => import('@/views/Turntable/TurntableView.vue'),
   },
   {
     path: '/DigitalRandomAnimation',
@@ -31,49 +38,49 @@ const demos = [
       title: 'DigitalRandomAnimation - 随机数抽奖',
     },
     component: () =>
-      import('@/views/demo/DigitalRandomAnimation/DigitalRandomAnimation.vue'),
+      import('@/views/DigitalRandomAnimation/DigitalRandomAnimation.vue'),
   },
   {
     path: '/ClockView',
     meta: {
       title: 'ClockView - 可拖动时钟',
     },
-    component: () => import('@/views/demo/ClockSimulation/ClockSimulation.vue'),
+    component: () => import('@/views/ClockSimulation/ClockSimulation.vue'),
   },
   {
     path: '/DemoJSX',
     meta: {
       title: 'DemoJSX - JSX 语法实验',
     },
-    component: () => import('@/views/demo/DemoJSX/DemoJSX.vue'),
+    component: () => import('@/views/DemoJSX/DemoJSX.vue'),
   },
   {
     path: '/PieChartCss',
     meta: {
       title: 'PieChartCss - css饼图',
     },
-    component: () => import('@/views/demo/PieChartCss/PieChartCss.vue'),
+    component: () => import('@/views/PieChartCss/PieChartCss.vue'),
   },
   {
     path: '/Resume',
     meta: {
       title: 'Resume',
     },
-    component: () => import('@/views/demo/Resume/ResumeIndex.vue'),
+    component: () => import('@/views/Resume/ResumeIndex.vue'),
   },
   {
     path: '/temp',
     meta: {
       title: '临时实验',
     },
-    component: () => import('@/views/demo/Temp/TempIndex.vue'),
+    component: () => import('@/views/Temp/TempIndex.vue'),
   },
   {
     path: '/I18n',
     meta: {
       title: 'I18n',
     },
-    component: () => import('@/views/demo/I18n/I18nIndex.vue'),
+    component: () => import('@/views/I18n/I18nIndex.vue'),
   },
   {
     path: '/Calendar',
@@ -87,15 +94,14 @@ const demos = [
     meta: {
       title: 'OneWeekPicker 日期选择',
     },
-    component: () =>
-      import('@/views/demo/OneWeekPickerDemo/OneWeekPickerDemo.vue'),
+    component: () => import('@/views/OneWeekPickerDemo/OneWeekPickerDemo.vue'),
   },
   {
     path: '/VideoAdd',
     meta: {
       title: 'VideoAdd 视频增加',
     },
-    component: () => import('@/views/demo/VideoAdd/index.vue'),
+    component: () => import('@/views/VideoAdd/index.vue'),
   },
 ]
 
