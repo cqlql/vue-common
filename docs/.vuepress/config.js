@@ -4,6 +4,7 @@ const { defaultTheme } = require('@vuepress/theme-default')
 const {
   registerComponentsPlugin,
 } = require('@vuepress/plugin-register-components')
+
 module.exports = {
   lang: 'zh-CN',
   title: 'JSLibr Vue 组件库',
