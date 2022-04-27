@@ -1,12 +1,15 @@
 const path = require('path')
 const vuepressUtils = require('@vuepress/utils')
-
+const { defaultTheme } = require('@vuepress/theme-default')
+const {
+  registerComponentsPlugin,
+} = require('@vuepress/plugin-register-components')
 module.exports = {
   lang: 'zh-CN',
   title: 'JSLibr Vue 组件库',
   description: '这是我的第一个 VuePress 站点',
 
-  themeConfig: {
+  theme: defaultTheme({
     logo: 'https://vuejs.org/images/logo.png',
 
     // https://v2.vuepress.vuejs.org/zh/reference/default-theme/config.html#navbar
@@ -20,7 +23,12 @@ module.exports = {
     sidebar: [
       {
         text: 'form',
-        children: ['/form/form.md', '/form/input.md', '/form/select.md'],
+        children: [
+          '/form/form.md',
+          '/form/input.md',
+          '/form/InputNumber.md',
+          '/form/select.md',
+        ],
       },
       {
         text: 'animation 动画',
@@ -39,7 +47,7 @@ module.exports = {
       '/utils.md',
       '/TabButtons.md',
     ],
-  },
+  }),
   alias: {
     '@': path.resolve(__dirname, '../../src'),
   },
@@ -52,12 +60,11 @@ module.exports = {
   plugins: [
     // 全局注册组件
     [
-      '@vuepress/register-components',
-      {
+      registerComponentsPlugin({
         components: {
           DemoBox: path.resolve(__dirname, './components/DemoBox.vue'),
         },
-      },
+      }),
     ],
   ],
   clientAppEnhanceFiles: vuepressUtils.path.resolve(

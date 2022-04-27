@@ -8,8 +8,14 @@ import CheckboxPlus from '@/components/CheckboxPlus/CheckboxPlusDemo.vue'
 import ButtonVue from '@/components/Button/ButtonVue.vue'
 import ButtonGreen from '@/components/Button/ButtonGreen.vue'
 import LoadingDemo from '../LoadingDemo/LoadingDemo.vue'
+import InputNumberDemo from '@/components/Form/InputNumber/demo/InputNumberDemo.vue'
+import InputNumberMinDemo from '@/components/Form/InputNumber/demo/InputNumberMinDemo.vue'
 </script>
 <template>
+  <BoxView title="InputNumber">
+    <p><InputNumberDemo></InputNumberDemo></p>
+    <p><InputNumberMinDemo></InputNumberMinDemo></p>
+  </BoxView>
   <BoxView title="Loading">
     <LoadingDemo></LoadingDemo>
   </BoxView>
@@ -38,5 +44,3 @@ import LoadingDemo from '../LoadingDemo/LoadingDemo.vue'
     <SwipeX></SwipeX>
   </BoxView>
 </template>
-
-<style lang="scss"></style>

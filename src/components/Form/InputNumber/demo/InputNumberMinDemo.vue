@@ -1,6 +1,6 @@
 <template>
   <div>
-    <InputNumber :min="100" v-model="val"></InputNumber>
+    <InputNumber :min="0" v-model="val"></InputNumber>
     <p>result: {{ val }}</p>
   </div>
 </template>
@@ -11,4 +11,3 @@ import InputNumber from '../InputNumber.vue'
 
 const val = ref('')
 </script>
-<style lang="scss"></style>

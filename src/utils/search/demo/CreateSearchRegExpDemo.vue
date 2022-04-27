@@ -11,7 +11,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import createSearchRegExp from '@/utils/search/create-search-regExp'
+import createSearchRegexp from '@/utils/search/create-search-regExp'
 
 const keyword = ref('收')
 
@@ -24,7 +24,7 @@ let contentData = [
 let resultList = ref<string[]>([])
 
 function onInput() {
-  const reg = createSearchRegExp(keyword.value)
+  const reg = createSearchRegexp(keyword.value)
   resultList.value = contentData.filter((content) => {
     return reg.test(content)
   })
@@ -35,6 +35,7 @@ onInput()
 .SearchDemo {
   padding: 10px;
 }
+
 .SearchDemo_result {
   // padding: 10px 0;
 }

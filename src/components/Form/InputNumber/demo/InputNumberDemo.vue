@@ -10,4 +10,3 @@ import { ref } from 'vue'
 import InputNumber from '../InputNumber.vue'
 const val = ref('')
 </script>
-<style lang="scss"></style>
