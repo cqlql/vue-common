@@ -67,6 +67,10 @@ module.exports = {
       registerComponentsPlugin({
         components: {
           DemoBox: path.resolve(__dirname, './components/DemoBox.vue'),
+          VButton: path.resolve(
+            __dirname,
+            '../../src/components/Button/ButtonVue.vue',
+          ),
         },
       }),
     ],
