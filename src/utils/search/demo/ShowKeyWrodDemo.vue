@@ -7,7 +7,7 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import showKeyWrod from '@/utils/search/show-key-word'
+import showKeyWrod from '@/utils/search/show-keyword'
 
 const keyword = ref('你 世')
 const result = computed(() => {
@@ -18,9 +18,11 @@ const result = computed(() => {
 .ShowKeyWrodDemo {
   padding: 10px;
 }
+
 .ShowKeyWrodDemo_result {
   padding: 10px 0;
 }
+
 .ShowKeyWrodDemo :deep(b) {
   background-color: yellow;
 }

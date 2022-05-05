@@ -35,6 +35,10 @@ module.exports = {
         text: 'animation 动画',
         children: ['/animation.md'],
       },
+      {
+        text: 'utils 工具库',
+        children: ['/utils/debounce.md', '/utils/OnceCallback.md'],
+      },
       '/icon.md',
       '/cell.md',
       '/search.md',
@@ -45,7 +49,6 @@ module.exports = {
       '/clock.md',
       '/ProgressBar.md',
       '/DatePicker.md',
-      '/utils.md',
       '/TabButtons.md',
     ],
   }),
