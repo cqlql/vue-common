@@ -3,13 +3,17 @@
 [滑动切换、左右切换](./SliderFast)
 
 <demo-box>
-  <SliderFast></SliderFast>
+  <ClientOnly>
+    <SliderFast></SliderFast>
+  </ClientOnly>
 </demo-box>
 
 ## 所有 demo
 
 <demo-box>
-  <AllComp/>
+  <ClientOnly>
+    <AllComp/>
+  </ClientOnly>
 </demo-box>
 
 <script setup>

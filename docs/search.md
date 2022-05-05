@@ -18,7 +18,9 @@ title: search 搜索
 ## 标记关键字
 
 <demo-box>
-  <SearShowKeyWrodDemo />
+  <ClientOnly>
+    <SearShowKeyWrodDemo />
+  </ClientOnly>
   <template #code>
 
 @[code{1-16} vue{10,14}](/src/utils/search/demo/ShowKeyWrodDemo.vue)
@@ -29,7 +31,9 @@ title: search 搜索
 ## 结合使用
 
 <demo-box>
-<SearchDemo />
+<ClientOnly>
+  <SearchDemo />
+</ClientOnly>
 <template #code>
 
 @[code{1-35} vue{12,13,25-32}](/src/utils/search/demo/SearchDemo.vue)
