@@ -6,7 +6,7 @@ title: IconSvg
 
 核心包 svg-sprite-loader
 
-优化包 svgo （可选）
+[优化包 svgo （可选）](https://github.com/svg/svgo)
 
 
 ```
