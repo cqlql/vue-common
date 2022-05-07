@@ -41,7 +41,7 @@ module.exports = {
       },
       {
         text: 'icon 图标',
-        children: ['/icon/iconfont.md'],
+        children: ['/icon/Iconfont.md','/icon/IconSvg.md'],
       },
       
       '/cell.md',
