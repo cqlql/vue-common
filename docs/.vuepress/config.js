@@ -39,7 +39,11 @@ module.exports = {
         text: 'utils 工具库',
         children: ['/utils/debounce.md', '/utils/OnceCallback.md'],
       },
-      '/icon.md',
+      {
+        text: 'icon 图标',
+        children: ['/icon/iconfont.md'],
+      },
+      
       '/cell.md',
       '/search.md',
       '/timer.md',
