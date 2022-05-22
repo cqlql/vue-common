@@ -60,7 +60,7 @@ module.exports = {
 │  │  ├─svg
 │  │  │  └─add.svg
 │  │  ├─index.js
-│  │  ├─svgo.yml
+│  │  ├─svgo.config.js
 ```
 
 svg 下存放 svg 文件。另外两个文件：
@@ -73,32 +73,35 @@ const requireAll = (requireContext) => requireContext.keys().map(requireContext)
 requireAll(req)
 ```
 
-svgo.yml 文件
+svgo.config.js 文件
 
-```yml
-# https://github.com/svg/svgo
-# replace default config
-
-# multipass: true
-# full: true
-
-plugins:
-  # - name
-  #
-  # or:
-  # - name: false
-  # - name: true
-  #
-  # or:
-  # - name:
-  #     param1: 1
-  #     param2: 2
-
-  - removeAttrs:
-      attrs:
-        - 'fill'
-        - 'fill-rule'
+```js
+// docs: https://github.com/svg/svgo
+module.exports = {
+  plugins: [
+    {
+      name: 'removeAttrs',
+      params: {
+        attrs: 'fill|fil-rule|p-id|width|height|class',
+      },
+    },
+  ],
+}
 ```
+
+## 使用 svgo
+
+package.json 中新增命令如下
+
+```json
+{
+  "script": {
+    "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.config.js"
+  }
+}
+```
+
+运行优化 `npm run svgo`
 
 ## 组件使用
 
