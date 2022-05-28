@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import type { UserConfig, ConfigEnv } from 'vite'
 import { createVitePlugins } from './build/vite/plugin'
 import { resolve } from 'path'
@@ -26,6 +27,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       cssTarget: 'chrome70',
       brotliSize: false,
       chunkSizeWarningLimit: 2000,
+    },
+    test: {
+      include: ['tests/unit/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     },
   }
 }
