@@ -1,4 +1,5 @@
 /* 
+!! 可使用 front-matter(https://github.com/jxson/front-matter) 代替
 
 解析 markdown 顶部如下格式
 
@@ -16,7 +17,7 @@ author: joly
 
 */
 
-export default function mdTop(text: string) {
+export default function mdFront(text: string) {
   const resultData: Record<string, string> = {}
   const res = text.match(/^---\s*[\n\r]([\s\S]+?)[\n\r]---\s*[\n\r]/)
 
