@@ -1,22 +1,16 @@
-[检测更新](./check-update.md)
+---
+title: 首页
+home: true
+heroText: false
+tagline: false
+---
 
-[滑动切换、左右切换](./SliderFast)
+## 待办
 
-<demo-box>
-  <ClientOnly>
-    <SliderFast></SliderFast>
-  </ClientOnly>
-</demo-box>
+## 导航
 
-## 所有 demo
+<HomeView></HomeView>
 
-<demo-box>
-  <ClientOnly>
-    <AllComp/>
-  </ClientOnly>
-</demo-box>
-
-<script setup>
-import SliderFast from '@/components/SliderFast/SliderFast.vue'
-import AllComp from '@/views/AllComp/index.vue'
+<script lang="ts" setup>
+import HomeView from '@/components/HomeView.vue'
 </script>
