@@ -1,1 +1,1 @@
-[{"text":"utils","icon":"","prefix":"/utils/","sort":0,"children":[{"text":"debounce 防抖","link":"debounce.md","icon":"","fullLink":"/utils/debounce.md","sort":0},{"text":"OnceCallback 只执行一次","link":"OnceCallback.md","icon":"","fullLink":"/utils/OnceCallback.md","sort":0}]}]
+[{"text":"utils","icon":"","prefix":"/utils/","sort":0,"children":[{"text":"debounce 防抖","link":"debounce.md","icon":"","fullLink":"/utils/debounce.md","sort":0},{"text":"once 只执行一次","link":"once.md","icon":"","fullLink":"/utils/once.md","sort":0}]}]
