@@ -1,14 +1,14 @@
-export default class OnceCallback {
-  cb: () => void
+export default class OnceExecute {
+  onceFn: () => void
   isExecuted = false
-  constructor(cb: () => void) {
-    this.cb = cb
+  constructor(onceFn: () => void) {
+    this.onceFn = onceFn
   }
 
   execute() {
     if (this.isExecuted) return
     this.isExecuted = true
-    this.cb()
+    this.onceFn()
   }
 
   clear() {
