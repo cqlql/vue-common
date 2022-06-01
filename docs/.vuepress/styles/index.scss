@@ -1,0 +1,4 @@
+/* 高亮代码行(默认颜色不清楚) */
+html[data-theme='dark'] #app {
+  --code-highlight-line-color: #363b46;
+}

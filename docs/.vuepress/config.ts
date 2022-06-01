@@ -1,6 +1,7 @@
 import { defineUserConfig } from 'vuepress'
 import { searchPlugin } from '@vuepress/plugin-search'
 import theme from './theme'
+import path from 'path'
 
 export default defineUserConfig({
   port: 3005,
@@ -20,7 +21,14 @@ export default defineUserConfig({
     ],
   ],
   alias: {
-    '@': __dirname,
+    $: __dirname,
+    '@': path.resolve(__dirname, '../../src'),
+  },
+  markdown: {
+    importCode: {
+      handleImportPath: (str) =>
+        str.replace(/^\/src/, path.resolve(__dirname, '../../src')),
+    },
   },
 
   theme,
