@@ -37,7 +37,7 @@ const oncePromise = new OncePromise(() => {
 
 // 某重复调用函数
 async function update() {
-  // 只会执行一次，重复调用将返回第一次执行的值
+  // 重复调用将返回第一次执行的值
   const id = await oncePromise.execute()
 
   // do something...
