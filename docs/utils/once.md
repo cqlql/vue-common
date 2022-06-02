@@ -20,7 +20,7 @@ onceExecute.clear()
 ## OncePromise - Promise 函数
 
 - 仅仅只执行一次 Promise，重复执行将返回第一次执行的值。可进行 clear 恢复初始状态。
-- 等待期间调用会给上一次调用抛错，只有最后一次调用生效
+- 等待期间再次调用会给上一次调用抛错，只有最后一次调用生效
 
 ```ts
 import OncePromise from '@/utils/once-promise'
@@ -80,4 +80,4 @@ function clear() {
 
 ## OncePromiseQueue
 
-等待期间调用会产生队列，加载好后依次全部调用
+等待期间再次调用会产生队列，加载好后依次全部调用
