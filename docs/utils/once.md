@@ -19,7 +19,8 @@ onceExecute.clear()
 
 ## OncePromise - Promise 函数
 
-仅仅只执行一次 Promise，重复执行将返回第一次执行的值。可进行 clear 恢复初始状态
+- 仅仅只执行一次 Promise，重复执行将返回第一次执行的值。可进行 clear 恢复初始状态。
+- 等待期间调用会给上一次调用抛错，只有最后一次调用生效
 
 ```ts
 import OncePromise from '@/utils/once-promise'
@@ -35,7 +36,7 @@ const oncePromise = new OncePromise(() => {
 })
 
 // 某重复调用函数
-async function update(rangeType: string) {
+async function update() {
   // 只会执行一次，重复调用将返回第一次执行的值
   const id = await oncePromise.execute()
 
@@ -76,3 +77,7 @@ function clear() {
   oncePromise.clear()
 }
 ``` -->
+
+## OncePromiseQueue
+
+等待期间调用会产生队列，加载好后依次全部调用
