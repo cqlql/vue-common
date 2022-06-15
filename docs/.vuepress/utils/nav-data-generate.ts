@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import readdir from './readdir'
 import fm from 'front-matter'
+import configPlus from '../config-plus'
 
 const rootPath = process.cwd()
 const docsDir = 'docs'
@@ -30,7 +31,9 @@ function dirHandler(params: HandlerParams) {
   try {
     fs.openSync(dirConfigPath, 'r')
 
-    const { title, icon, sort } = JSON.parse(fs.readFileSync(dirConfigPath, 'utf8'))
+    const { title, icon, sort } = JSON.parse(
+      fs.readFileSync(dirConfigPath, 'utf8'),
+    )
     resultConfig.text = title || resultConfig.text
     resultConfig.icon = icon || resultConfig.icon
     resultConfig.sort = sort || resultConfig.sort
@@ -54,7 +57,8 @@ function fileHandler(params: HandlerParams) {
   try {
     fs.openSync(filePath, 'r')
 
-    let { title, icon, sort } = fm(fs.readFileSync(filePath, 'utf8')).attributes as any
+    let { title, icon, sort } = fm(fs.readFileSync(filePath, 'utf8'))
+      .attributes as any
 
     resultConfig.text = title || resultConfig.text
     resultConfig.icon = icon || resultConfig.icon
@@ -67,7 +71,7 @@ function fileHandler(params: HandlerParams) {
 readdir({
   initValue: navbarConfig,
   rootPath: path.join(rootPath, docsDir),
-  ignore: ['.vuepress', '.config', 'image'],
+  ignore: configPlus.ignore,
   callback: (params) => {
     let { dirname, parentDir, parentDirname, isDirectory } = params
     if (dirname === 'README.md') return
