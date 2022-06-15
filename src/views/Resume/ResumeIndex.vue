@@ -41,13 +41,13 @@ let data = {
 
   workExperience: [
     {
-      dateRange: '2020/12 - 2012/3',
+      dateRange: '2020/12 - 2012/6',
       companyName: '湖南旅美美信息科技有限公司',
       position: '前端工程师',
       work: `负责pc、移动，以及小程序的相关的前端工作`,
     },
     {
-      dateRange: '2014/12 - 2010/10',
+      dateRange: '2014/12 - 2020/10',
       companyName: '深圳深度未来教育有限公司',
       position: '前端工程师',
       work: `
@@ -57,11 +57,10 @@ webview 页面开发，配合 App，实现原生难以实现，或者能显著�
 `,
     },
     {
-      dateRange: '2013/7 - 2014/12',
+      dateRange: '2011/7 - 2014/12',
       companyName: '深圳汉家文化传媒有限公司',
       position: '前端工程师',
       work: `
-新石器玉石网络服务平台：www.newshiqi.com
 静态页面编写，包括pc端、移动端，交互效果定制，ajax数据交互，php 模板数据绑定。
 `,
     },

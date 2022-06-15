@@ -2,6 +2,7 @@
 node_modules
 /dist
 docs/.vuepress/dist
+docs/.vuepress/components/data.json
 
 
 # local env files
@@ -26,3 +27,4 @@ pnpm-debug.log*
 # vuepress
 .temp
 .cache
+
