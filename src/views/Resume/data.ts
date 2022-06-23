@@ -2,6 +2,7 @@ interface DataType {
   name: string
   profession: string
   workingYears: number
+  repository: string
   baseInfo: {
     phone: {
       label: string
@@ -31,10 +32,11 @@ interface DataType {
   projectExperience: {
     name: string
     dataRange?: string
-    overview: string
-    responsible: string
+    overview?: string
+    responsible?: string
     difficulty: string[]
-    technology: string
+    technology?: string
+    other?: boolean
   }[]
   education: {
     name: string
@@ -47,6 +49,7 @@ const data: DataType = {
   name: '陈桥黎',
   profession: '前端开发工程师',
   workingYears: 11,
+  repository: 'https://gitee.com/cqlql',
   baseInfo: {
     phone: {
       label: '手机',
@@ -72,9 +75,9 @@ const data: DataType = {
 
     '熟练掌握小程序开发，可使用原生或者 Taro3、uniapp 跨平台框架开发',
 
-    '熟练使用 element-ui、ant.design、nutui 等前端ui框架',
+    '熟练使用 ant.design、element-ui、nutui 等前端ui框架',
 
-    '熟悉 nodejs，webpack、vite 打包工具，可编写提高开发效率的打包插件',
+    '熟悉 nodejs，webpack、vite 打包工具，可编写提高开发效率的工程工具插件',
 
     '良好的编程习惯，代码简洁高效，可维护可扩展性高。',
   ],
@@ -84,16 +87,16 @@ const data: DataType = {
       dateRange: '2020/12 - 2012/6',
       companyName: '湖南旅美美信息科技有限公司',
       position: '前端工程师',
-      work: `负责pc、移动，以及小程序的相关的前端工作`,
+      work: `与后端配合，负责公司后台管理系统，以及小程序相关的前端工作`,
     },
     {
       dateRange: '2014/12 - 2020/10',
       companyName: '深圳深度未来教育有限公司',
       position: '前端工程师',
       work: `
-配合后端，完成pc/移动端网站的前端开发
-webview 页面开发，配合 App，实现原生难以实现，或者能显著提高开发效率的页面开发。
-协助后端，Android，ios，解决各种前端技术问题。
+配合后端，完成pc/移动端网站的前端开发。
+配合 App，使用 webview，实现原生难以实现，或者能显著提高开发效率的页面开发。
+协助后端、Android、ios，解决各种前端技术问题。
 `,
     },
     {
@@ -101,26 +104,18 @@ webview 页面开发，配合 App，实现原生难以实现，或者能显著�
       companyName: '深圳汉家文化传媒有限公司',
       position: '前端工程师',
       work: `
-静态页面编写，包括pc端、移动端，交互效果定制，ajax数据交互，php 模板数据绑定。
+负责pc端、移动端的前端开发；交互效果定制开发；ajax数据交互，php 模板数据绑定。
 `,
     },
   ],
 
   selfEvaluation: [
-    '喜欢思考、专研、学习、总结，保持好奇心，注重进步发展；',
-    '工作认真、负责，具备良好的团队沟通、协作能力；',
-    '抗压能力强，具备吃苦耐劳的精神；',
-    '热爱互联网行业，对前端充满热情，时刻想要尝试学习各种新的技术',
+    '喜欢思考、专研、学习、总结，保持好奇心，注重进步发展。',
+    '工作认真、负责，具备良好的团队沟通、协作能力。',
+    '抗压能力强，具备吃苦耐劳的精神。',
+    '热爱互联网行业，对前端充满热情，时刻想要尝试学习各种新的技术。',
   ],
   projectExperience: [
-    {
-      name: '小派智听小程序',
-      dataRange: `2022-06-01 ~ 2022-07-01`,
-      overview: '',
-      responsible: `项目开发与维护`,
-      difficulty: [],
-      technology: `taro3 vue3 typescript`,
-    },
     // {
     //   name: 'x',
     //   dataRange: `2022-02-02 ~ 2022-02-03`,
@@ -145,17 +140,34 @@ webview 页面开发，配合 App，实现原生难以实现，或者能显著�
     {
       name: '旅美美后台管理',
       dataRange: `2022-02-02 ~ 2022-02-03`,
-      overview: `公司内部销售管理平台，包括线索管理，销售管理，商品管理，订单管理，运营管理，财务管理等`,
-      responsible: `项目开发与维护`,
+      overview: `公司内部后台管理系统，包括线索管理，销售管理，商品管理，订单管理，运营管理，财务管理等`,
+      // responsible: `项目前端`,
       difficulty: [],
       technology: `vue2 element-ui`,
     },
     {
       name: '旅美达人小程序',
-      overview: `旅游线路特产商品的买卖`,
-      responsible: `项目开发与维护`,
+      overview: `旅行小程序，提供线路特产商品买卖`,
+      // responsible: `项目前端`,
       difficulty: [],
-      technology: `taro3 vue3 typescript`,
+      technology: `vue3 typescript taro3`,
+    },
+
+    {
+      name: '小派智听小程序',
+      dataRange: `2022-06-01 ~ 2022-07-01`,
+      overview: '老师线上听课小程序。解决传统听课弊端，提高听课效率',
+      // responsible: `项目前端`,
+      difficulty: [],
+      technology: `vue3 typescript taro3`,
+    },
+    {
+      name: '个人项目',
+      dataRange: ``,
+      other: true,
+      // responsible: `项目前端`,
+      difficulty: [],
+      // technology: `vue3 typescript taro3`,
     },
   ],
   education: {

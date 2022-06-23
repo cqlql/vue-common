@@ -17,6 +17,12 @@ document.title = '陈桥黎-前端简历'
         <span>{{ data.baseInfo.email.value }}</span>
         <span class="text-true-gray-300 mx-2">|</span>
         <span>{{ data.workingYears }}年工作经验</span>
+        <span class="text-true-gray-300 mx-2">|</span>
+        <span
+          ><a class="hover:text-blue-600" :href="data.repository">{{
+            data.repository
+          }}</a>
+        </span>
       </div>
     </div>
 
@@ -62,10 +68,10 @@ document.title = '陈桥黎-前端简历'
       >
         <div class="text-xl font-bold pb-1">{{ item.name }}</div>
 
-        <div class="whitespace-pre-line"
-          ><b>项目概述：</b>{{ item.overview.trim() }}</div
+        <div v-if="item.overview" class="whitespace-pre-line"
+          ><b>项目概述：</b>{{ item.overview }}</div
         >
-        <div class="whitespace-pre-line"
+        <div v-if="item.responsible" class="whitespace-pre-line"
           ><b>负责内容：</b>{{ item.responsible.trim() }}</div
         >
         <div v-if="item.difficulty.length"
@@ -80,13 +86,29 @@ document.title = '陈桥黎-前端简历'
             </li>
           </ul>
         </div>
-        <div>
+        <div v-if="item.technology">
           <b>使用技术：</b>
           {{ item.technology }}
         </div>
+        <div v-if="item.other">
+          <p>
+            开发笔记 - 新：<a
+              class="hover:text-blue-600"
+              href="https://docs.cqlql.top"
+              >https://docs.cqlql.top</a
+            >
+          </p>
+          <p>
+            开发笔记 - 旧：<a
+              class="hover:text-blue-600"
+              href="https://cqlql.github.io/note"
+              >https://cqlql.github.io/note</a
+            >
+          </p>
+        </div>
       </div>
     </ResumeItem>
-    <ResumeItem name="教育背景">
+    <ResumeItem name="教育经历">
       <span>{{ data.education.name }}</span>
       <span class="px-5">{{ data.education.professional }}</span>
       <span>{{ data.education.education }}</span>
