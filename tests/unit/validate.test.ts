@@ -8,7 +8,7 @@ interface ErrorItem {
 function validate(
   form: any,
   fieldRules: Record<string, any[]>,
-  errorFn: (errors: ErrorItem[]) => void,
+  fail: (errors: ErrorItem[]) => void,
 ) {
   const errors: ErrorItem[] = []
 
@@ -24,13 +24,13 @@ function validate(
   }
 
   if (errors.length > 0) {
-    console.log('🚀 -- errors', errors)
-    errorFn(errors)
+    console.error('🚀 -- errors', errors)
+    fail(errors)
 
     throw errors
   }
 }
-test('validate 字段验证', () => {
+test('validate 表单字段验证', () => {
   const form = {
     username: 'joly',
     password: '',
