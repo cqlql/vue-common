@@ -8,7 +8,7 @@ interface ErrorItem {
 function validate(
   form: any,
   fieldRules: Record<string, any[]>,
-  fail: (errors: ErrorItem[]) => void,
+  errorCallback: (errors: ErrorItem[]) => void,
 ) {
   const errors: ErrorItem[] = []
 
@@ -25,7 +25,7 @@ function validate(
 
   if (errors.length > 0) {
     console.error('🚀 -- errors', errors)
-    fail(errors)
+    errorCallback(errors)
 
     throw errors
   }
