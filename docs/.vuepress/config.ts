@@ -11,7 +11,7 @@ export default defineUserConfig({
   title: '开发笔记',
   // description: 'welcome',
 
-  base: '/',
+  base: '/docs/',
 
   head: [
     [
