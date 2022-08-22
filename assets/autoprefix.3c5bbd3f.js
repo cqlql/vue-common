@@ -1,0 +1,1 @@
+function f(e,n="js"){let t;const o=u(e),i=document.body.style;if(o in i)t={js:o,css:e};else{const a=o.replace(/^\w/,s=>s.toUpperCase()),r=["ms","Moz","webkit"];for(let s=r.length;s--;){const c=r[s],p=c+a;if(p in i){t={js:p,css:`-${c}-`+e};break}}}return t&&t[n]}function u(e){return e.replace(/-\w/g,function(n){return n[1].toUpperCase()})}export{f as a};
