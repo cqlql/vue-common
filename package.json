@@ -1,6 +1,6 @@
 {
-  "name": "vue-js-libr",
-  "version": "0.0.1",
+  "name": "vue-js-common",
+  "version": "1.0.1",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
