@@ -25,7 +25,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     build: {
       target: 'es2015',
       cssTarget: 'chrome70',
-      brotliSize: false,
       chunkSizeWarningLimit: 2000,
     },
     test: {

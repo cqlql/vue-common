@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import readdir from './readdir'
 import fm from 'front-matter'
-import configPlus from '../config-plus'
+import configNav from '../config-nav'
 
 const rootPath = process.cwd()
 const docsDir = 'docs'
@@ -71,7 +71,7 @@ function fileHandler(params: HandlerParams) {
 readdir({
   initValue: navbarConfig,
   rootPath: path.join(rootPath, docsDir),
-  ignore: configPlus.ignore,
+  ignore: configNav.ignore,
   callback: (params) => {
     let { dirname, parentDir, parentDirname, isDirectory } = params
     if (dirname === 'README.md') return
