@@ -32,8 +32,8 @@ function validate(
 }
 test('validate 表单字段验证', () => {
   const form = {
-    username: 'joly',
-    password: '',
+    username: 'jolyc',
+    password: '123',
   }
 
   validate(
