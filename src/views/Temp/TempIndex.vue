@@ -7,7 +7,9 @@
       </div>
       <div class="m">
         <div class="label">地址</div>
-        <div class="val">0xxxxxx111xx</div>
+        <div class="val"
+          >0xxxxxx111xx0xxxxxx111xx0xxxxxx111xx0xxxxxx111xx0xxxxxx111xx0xxxxxx111xx0xxxxxx111xx0xxxxxx111xx0xxxxxx111xx0xxxxxx111xx0xxxxxx111xx0xxxxxx111xx0xxxxxx111xx0xxxxxx111</div
+        >
       </div>
       <div class="r">
         <div class="label">注册时间</div>
@@ -46,16 +48,18 @@
   .l {
     display: flex;
     align-items: center;
-    padding-left: 16px;
+    // padding-left: 16px;
+    flex: 1 1 200px;
   }
 
   .m {
-    flex: 1;
-    padding: 0 10px;
+    flex: 1 1 200px;
+    // padding: 0 10px;
   }
 
   .r {
-    padding-right: 18px;
+    // padding-right: 18px;
+    flex: 1 2 200px;
   }
 
   .no {

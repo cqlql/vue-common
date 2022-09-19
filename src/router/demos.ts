@@ -103,6 +103,20 @@ const demos = [
     },
     component: () => import('@/views/VideoAdd/index.vue'),
   },
+  {
+    path: '/Search',
+    meta: {
+      title: 'Search 搜索',
+    },
+    component: () => import('@/utils/search/demo/SearchDemo.vue'),
+  },
+  {
+    path: '/UseSearchDemo',
+    meta: {
+      title: 'UseSearch 搜索',
+    },
+    component: () => import('@/utils/search/demo/UseSearchDemo.vue'),
+  },
 ]
 
 const routes: RouteRecordRaw[] = demos

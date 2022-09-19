@@ -36,7 +36,7 @@ title: search 搜索
 </ClientOnly>
 <template #code>
 
-@[code{1-35} vue{12,13,25-32}](/src/utils/search/demo/SearchDemo.vue)
+@[code{1-44} vue{13,14,27-42}](/src/utils/search/demo/SearchDemo.vue)
 
 </template>
 </demo-box>
@@ -47,7 +47,7 @@ title: search 搜索
 <UseSearchDemo />
 <template #code>
 
-@[code vue{3-7,12,20,26}](/src/utils/search/demo/UseSearchDemo.vue)
+@[code vue{3-7,12,20-28}](/src/utils/search/demo/UseSearchDemo.vue)
 
   </template>
 </demo-box>

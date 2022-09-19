@@ -6,6 +6,16 @@ import Debounce from '../perf/debounce'
 import createSearchRegexp from './create-search-regexp'
 import showKeyWrod from './show-keyword'
 
+interface SearchParams {
+  keyword: string
+  list: any[]
+  getItemText: (item: any) => string
+  buildItem: (p: { keyWrodText: string; rawItem: any }) => any
+  cb: (resultList: any[]) => void
+  time: number
+  noMarkKeyword?: boolean
+}
+
 export default class Search {
   debounce
   constructor() {
@@ -19,29 +29,31 @@ export default class Search {
    * @returns {null} 没找到
    * @returns {string[]} 找到并且有标记，或者空字符串输出所有
    */
-  to(
-    keyword: string,
-    list: string[],
-    debounceCallback: (resultList: string[] | null) => void,
-    debounceTime: number,
-  ) {
+  to(params: SearchParams) {
+    let { keyword, list, getItemText, buildItem, time, cb, noMarkKeyword } =
+      params
     this.debounce.exec(() => {
-      let resultList: string[] = []
+      let resultList: any[] = []
+      keyword = keyword.trim()
       if (keyword) {
         const reg = createSearchRegexp(keyword)
-        list.forEach((content) => {
+        const handleText = noMarkKeyword ? (text: string) => text : showKeyWrod
+
+        list.forEach((item) => {
+          let content = getItemText(item)
           if (reg.test(content)) {
-            resultList.push(showKeyWrod(content, keyword))
+            resultList.push(
+              buildItem({
+                keyWrodText: handleText(content, keyword),
+                rawItem: item,
+              }),
+            )
           }
         })
       } else {
         resultList = list
       }
-      if (resultList.length === 0) {
-        debounceCallback(null)
-      } else {
-        debounceCallback(resultList)
-      }
-    }, debounceTime)
+      cb(resultList)
+    }, time)
   }
 }
