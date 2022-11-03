@@ -17,6 +17,13 @@ const demos = [
     },
     component: () => import('@/views/Animation/AnimationView.vue'),
   },
+  {
+    path: '/PreventReturn',
+    meta: {
+      title: '返回阻止',
+    },
+    component: () => import('@/views/PreventReturn/PreventReturn.vue'),
+  },
   // {
   //   path: '/Skeleton',
   //   component: import('@/components/Skeleton/SkeletonDemo.vue'),

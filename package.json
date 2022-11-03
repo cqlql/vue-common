@@ -10,6 +10,7 @@
     "test:unit": "vitest"
   },
   "dependencies": {
+    "any-touch": "^2.2.0",
     "axios": "^0.27.2",
     "dayjs": "^1.11.5",
     "lodash-es": "^4.17.21",
