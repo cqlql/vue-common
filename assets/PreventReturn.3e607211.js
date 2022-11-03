@@ -1,0 +1,1 @@
+import{d as o,z as t,A as r,o as a,c as u}from"./index.c4f1f108.js";const c=o({__name:"PreventReturn",setup(d){function n(e){e.preventDefault(),e.returnValue="xx"}return t(()=>{window.addEventListener("beforeunload",n)}),r(()=>{window.removeEventListener("beforeunload",n)}),(e,s)=>(a(),u("div",null," PreventReturn "))}});export{c as default};

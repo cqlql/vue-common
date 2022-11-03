@@ -1,1 +1,0 @@
-import{_ as o}from"./Calendar.04632fc2.js";import{_ as a,o as n,c as t,b as r,h as s,y as c}from"./index.99257a60.js";const _={components:{CalendarVue:o}},d={style:{width:"300px",margin:"0 auto"}};function m(p,l,i,u,f,h){const e=c("CalendarVue");return n(),t("div",null,[r("div",d,[s(e,{month:2})])])}var $=a(_,[["render",m]]);export{$ as default};
