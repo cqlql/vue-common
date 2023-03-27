@@ -32,7 +32,7 @@ export default class Throttle {
   }
 }
 
-export function throttleInit (options) {
+export function createThrottle (options) {
   if (typeof options === 'number') {
     options = {
       time: options,
