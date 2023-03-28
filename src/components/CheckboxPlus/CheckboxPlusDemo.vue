@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import CheckboxPlus from './CheckboxPlus.vue'
-import Icon from '../Icon/src/Icon.vue'
+import Icon from '../Icon/src/IconMain.vue'
 
 const list = [
   {

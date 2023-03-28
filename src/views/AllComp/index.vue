@@ -11,7 +11,7 @@ import LoadingDemo from '../LoadingDemo/LoadingDemo.vue'
 import InputNumberDemo from '@/components/Form/InputNumber/demo/InputNumberDemo.vue'
 import InputNumberMinDemo from '@/components/Form/InputNumber/demo/InputNumberMinDemo.vue'
 import AddSubtractBar from '@/components/Form/InputNumber/AddSubtractBar.vue'
-import Icon from '@/components/Icon/src/Icon.vue'
+import Icon from '@/components/Icon/src/IconMain.vue'
 </script>
 <template>
   <BoxView title="AddSubtractBar">
