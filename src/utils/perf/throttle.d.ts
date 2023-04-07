@@ -8,12 +8,14 @@ interface options {
   time?: number;
   /**exec后立即callback */
   immediate?: boolean;
+  /**仅仅第一次立即 */
+  firstImmediate?: boolean;
 }
 
 export default class Throttle {
   constructor(options: { callback: () => void; time: number; immediate: boolean });
 
-  exec(cb: () => void, time: number): void;
+  exec(cb: () => void, time?: number): void;
 }
 
-export declare function createThrottle(options?: number | options): (fn: () => void) => void;
+export declare function createThrottle(options?: number | options): Throttle['exec'];
