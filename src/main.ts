@@ -1,3 +1,6 @@
+// 结合 vite-plugin-svg-icons 使用，否则图标不出现
+import 'virtual:svg-icons-register'
+
 // import 'virtual:windi.css'
 import './styles/animation.scss'
 import './styles/index.scss'
