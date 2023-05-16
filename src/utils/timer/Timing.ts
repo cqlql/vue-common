@@ -31,3 +31,38 @@ export default class Timing {
     })
   }
 }
+
+// 函数版。没发现优势，暂时注释
+// function Timing() {
+//   let stopId: number | undefined;
+
+//   function stop() {
+//     clearInterval(stopId);
+//   }
+
+//   function timeUp(cb: (time: number) => false | void, time = 0) {
+//     stop(); // 开始前结束，避免开启2次
+
+//     stopId = setInterval(() => {
+//       time++;
+//       cb(time) === false && stop();
+//     }, 1000);
+//     cb(time) === false && stop();
+//   }
+
+//   function timeDown(timeCount: number, update: (time: number) => void, finish: () => void) {
+//     timeUp((t) => {
+//       let v = timeCount - t;
+//       update(v);
+//       if (!v) {
+//         stop();
+//         finish();
+//       }
+//     });
+//   }
+
+//   return {
+//     timeUp,
+//     timeDown,
+//   };
+// }
