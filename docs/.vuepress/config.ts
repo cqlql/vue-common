@@ -28,8 +28,7 @@ export default defineUserConfig({
   },
   markdown: {
     importCode: {
-      handleImportPath: (str) =>
-        str.replace(/^\/src/, path.resolve(__dirname, '../../src')),
+      handleImportPath: (str) => str.replace(/^\/src/, path.resolve(__dirname, '../../src')),
     },
   },
 
