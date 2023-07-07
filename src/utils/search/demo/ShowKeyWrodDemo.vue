@@ -7,11 +7,11 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import showKeyWrod from '@/utils/search/show-keyword'
+import keywordHighlight from '@/utils/search/keyword-highlight'
 
 const keyword = ref('你 世')
 const result = computed(() => {
-  return showKeyWrod('你好，世界', keyword.value)
+  return keywordHighlight('你好，世界', keyword.value)
 })
 </script>
 <style lang="scss" scoped>

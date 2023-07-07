@@ -1,6 +1,5 @@
 import Debounce from '@/utils/perf/debounce'
-import createSearchRegexp from '@/utils/search/create-search-regexp'
-import showKeyWrod from '@/utils/search/show-keyword'
+import { createRegexp, keywordHighlight } from './keyword-search'
 
 export default class SearchCustom {
   debounce
@@ -22,11 +21,11 @@ export default class SearchCustom {
     this.debounce.exec(() => {
       let resultList: T[] = []
       if (keyword) {
-        const reg = createSearchRegexp(keyword)
+        const reg = createRegexp(keyword)
         list.forEach((item) => {
           const content = getContent(item)
           if (reg.test(content)) {
-            setNewItem(item, showKeyWrod(content, keyword))
+            setNewItem(item, keywordHighlight(content, keyword))
             resultList.push(item)
           }
         })

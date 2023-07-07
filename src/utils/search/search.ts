@@ -3,8 +3,7 @@
 // }
 
 import Debounce from '../perf/debounce'
-import createSearchRegexp from './create-search-regexp'
-import showKeyWrod from './show-keyword'
+import { createRegexp, keywordHighlight } from './keyword-search'
 
 interface SearchParams {
   keyword: string
@@ -36,8 +35,8 @@ export default class Search {
       let resultList: any[] = []
       keyword = keyword.trim()
       if (keyword) {
-        const reg = createSearchRegexp(keyword)
-        const handleText = noMarkKeyword ? (text: string) => text : showKeyWrod
+        const reg = createRegexp(keyword)
+        const handleText = noMarkKeyword ? (text: string) => text : keywordHighlight
 
         list.forEach((item) => {
           let content = getItemText(item)
