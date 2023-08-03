@@ -148,7 +148,8 @@ const animation = new Animation();
 // animation.easing =bezier(0.47,0.09,0.24,0.99);
 // animation.easing =bezier(0.47,0.09,0.16,0.83);
 // animation.easing =bezier(0.45,0.1,0.1,0.8);
-animation.easing = bezier(0.3, 0.2, 0.3, 0.9);
+// animation.easing = bezier(0.3, 0.2, 0.3, 0.9);
+animation.easing = bezier(0.36, 0, 0.08, 0.9);
 
 let prizeIndex = 1;
 let centerIndex = 2;
@@ -187,10 +188,27 @@ function start() {
 </template>
 
 <style scoped>
-.box {
-  border: 2px solid red;
+.raffle-view {
+  background-color: #ddd;
+  width: 720px;
+  height: 720px;
+  padding: 10px;
+}
+.container {
   width: 500px;
+  border: 5px solid #fff;
+  border-radius: 50px;
+  /* text-align: center; */
+  margin: 0 auto;
   overflow: hidden;
+  .tit {
+    text-align: center;
+  }
+}
+.box {
+  /* border: 2px solid red; */
+
+  /* overflow: hidden; */
 }
 .list {
   display: flex;
@@ -200,7 +218,7 @@ function start() {
   width: 100px;
   height: 100px;
   flex-shrink: 0;
-  background-color: #ddd;
+  /* background-color: #ddd; */
 }
 .item img {
   width: 100%;
