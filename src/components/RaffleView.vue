@@ -1,10 +1,4 @@
-<script setup>
-import { ref } from "vue";
-
-defineProps({
-  list: Array,
-});
-
+<script>
 
 class Animation {
   // params: 反复执行的函数，动画持续时间(毫秒)，到达目标位置时回调
@@ -93,29 +87,36 @@ function bezier(p1x, p1y, p2x, p2y) {
   };
 }
 
+export default {
+  props: ["list"],
+  data() {
+    return {
+      x: 0,
+    };
+  },
+  mounted() {
+    const animation = new Animation();
+    // animation.easing = bezier(0.59,0.21,0,1);
+    // animation.easing =bezier(0.47,0.09,0.24,0.99);
+    // animation.easing =bezier(0.47,0.09,0.16,0.83);
+    // animation.easing =bezier(0.45,0.1,0.1,0.8);
+    // animation.easing = bezier(0.3, 0.2, 0.3, 0.9);
+    animation.easing = bezier(0.36, 0, 0.08, 0.9);
 
+    let prizeIndex = 1;
+    let centerIndex = 2;
+    // const x = ref(0);
+    const itemWidth = 100;
+    const boxWidth = 500;
+    let baseLen = boxWidth * 4;
+    let moveLen =
+      baseLen + itemWidth * (centerIndex + 1) + prizeIndex * itemWidth;
 
-const animation = new Animation();
-// animation.easing = bezier(0.59,0.21,0,1);
-// animation.easing =bezier(0.47,0.09,0.24,0.99);
-// animation.easing =bezier(0.47,0.09,0.16,0.83);
-// animation.easing =bezier(0.45,0.1,0.1,0.8);
-// animation.easing = bezier(0.3, 0.2, 0.3, 0.9);
-animation.easing = bezier(0.36, 0, 0.08, 0.9);
-
-let prizeIndex = 1;
-let centerIndex = 2;
-const x = ref(0);
-const itemWidth = 100;
-const boxWidth = 500;
-let baseLen = boxWidth * 4;
-let moveLen = baseLen + itemWidth * (centerIndex + 1) + prizeIndex * itemWidth;
-
-function start() {
-  animation.start((v) => {
-    x.value = -(moveLen * v) % boxWidth;
-  }, 3000);
-}
+    animation.start((v) => {
+      this.x = -(moveLen * v) % boxWidth;
+    }, 3000);
+  },
+};
 </script>
 
 <template>
@@ -135,7 +136,7 @@ function start() {
         </div>
       </div>
     </div>
-    <button @click="start">豪气四连</button>
+    <button>豪气四连</button>
   </div>
 </template>
 
