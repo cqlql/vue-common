@@ -360,12 +360,6 @@
 			this.getMessage()
 			this.getpeizhi()
 		},
-		mounted(){
-			setTimeout(() => {
-				this.haveTry()
-			},500)
-			
-		},
 		computed:{
 			//当前选中盒子
 			currBox(){
