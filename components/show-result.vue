@@ -99,7 +99,7 @@ export default {
           id: "5",
           name: "5",
           img: "//img30.360buyimg.com/img/s100x100_jfs/t1/91981/1/41511/72149/64c333e9F758186fd/aff40a7e8d41fadf.jpg!cc_100x100.webp",
-        },
+        }, 
       ],
       //特效
       scale: false,

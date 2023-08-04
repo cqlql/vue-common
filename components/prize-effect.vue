@@ -87,55 +87,117 @@ function bezier(p1x, p1y, p2x, p2y) {
   };
 }
 
+
+function completeList(list, num) {
+  const currNum = list.length;
+  const newList = [];
+
+  if (currNum < num) {
+    for (let index = 0; index < num; index++) {
+      newList.push(list[index % currNum]);
+    }
+    return newList;
+  }
+  return list;
+}
+
+function randomList(list, prizeIndex, prizeNewIndex) {
+  const cloneList = list.slice();
+  const newList = [];
+  newList.push(cloneList.splice(prizeIndex, 1)[0]);
+  function loopGet() {
+    const len = cloneList.length;
+    if (len) {
+      const index = Math.floor(len * Math.random());
+      newList.push(cloneList.splice(index, 1)[0]);
+      loopGet();
+    }
+  }
+  loopGet();
+  // 交换。大奖放到指定位置
+  const prizeValue = newList[0];
+  newList[0] = newList[prizeNewIndex];
+  newList[prizeNewIndex] = prizeValue;
+  return newList;
+}
+
 export default {
   props: ["list"],
   data() {
     return {
       x: 0,
+      // 奖品数
+      prizeNum:9,
+      // 显示数
+      showNum: 7
     };
   },
-  mounted() {
-    const animation = new Animation();
-    // animation.easing = bezier(0.59,0.21,0,1);
-    // animation.easing =bezier(0.47,0.09,0.24,0.99);
-    // animation.easing =bezier(0.47,0.09,0.16,0.83);
-    // animation.easing =bezier(0.45,0.1,0.1,0.8);
-    // animation.easing = bezier(0.3, 0.2, 0.3, 0.9);
-    animation.easing = bezier(0.36, 0, 0.08, 0.9);
+  computed: {
+    lists() {
+      let newList = completeList(this.list,this.showNum)
+      // 真实产品总数
+      let realNum = this.list.length
 
-    let prizeIndex = 1;
-    let centerIndex = 2;
-    // const x = ref(0);
-    const itemWidth = 100;
-    const boxWidth = 500;
-    let baseLen = boxWidth * 4;
-    let moveLen =
-      baseLen + itemWidth * (centerIndex + 1) + prizeIndex * itemWidth;
-
-    animation.start((v) => {
-      this.x = -(moveLen * v) % boxWidth;
-    }, 3000);
+      let lists = []
+      for (let index = 0; index < this.prizeNum; index++) {
+        lists.push(randomList(newList,index%realNum,1))
+      }
+      return lists
+    }
   },
+  mounted() {
+    this.action()
+  },
+  methods:{
+    action () {
+      const animation = new Animation();
+      // animation.easing = bezier(0.59,0.21,0,1);
+      // animation.easing =bezier(0.47,0.09,0.24,0.99);
+      // animation.easing =bezier(0.47,0.09,0.16,0.83);
+      // animation.easing =bezier(0.45,0.1,0.1,0.8);
+      // animation.easing = bezier(0.3, 0.2, 0.3, 0.9);
+      animation.easing = bezier(0.36, 0, 0.08, 0.9);
+
+      let showNum = this.showNum;
+      const boxWidth = this.$refs.vContainer.$el.clientWidth;
+      const itemWidth = boxWidth/7;
+
+      let prizeIndex = 1;
+      let centerIndex = 3;
+      // const x = ref(0);
+      
+    
+      let baseLen = boxWidth * 4;
+      let moveLen =
+        baseLen + itemWidth * (centerIndex + 1) + prizeIndex * itemWidth;
+
+      animation.start((v) => {
+        this.x = -(moveLen * v) % boxWidth;
+      }, 3000);
+    }
+  }
 };
 </script>
 
 <template>
   <view class="raffle-view">
-    <view class="container">
+    <view ref="vContainer" class="container">
       <view class="tit">奖品池</view>
       <view class="box">
-        <view class="move" :style="{ transform: `translateX(${x}px)` }">
-          <view v-for="i of 9" class="list">
+        <view class="move" :style="{ transform: `translate3d(${x}px,0,0)` }">
+          <view v-for="ls of lists" class="list">
             <template v-for="i of 2">
-              <view v-for="item of list" class="item">
-                <img :src="item.img" alt="" />
+              <view v-for="item of ls" class="item">
+                <view class="item-wrap">
+                  <img :src="item.img" />
+                </view>
               </view>
             </template>
           </view>
         </view>
       </view>
     </view>
-    <button>豪气四连</button>
+    <button @click="action">豪气四连</button>
   </view>
 </template>
 
@@ -158,14 +220,17 @@ export default {
   background-color: #ffffff85;
   margin: 0 auto;
   overflow: hidden;
+  padding-bottom: 50rpx;
   .tit {
     text-align: center;
+    font-size: 40rpx;
   }
 }
 .box {
   /* border: 2rpx solid red; */
 
   /* overflow: hidden; */
+  padding-top: 30rpx;
 }
 .list {
   display: flex;
@@ -176,6 +241,10 @@ export default {
   height: 100rpx;
   flex-shrink: 0;
   /* background-color: #ddd; */
+}
+
+.item-wrap{
+  margin: 6rpx;
 }
 .item img {
   width: 100%;
