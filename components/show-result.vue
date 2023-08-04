@@ -44,7 +44,7 @@
           <view class="shiwan center" v-else>{{$t('试玩结果仅供展示哦~')}}</view>
         </view>
       </view>
-      <prize-effect :list="list"></prize-effect>
+      <prize-effect v-if="!explode" :list="list" @complete="animationEnd" :prizeNum="num"></prize-effect>
       <audio
         id="result-audio"
         src="https://img.50api.cn/dingdang/choujiang.mp3"
@@ -74,33 +74,8 @@ export default {
     return {
       //奖品列表
       prizedata: [],
-      list:[
-        {
-          id: "1",
-          name: "1",
-          img: "//img10.360buyimg.com/seckillcms/s140x140_jfs/t1/194549/19/13333/188027/60f30d8aE144e212d/af2f276856b3b978.jpg.webp",
-        },
-        {
-          id: "2",
-          name: "2",
-          img: "//img20.360buyimg.com/seckillcms/s140x140_jfs/t1/127785/22/35777/104123/640172a7F9a6e2d75/3603e2456584da3a.jpg.webp",
-        },
-        {
-          id: "3",
-          name: "3",
-          img: "//img20.360buyimg.com/seckillcms/s140x140_jfs/t20260522/137334/27/32093/43030/646ca3aeF652d03cf/cac75edac45bead0.jpg.webp",
-        },
-        {
-          id: "4",
-          name: "4",
-          img: "//img13.360buyimg.com/seckillcms/s140x140_jfs/t1/221947/2/6459/190430/61bff09aE35bc929b/e836cc7537c4528d.jpg.webp",
-        },
-        {
-          id: "5",
-          name: "5",
-          img: "//img30.360buyimg.com/img/s100x100_jfs/t1/91981/1/41511/72149/64c333e9F758186fd/aff40a7e8d41fadf.jpg!cc_100x100.webp",
-        }, 
-      ],
+      // 盲盒中商品列表
+      list:[],
       //特效
       scale: false,
       //开盒动画
@@ -136,8 +111,19 @@ export default {
   },
   watch: {},
   methods: {
+    animationEnd () {
+      this.explode= true
+    },
     open(prizedata) {
       prizedata.boxImg && (this.boxImg = prizedata.boxImg);
+
+      this.list= prizedata.goodslist.map((goods,index)=>{
+        return {
+          id: index,
+          img: goods.image
+        }
+      })
+
       //播放音乐
       // this.startAudio();
       //打开结果

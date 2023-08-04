@@ -40,10 +40,10 @@ class Animation {
   // 缓动类型：可进行更换
   // easeOutQuad
   easing(t, b, c, d) {
-    if ((t /= d / 2) < 1) return (c / 2) * t * t * t + b;
-    return (c / 2) * ((t -= 2) * t * t + 2) + b;
+    // if ((t /= d / 2) < 1) return (c / 2) * t * t * t + b;
+    // return (c / 2) * ((t -= 2) * t * t + 2) + b;
     // return c * Math.sqrt(1 - (t=t/d-1)*t) + b;
-    // return c*((t=t/d-1)*t*t*t*t + 1) + b;
+    return c*((t=t/d-1)*t*t*t*t + 1) + b;
     // return -c * (t /= d) * (t - 2) + b
   }
 }
@@ -122,12 +122,12 @@ function randomList(list, prizeIndex, prizeNewIndex) {
 }
 
 export default {
-  props: ["list"],
+  props: ["list","prizeNum"],
   data() {
     return {
       x: 0,
       // 奖品数
-      prizeNum:9,
+      // prizeNum:9,
       // 显示数
       showNum: 7
     };
@@ -143,6 +143,13 @@ export default {
         lists.push(randomList(newList,index%realNum,1))
       }
       return lists
+    },
+    total () {
+      let realNum = this.list.length
+      if (realNum<this.showNum) {
+        return this.showNum
+      }
+      return realNum
     }
   },
   mounted() {
@@ -151,29 +158,26 @@ export default {
   methods:{
     action () {
       const animation = new Animation();
-      // animation.easing = bezier(0.59,0.21,0,1);
-      // animation.easing =bezier(0.47,0.09,0.24,0.99);
-      // animation.easing =bezier(0.47,0.09,0.16,0.83);
-      // animation.easing =bezier(0.45,0.1,0.1,0.8);
       // animation.easing = bezier(0.3, 0.2, 0.3, 0.9);
-      animation.easing = bezier(0.36, 0, 0.08, 0.9);
+      // animation.easing = bezier(0.36, 0, 0.08, 0.9);
 
-      let showNum = this.showNum;
       const boxWidth = this.$refs.vContainer.$el.clientWidth;
-      const itemWidth = boxWidth/7;
+      const itemWidth = boxWidth/this.showNum;
+      const contentWidth = itemWidth*this.total
 
-      let prizeIndex = 1;
-      let centerIndex = 3;
+      // let prizeIndex = 1;
+      // let centerIndex = 3;
       // const x = ref(0);
       
     
       let baseLen = boxWidth * 4;
-      let moveLen =
-        baseLen + itemWidth * (centerIndex + 1) + prizeIndex * itemWidth;
+      // let moveLen = baseLen ;
 
       animation.start((v) => {
-        this.x = -(moveLen * v) % boxWidth;
-      }, 3000);
+        this.x = -(baseLen * v) % contentWidth;
+      }, 3000,()=>{
+        this.$emit('complete')
+      });
     }
   }
 };
@@ -182,9 +186,9 @@ export default {
 <template>
   <view class="raffle-view">
     <view ref="vContainer" class="container">
-      <view class="tit">奖品池</view>
+      <!-- <view class="tit">奖品池</view> -->
       <view class="box">
-        <view class="move" :style="{ transform: `translate3d(${x}px,0,0)` }">
+        <view ref="vContent" class="move" :style="{ transform: `translate3d(${x}px,0,0)` }">
           <view v-for="ls of lists" class="list">
             <template v-for="i of 2">
               <view v-for="item of ls" class="item">
@@ -197,7 +201,7 @@ export default {
         </view>
       </view>
     </view>
-    <button @click="action">豪气四连</button>
+    <!-- <button @click="action">豪气四连</button> -->
   </view>
 </template>
 
@@ -220,11 +224,12 @@ export default {
   background-color: #ffffff85;
   margin: 0 auto;
   overflow: hidden;
-  padding-bottom: 50rpx;
-  .tit {
+  /* padding-bottom: 50rpx; */
+  padding-bottom: 30rpx;
+  /* .tit {
     text-align: center;
     font-size: 40rpx;
-  }
+  } */
 }
 .box {
   /* border: 2rpx solid red; */

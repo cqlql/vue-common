@@ -4,3 +4,4 @@ node_modules
 !show-result.vue
 !.gitignore
 !prize-effect.vue
+!pages/tabbar/index.vue
