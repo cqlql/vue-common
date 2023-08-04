@@ -44,10 +44,14 @@
           <view class="shiwan center" v-else>{{$t('试玩结果仅供展示哦~')}}</view>
         </view>
       </view>
-      <prize-effect v-if="!explode" :list="list" @complete="animationEnd" :prizeNum="num"></prize-effect>
+      <prize-effect v-if="!explode" :goodsList="goodsList" @complete="animationEnd" :prizeNum="num" :prizeList="prizedata.prizeInfo"></prize-effect>
       <audio
         id="result-audio"
         src="https://img.50api.cn/dingdang/choujiang.mp3"
+      ></audio>
+      <audio
+        ref="eAudioZJ"
+        src="https://img.50api.cn/dingdang/zhongjiang.mp3"
       ></audio>
     </view>
   </uni-popup>
@@ -75,7 +79,7 @@ export default {
       //奖品列表
       prizedata: [],
       // 盲盒中商品列表
-      list:[],
+      goodsList:[],
       //特效
       scale: false,
       //开盒动画
@@ -117,15 +121,10 @@ export default {
     open(prizedata) {
       prizedata.boxImg && (this.boxImg = prizedata.boxImg);
 
-      this.list= prizedata.goodslist.map((goods,index)=>{
-        return {
-          id: index,
-          img: goods.image
-        }
-      })
+      this.goodsList= prizedata.goodslist
 
       //播放音乐
-      // this.startAudio();
+      this.startAudio();
       //打开结果
       this.$refs.prize.open();
       //加载动画
@@ -136,10 +135,16 @@ export default {
     //播放音乐
     startAudio() {
       setTimeout(() => {
-        let audio = document
+        this.audio = document
           .getElementById("result-audio")
           .querySelector("audio");
-        audio.play();
+          this.audio.play();
+
+          setTimeout(()=> {
+            this.audio.pause();
+            this.$refs.eAudioZJ.$el.querySelector('audio').play();
+            
+          },4600)
       });
     },
 	  //关闭
@@ -193,12 +198,15 @@ export default {
 .result-popup-main{
 	z-index: 9999;
 	.result-popup{
-		background-image: url('@/static/image/result/bg.jpg');
+		// background-image: url('@/static/image/result/bg.jpg');
 		position: fixed;
 		bottom: 0;
 		left: 0;
-		background-repeat: no-repeat;
-		background-size: 100% 100%;
+		// background-repeat: no-repeat;
+		// background-size: 100% 100%;
+    // background-color: #fff;
+     
+    background: linear-gradient(#d4ecf1, #7dcee1);
 	}
 }
 

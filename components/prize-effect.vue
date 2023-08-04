@@ -1,202 +1,119 @@
 <script>
-
-class Animation {
-  // params: 反复执行的函数，动画持续时间(毫秒)，到达目标位置时回调
-  start(exec, duration = 400, complete = () => {}) {
-    let t = 0; // 当前起始次数
-    let interval = 16; // 帧间隔
-    let count = duration / interval; // 总次数
-    let position = 0; // 起始位置
-    // let endPosition = 1 // 目标位置
-    let length = 1; // 要走的总长度
-
-    let that = this;
-
-    function run() {
-      t++;
-      if (t < count) {
-        exec(that.easing(t, position, length, count));
-        // that.stopId = requestAnimationFrame(run, interval)
-        that.stopId = setTimeout(run, interval);
-      } else {
-        // 最后一次
-        exec(1);
-
-        that.stopId = undefined;
-
-        complete();
-      }
-    }
-
-    run();
-  }
-
-  // 终止动画
-  stop() {
-    // cancelAnimationFrame(this.stopId)
-    clearTimeout(this.stopId);
-  }
-
-  // 缓动类型：可进行更换
-  // easeOutQuad
-  easing(t, b, c, d) {
-    // if ((t /= d / 2) < 1) return (c / 2) * t * t * t + b;
-    // return (c / 2) * ((t -= 2) * t * t + 2) + b;
-    // return c * Math.sqrt(1 - (t=t/d-1)*t) + b;
-    return c*((t=t/d-1)*t*t*t*t + 1) + b;
-    // return -c * (t /= d) * (t - 2) + b
-  }
-}
-
-function bezier(p1x, p1y, p2x, p2y) {
-  var Cx = 3 * p1x,
-    Bx = 3 * (p2x - p1x) - Cx,
-    Ax = 1 - Cx - Bx,
-    Cy = 3 * p1y,
-    By = 3 * (p2y - p1y) - Cy,
-    Ay = 1 - Cy - By;
-
-  function bezierX(t) {
-    return t * (Cx + t * (Bx + t * Ax));
-  }
-
-  function bezierY(t) {
-    return t * (Cy + t * (By + t * Ay));
-  }
-
-  function findX(t) {
-    var x = t,
-      i = 0,
-      z;
-
-    while (++i < 14) {
-      z = bezierX(x) - t;
-      if (Math.abs(z) < 1e-3) break;
-      x -= z / derivativeX(x);
-    }
-
-    return x;
-  }
-
-  function derivativeX(t) {
-    return Cx + t * (2 * Bx + 3 * Ax * t);
-  }
-
-  return function (t, b, c, d) {
-    return bezierY(findX(t / d)) * c + b;
-  };
-}
-
-
-function completeList(list, num) {
-  const currNum = list.length;
-  const newList = [];
-
-  if (currNum < num) {
-    for (let index = 0; index < num; index++) {
-      newList.push(list[index % currNum]);
-    }
-    return newList;
-  }
-  return list;
-}
-
-function randomList(list, prizeIndex, prizeNewIndex) {
-  const cloneList = list.slice();
-  const newList = [];
-  newList.push(cloneList.splice(prizeIndex, 1)[0]);
-  function loopGet() {
-    const len = cloneList.length;
-    if (len) {
-      const index = Math.floor(len * Math.random());
-      newList.push(cloneList.splice(index, 1)[0]);
-      loopGet();
-    }
-  }
-  loopGet();
-  // 交换。大奖放到指定位置
-  const prizeValue = newList[0];
-  newList[0] = newList[prizeNewIndex];
-  newList[prizeNewIndex] = prizeValue;
-  return newList;
-}
-
 export default {
-  props: ["list","prizeNum"],
+  props: ["goodsList", "prizeNum", "prizeList"],
   data() {
     return {
       x: 0,
       // 奖品数
       // prizeNum:9,
       // 显示数
-      showNum: 7
+      showNum: 7,
     };
   },
   computed: {
     lists() {
-      let newList = completeList(this.list,this.showNum)
+      let goodsList = this.goodsList;
       // 真实产品总数
-      let realNum = this.list.length
+      let realNum = goodsList.length;
 
-      let lists = []
+      function getRandomIndex() {
+        return Math.floor(Math.random() * realNum);
+      }
+
+      let lists = [];
       for (let index = 0; index < this.prizeNum; index++) {
-        lists.push(randomList(newList,index%realNum,1))
+        let newList = [];
+        for (let i = 0; i < 50; i++) {
+          let goods;
+          if (i === 38) {
+            goods = this.prizeList[index];
+          } else {
+            goods = goodsList[getRandomIndex()];
+          }
+          newList.push(goods);
+        }
+        lists.push(newList);
       }
-      return lists
+      return lists;
     },
-    total () {
-      let realNum = this.list.length
-      if (realNum<this.showNum) {
-        return this.showNum
-      }
-      return realNum
-    }
   },
   mounted() {
-    this.action()
+    this.action();
   },
-  methods:{
-    action () {
-      const animation = new Animation();
-      // animation.easing = bezier(0.3, 0.2, 0.3, 0.9);
-      // animation.easing = bezier(0.36, 0, 0.08, 0.9);
-
+  methods: {
+    action() {
       const boxWidth = this.$refs.vContainer.$el.clientWidth;
-      const itemWidth = boxWidth/this.showNum;
-      const contentWidth = itemWidth*this.total
+      const itemWidth = this.$refs.vItem.$el.clientWidth;
 
-      // let prizeIndex = 1;
-      // let centerIndex = 3;
-      // const x = ref(0);
-      
-    
-      let baseLen = boxWidth * 4;
-      // let moveLen = baseLen ;
+      this.x = -itemWidth * 38 + (boxWidth - itemWidth) / 2;
+    },
+    transitionend() {
+      this.$emit("complete");
+    },
 
-      animation.start((v) => {
-        this.x = -(baseLen * v) % contentWidth;
-      }, 3000,()=>{
-        this.$emit('complete')
-      });
-    }
-  }
+    //品质文本
+    tagTextFun(prizeInfo){
+      if(!prizeInfo) return null
+      if(prizeInfo.tag == 'normal'){
+        return this.$t('普通')
+      }
+      if(prizeInfo.tag == 'rare'){
+        return this.$t('稀有')
+      }
+      if(prizeInfo.tag == 'supreme'){
+        return this.$t('史诗')
+      }
+      if(prizeInfo.tag == 'legend'){
+        return this.$t('传说')
+      }
+    },
+    //品质角标
+    tagImgFun(prizeInfo){
+      if(!prizeInfo) return null
+      if(prizeInfo.tag == 'normal'){
+        return "/pagesA/static/tag-1.png"
+      }
+      if(prizeInfo.tag == 'rare'){
+        return "/pagesA/static/tag-2.png"
+      }
+      if(prizeInfo.tag == 'supreme'){
+        return "/pagesA/static/tag-3.png"
+      }
+      if(prizeInfo.tag == 'legend'){
+        return "/pagesA/static/tag-4.png"
+      }
+    },
+  },
 };
 </script>
 
 <template>
   <view class="raffle-view">
+    <view ref="vItem" class="item hide"  :class="'num'+prizeNum"></view>
     <view ref="vContainer" class="container">
-      <!-- <view class="tit">奖品池</view> -->
+      <view class="tit">
+        <div class="tit-wrap">奖品池</div>
+      </view>
       <view class="box">
-        <view ref="vContent" class="move" :style="{ transform: `translate3d(${x}px,0,0)` }">
+        <view
+          class="move"
+          :style="{ transform: `translate3d(${x}px,0,0)` }"
+          @transitionend="transitionend"
+        >
           <view v-for="ls of lists" class="list">
-            <template v-for="i of 2">
-              <view v-for="item of ls" class="item">
-                <view class="item-wrap">
-                  <img :src="item.img" />
+            <view v-for="item of ls" class="item" :class="'num'+prizeNum">
+              <view class="item-wrap">
+                <view class="left-top-tag">
+                  <image
+                    class="tag-img"
+                    :src="tagImgFun(item)"
+                    mode="aspectFit"
+                  ></image>
+                  <text class="tag-text">{{ tagTextFun(item) }}</text>
                 </view>
+                <img :src="item.image" />
               </view>
-            </template>
+            </view>
           </view>
         </view>
       </view>
@@ -205,16 +122,16 @@ export default {
   </view>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .raffle-view {
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 .container {
   width: 700rpx;
@@ -224,12 +141,19 @@ export default {
   background-color: #ffffff85;
   margin: 0 auto;
   overflow: hidden;
-  /* padding-bottom: 50rpx; */
-  padding-bottom: 30rpx;
-  /* .tit {
+  padding-bottom: 50rpx;
+  // padding-bottom: 30rpx;
+  .tit {
     text-align: center;
+  }
+  .tit-wrap {
     font-size: 40rpx;
-  } */
+    background-color: #fff;
+    width: 200rpx;
+    margin: 0 auto;
+    border-radius: 0 0 20rpx 20rpx;
+    padding: 10rpx 10rpx 20rpx;
+  }
 }
 .box {
   /* border: 2rpx solid red; */
@@ -237,22 +161,69 @@ export default {
   /* overflow: hidden; */
   padding-top: 30rpx;
 }
+
+.move {
+  transition: transform 5s cubic-bezier(0.2, 0, 0.1, 1);
+}
 .list {
   display: flex;
 }
 .item {
   /* border: 1rpx solid #333; */
-  width: 100rpx;
-  height: 100rpx;
+  width: 200rpx;
+  height: 200rpx;
   flex-shrink: 0;
-  /* background-color: #ddd; */
+  display: flex;
+ 
 }
 
-.item-wrap{
-  margin: 6rpx;
+// .item.num1{}
+// .item.num5{}
+.item.num9{
+  width: 120rpx;
+  height: 120rpx;
+  .item-wrap {
+    margin: 6rpx;
+  }
+}
+
+.item.hide {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+
+.item-wrap {
+  margin: 10rpx;
+  background-color: #fff;
+  border-radius: 8rpx;
+  overflow: hidden;
+  position: relative;
+  flex: 1;
+  .left-top-tag {
+    position: absolute;
+    left: -2px;
+    top: -3px;
+    width: 50%;
+  height: 50%;
+    .tag-img {
+      height: 100% !important;
+      width: 100% !important;
+    }
+    .tag-text {
+      position: absolute;
+      top: 30%;
+      left: 30%;
+      color: #fff !important;
+      width: auto !important;
+      transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+    }
+  }
 }
 .item img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
 }
 </style>

@@ -536,7 +536,7 @@
 								return
 							}
 							this.$refs['result-popup'].open({...result, boxImg: this.currBoxImg, goodslist:boxDetailRes.goodslist})
-							}
+						}
 						
 					})
 			    
