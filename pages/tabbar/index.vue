@@ -535,7 +535,7 @@
 								this.$refs['result-popup'].open({prizeInfo: result.goodsInfo, boxImg: this.currBoxImg, goodslist:boxDetailRes.goodslist })
 								return
 							}
-							this.$refs['result-popup'].open({...result, boxImg: this.currBoxImg})
+							this.$refs['result-popup'].open({...result, boxImg: this.currBoxImg, goodslist:boxDetailRes.goodslist})
 							}
 						
 					})
