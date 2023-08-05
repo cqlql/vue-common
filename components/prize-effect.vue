@@ -102,15 +102,15 @@ export default {
         >
           <view v-for="ls of lists" class="list">
             <view v-for="item of ls" class="item" :class="'num'+prizeNum">
+              <view class="left-top-tag">
+                <image
+                  class="tag-img"
+                  :src="tagImgFun(item)"
+                  mode="aspectFit"
+                ></image>
+                <text class="tag-text">{{ tagTextFun(item) }}</text>
+              </view>
               <view class="item-wrap">
-                <view class="left-top-tag">
-                  <image
-                    class="tag-img"
-                    :src="tagImgFun(item)"
-                    mode="aspectFit"
-                  ></image>
-                  <text class="tag-text">{{ tagTextFun(item) }}</text>
-                </view>
                 <img :src="item.image" />
               </view>
             </view>
@@ -135,14 +135,25 @@ export default {
 }
 .container {
   width: 700rpx;
+  // min-height: 800rpx;
+  // margin: 0 auto;
+  // overflow: hidden;
+  // padding-top: 100rpx;
+  // display: flex;
+  //   align-items: center;
+
+  // background: url(https://img.50api.cn/dingdang/ql.png);
+  // background-size: 100% 100%;
+
   border: 5rpx solid #fff;
   border-radius: 50rpx;
-  /* text-align: center; */
   background-color: #ffffff85;
   margin: 0 auto;
   overflow: hidden;
   padding-bottom: 50rpx;
-  // padding-bottom: 30rpx;
+  
+
+
   .tit {
     text-align: center;
   }
@@ -153,13 +164,14 @@ export default {
     margin: 0 auto;
     border-radius: 0 0 20rpx 20rpx;
     padding: 10rpx 10rpx 20rpx;
+    margin-bottom: 30rpx;
   }
 }
 .box {
   /* border: 2rpx solid red; */
 
   /* overflow: hidden; */
-  padding-top: 30rpx;
+  // padding-top: 30rpx;
 }
 
 .move {
@@ -174,6 +186,30 @@ export default {
   height: 200rpx;
   flex-shrink: 0;
   display: flex;
+  position: relative;
+  .left-top-tag {
+    position: absolute;
+    left: 6rpx;
+    top: 6rpx;
+    width: 100%;
+    height: 100%;
+    transform: scale(.5);
+    transform-origin: 0 0;
+    
+    .tag-img {
+      height: 100% !important;
+      width: 100% !important;
+    }
+    .tag-text {
+      position: absolute;
+      top: 30%;
+      left: 30%;
+      color: #fff !important;
+      width: auto !important;
+      transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+      font-size: 40rpx;
+    }
+  }
  
 }
 
@@ -199,27 +235,9 @@ export default {
   background-color: #fff;
   border-radius: 8rpx;
   overflow: hidden;
-  position: relative;
+  
   flex: 1;
-  .left-top-tag {
-    position: absolute;
-    left: -2px;
-    top: -3px;
-    width: 50%;
-  height: 50%;
-    .tag-img {
-      height: 100% !important;
-      width: 100% !important;
-    }
-    .tag-text {
-      position: absolute;
-      top: 30%;
-      left: 30%;
-      color: #fff !important;
-      width: auto !important;
-      transform: translateX(-50%) translateY(-50%) rotate(-45deg);
-    }
-  }
+ 
 }
 .item img {
   width: 100%;
