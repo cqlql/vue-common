@@ -189,6 +189,20 @@ export default {
         return "/pagesA/static/tag-4.png"
       }
     },
+    recycle(){
+      this.$refs.prize.close()
+      uni.showModal({
+        cancelText: this.$t('取消'),
+        confirmText: this.$t('确认'),
+        title: this.$t('一键回收'),
+        content: this.$t('是否确认一键回收'),
+        success: res => {
+          if(res.confirm){
+            this.$emit('recycle', this.prizedata)
+          }
+        }
+      })
+    }
   },
 };
 </script>
