@@ -151,11 +151,13 @@ export default {
   margin: 0 auto;
   overflow: hidden;
   padding-bottom: 50rpx;
-  
+  position: relative;
 
 
   .tit {
     text-align: center;
+    position: relative;
+    z-index: 1;
   }
   .tit-wrap {
     font-size: 40rpx;
@@ -165,6 +167,17 @@ export default {
     border-radius: 0 0 20rpx 20rpx;
     padding: 10rpx 10rpx 20rpx;
     margin-bottom: 30rpx;
+    
+  }
+  &::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 10rpx;
+    transform: translateX(-50%);
+    background-color: rgba(189, 0, 234, 0.3);
   }
 }
 .box {
