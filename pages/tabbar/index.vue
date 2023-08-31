@@ -304,7 +304,7 @@
 				//金额
 				price: 0,
 				//数量
-				boxNum: 1,
+				boxNum: 5,
 				//开盒类型 0：正式开盒 1：试玩
 				type: 0,
 				isPlay:false,
@@ -359,6 +359,152 @@
 			this.getCategoryList()
 			this.getMessage()
 			this.getpeizhi()
+		},
+		mounted () {
+			this.$refs['result-popup'].open({
+				"select": "",
+				"prizeInfo": [
+					{
+						"prize_id": 2373,
+						"image": "https://dxxshoptest.oss-cn-shenzhen.aliyuncs.com/backManager/bd08d463-6610-4066-a9cc-d763e522094a.png",
+						"goods_name": "   小米充电器头30W快充10s红米k40k30i闪充33w瓦note9K20cc9pro手机18w头6正品7数据线科瑞信原装27w8typec",
+						"price": 39,
+						"goods_id": 11,
+						"tag": "normal"
+					},
+					{
+						"prize_id": 2374,
+						"image": "https://imgservice.suning.cn/uimg1/b2c/image/U4BIfbdYY8IiH-qbXb3Nmw.jpg",
+						"goods_name": "  手机通用pro正品P30小米max快充冲xs头oppo无限x华为xr专用10plus",
+						"price": 69,
+						"goods_id": 8,
+						"tag": "normal"
+					},
+					{
+						"prize_id": 2375,
+						"image": "https://dxxshoptest.oss-cn-shenzhen.aliyuncs.com/backManager/86bba9a2-ab95-4648-99ef-b26274ede530.png",
+						"goods_name": " 小米80W无线充电座套装 MIX4 11Pro 100W 原装30W 原装120W充电器",
+						"price": 46,
+						"goods_id": 10,
+						"tag": "normal"
+					},
+					{
+						"prize_id": 2376,
+						"image": "https://imgservice.suning.cn/uimg1/b2c/image/U4BIfbdYY8IiH-qbXb3Nmw.jpg",
+						"goods_name": "  手机通用pro正品P30小米max快充冲xs头oppo无限x华为xr专用10plus",
+						"price": 69,
+						"goods_id": 8,
+						"tag": "normal"
+					},
+					{
+						"prize_id": 2377,
+						"image": "https://dxxshoptest.oss-cn-shenzhen.aliyuncs.com/backManager/bd08d463-6610-4066-a9cc-d763e522094a.png",
+						"goods_name": "   小米充电器头30W快充10s红米k40k30i闪充33w瓦note9K20cc9pro手机18w头6正品7数据线科瑞信原装27w8typec",
+						"price": 39,
+						"goods_id": 11,
+						"tag": "normal"
+					}
+				],
+				"boxImg": "http://yunjiyouxuan.oss-cn-guangzhou.aliyuncs.com/a71974ece05facdfd5f474d54373e63e.jpg",
+				"goodslist": [
+					{
+						"image": "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/12a88ce45263713aa61ef75d1265f187.jpg",
+						"xiangqing": "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/12a88ce45263713aa61ef75d1265f187.jpg",
+						"goods_name": "MIUI/小米 Xiaomi 12 Pro骁龙8 5G手机小米12系列",
+						"id": 1,
+						"tag": "传说",
+						"price": 5399
+					},
+					{
+						"image": "https://dxxshoptest.oss-cn-shenzhen.aliyuncs.com/backManager/266f849c-0f9c-43f7-ad46-229abfccb22e.png",
+						"xiangqing": "https://dxxshoptest.oss-cn-shenzhen.aliyuncs.com/backManager/266f849c-0f9c-43f7-ad46-229abfccb22e.png",
+						"goods_name": "小米EA65 金属全面屏 65英寸4K超高清远场语音平板电视 ",
+						"id": 2,
+						"tag": "史诗",
+						"price": 3599
+					},
+					{
+						"image": "https://img.pconline.com.cn/images/upload/upc/tx/pc_best/2104/26/c27/262683507_1619387706208.jpg",
+						"xiangqing": "https://img.pconline.com.cn/images/upload/upc/tx/pc_best/2104/26/c27/262683507_1619387706208.jpg",
+						"goods_name": "小米米家免洗扫地机器人智能家用全自动清洗扫地拖地吸尘三合一体 ",
+						"id": 3,
+						"tag": "史诗",
+						"price": 2999
+					},
+					{
+						"image": "https://imgservice.suning.cn/uimg1/b2c/image/3ea4_GiN7d1duyTTgrdZeA.jpg_800w_800h_4e",
+						"xiangqing": "https://imgservice.suning.cn/uimg1/b2c/image/3ea4_GiN7d1duyTTgrdZeA.jpg_800w_800h_4e",
+						"goods_name": "小米米家清洗智能家用扫地机器人2全自动扫地拖地吸尘三合一体机",
+						"id": 4,
+						"tag": "稀有",
+						"price": 1799
+					},
+					{
+						"image": "https://imgservice.suning.cn/uimg1/b2c/image/3ea4_GiN7d1duyTTgrdZeA.jpg_800w_800h_4e",
+						"xiangqing": "https://imgservice.suning.cn/uimg1/b2c/image/3ea4_GiN7d1duyTTgrdZeA.jpg_800w_800h_4e",
+						"goods_name": "小米米家清洗智能家用扫地机器人2全自动扫地拖地吸尘三合一体机",
+						"id": 4,
+						"tag": "稀有",
+						"price": 1799
+					},
+					{
+						"image": "https://imgservice.suning.cn/uimg1/b2c/image/qTqDNcabqcgh0aDHULlAKA.jpg_800w_800h_4e",
+						"xiangqing": "https://imgservice.suning.cn/uimg1/b2c/image/qTqDNcabqcgh0aDHULlAKA.jpg_800w_800h_4e",
+						"goods_name": "小米米家波轮洗衣机1kg迷你全自动内裤内衣小型儿童宝宝家用 ",
+						"id": 5,
+						"tag": "稀有",
+						"price": 1299
+					},
+					{
+						"image": "https://img.alicdn.com/imgextra/i4/483740118/O1CN01P3CEIS1Ck5WcRy5iP_!!0-saturn_solar.jpg_468x468q75.jpg_.webp",
+						"xiangqing": "https://img.alicdn.com/imgextra/i4/483740118/O1CN01P3CEIS1Ck5WcRy5iP_!!0-saturn_solar.jpg_468x468q75.jpg_.webp",
+						"goods_name": "小米Color2手表Xiaomi Watch Color 2运动版智能男女测心率多功能支付小爱同学nfc ",
+						"id": 6,
+						"tag": "稀有",
+						"price": 369
+					},
+					{
+						"image": "https://imgservice.suning.cn/uimg1/b2c/image/U4BIfbdYY8IiH-qbXb3Nmw.jpg",
+						"xiangqing": "https://imgservice.suning.cn/uimg1/b2c/image/U4BIfbdYY8IiH-qbXb3Nmw.jpg",
+						"goods_name": "  手机通用pro正品P30小米max快充冲xs头oppo无限x华为xr专用10plus",
+						"id": 8,
+						"tag": "普通",
+						"price": 69
+					},
+					{
+						"image": "https://dxxshoptest.oss-cn-shenzhen.aliyuncs.com/backManager/3832782d-0668-42e3-948c-74f488f1ad48.png",
+						"xiangqing": "https://dxxshoptest.oss-cn-shenzhen.aliyuncs.com/backManager/3832782d-0668-42e3-948c-74f488f1ad48.png",
+						"goods_name": "小米67W充电器小米12快充红米note10pro小米11pro/11UItra氮化镓闪充K40增强版67W华为三星通用RKAIG品牌",
+						"id": 9,
+						"tag": "普通",
+						"price": 59
+					},
+					{
+						"image": "https://dxxshoptest.oss-cn-shenzhen.aliyuncs.com/backManager/86bba9a2-ab95-4648-99ef-b26274ede530.png",
+						"xiangqing": "https://dxxshoptest.oss-cn-shenzhen.aliyuncs.com/backManager/86bba9a2-ab95-4648-99ef-b26274ede530.png",
+						"goods_name": " 小米80W无线充电座套装 MIX4 11Pro 100W 原装30W 原装120W充电器",
+						"id": 10,
+						"tag": "普通",
+						"price": 46
+					},
+					{
+						"image": "https://dxxshoptest.oss-cn-shenzhen.aliyuncs.com/backManager/bd08d463-6610-4066-a9cc-d763e522094a.png",
+						"xiangqing": "https://dxxshoptest.oss-cn-shenzhen.aliyuncs.com/backManager/bd08d463-6610-4066-a9cc-d763e522094a.png",
+						"goods_name": "   小米充电器头30W快充10s红米k40k30i闪充33w瓦note9K20cc9pro手机18w头6正品7数据线科瑞信原装27w8typec",
+						"id": 11,
+						"tag": "普通",
+						"price": 39
+					},
+					{
+						"image": "https://dxxshop.oss-accelerate.aliyuncs.com/miaokaimanghe/f8a9fbb8-f26b-4d86-a446-dfa1739e5e63.png",
+						"xiangqing": "https://dxxshop.oss-accelerate.aliyuncs.com/miaokaimanghe/f8a9fbb8-f26b-4d86-a446-dfa1739e5e63.png",
+						"goods_name": "ROG魔霸X G16 水冷旗舰电竞游戏台式机电脑主机电竞全套设计办公高配吃鸡电竞游戏直播全新败家之眼2023新品",
+						"id": 42,
+						"tag": "传说",
+						"price": 79999
+					}
+				]
+			})
 		},
 		computed:{
 			//当前选中盒子
