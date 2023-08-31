@@ -3,6 +3,7 @@ node_modules
 *.*
 !show-result.vue
 !prize-item.vue
+!prize-list.vue
 !.gitignore
 !prize-effect.vue
 !pages/tabbar/index.vue
