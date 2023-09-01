@@ -32,12 +32,16 @@
         </view>
       </view>
     </view>
+    <recycle ref="recycle"></recycle>
   </view>
 
 </template>
 <script>
+import recycle from "@/components/recycle.vue"
 export default {
-  components: {},
+  components: {
+    recycle
+  },
   props: {
     list:Array
   },
@@ -83,6 +87,7 @@ export default {
               if (res.code === 1) {
                 uni.showToast({title:res.msg});
                 item.recycled = true;
+                this.$refs['recycle'].open(res.data)
               }
             })
           }
