@@ -1,10 +1,7 @@
 <template>
   <uni-popup class="result-popup-main" ref="prize" mode="top" :mask="false">
     <view class="result-popup">
-
-     
-
-      <view :class="['prize', explode && 'show']">
+      <view  :class="['prize', explode && 'show']">
         <view class="prize_box">
           <view class="prize_close" @click="close()">
             <image src="/static/image/home/guanbi@2x.png" mode=""></image>
@@ -12,30 +9,34 @@
   <!-- 					<view class="prize-top" :class="`prize-top-${mode}`">
             <image src="/static/image/result/gaizi@2x.png" mode="aspectFit"></image>
           </view -->
-          <!-- 1开 -->
-          <view :class="['prize_shop', 'center', 'onebox', 'tag-' + tag, scale && 'prize_shop_scale']" v-if="mode == 0">
-            <view class="spining"></view>
-            <view class="left-top-tag">
-              <image class="tag-img" :src="tagImg" mode="aspectFit"></image>
-              <text class="tag-text">{{tagText}}</text>
-            </view>
-            <image class="one" v-if="prizedata&&prizedata.prizeInfo" :src="prizedata.prizeInfo[0].image" mode="widthFix"></image>
-            <text class="colorblack" v-if="prizedata&&prizedata.prizeInfo">{{ prizedata.prizeInfo[0].goods_name }}</text>
-          </view>
-          <!-- 5开or10开 -->
-          <view class="prize_ul" :class="`prize_ul-${mode}`" v-else>
-            <!-- <scroll-view scroll-x="true" class="scroll-view"> -->
-              <view :class="['prize_ul_li', 'twobox', 'flex', 'tag-' + tagFun(item)]" v-for="(item,index) in prizedata.prizeInfo" :key="index">
-                <view class="left-top-tag">
-                  <image class="tag-img" :src="tagImgFun(item)" mode="aspectFit"></image>
-                  <text class="tag-text">{{tagTextFun(item)}}</text>
-                </view>
-                <image class="two" :src="item.image" mode="widthFix"></image>
-                <text class="a">{{ item.goods_name }}</text>
+          <view v-if="prizeList.length===1" class="spining"></view>
+          <prize-list :list="prizeList"></prize-list>
+          <div v-if="false">
+            <!-- 1开 -->
+            <view :class="['prize_shop', 'center', 'onebox', 'tag-' + tag, scale && 'prize_shop_scale']" v-if="mode == 0">
+              <view class="spining"></view>
+              <view class="left-top-tag">
+                <image class="tag-img" :src="tagImg" mode="aspectFit"></image>
+                <text class="tag-text">{{tagText}}</text>
               </view>
-            <!-- </scroll-view> -->
-          </view>
-          <view class="prize_footer" :class="`prize_footer-${mode}`" v-if="type == 0">
+              <image class="one" v-if="prizedata&&prizedata.prizeInfo" :src="prizedata.prizeInfo[0].image" mode="widthFix"></image>
+              <text class="colorblack" v-if="prizedata&&prizedata.prizeInfo">{{ prizedata.prizeInfo[0].goods_name }}</text>
+            </view>
+            <!-- 5开or10开 -->
+            <view class="prize_ul" :class="`prize_ul-${mode}`" v-else>
+              <!-- <scroll-view scroll-x="true" class="scroll-view"> -->
+                <view :class="['prize_ul_li', 'twobox', 'flex', 'tag-' + tagFun(item)]" v-for="(item,index) in prizedata.prizeInfo" :key="index">
+                  <view class="left-top-tag">
+                    <image class="tag-img" :src="tagImgFun(item)" mode="aspectFit"></image>
+                    <text class="tag-text">{{tagTextFun(item)}}</text>
+                  </view>
+                  <image class="two" :src="item.image" mode="widthFix"></image>
+                  <text class="a">{{ item.goods_name }}</text>
+                </view>
+              <!-- </scroll-view> -->
+            </view>
+          </div>
+          <view class="prize_footer-v2" v-if="type == 0">
             <!-- 立即收下 -->
             <view class="btn btn-1" @click="$emit('accept')">{{$t('立即收下')}}</view>
             <!-- 一键回收 -->
@@ -59,10 +60,12 @@
 
 <script>
 import PrizeEffect from './prize-effect.vue';
+import PrizeList from './prize-list.vue';
 export default {
   components: {
-    PrizeEffect
-  },
+    PrizeEffect,
+    PrizeList
+},
   props: {
     //数量
     num: Number,
@@ -77,7 +80,7 @@ export default {
   data() {
     return {
       //奖品列表
-      prizedata: [],
+      prizedata: {},
       // 盲盒中商品列表
       goodsList:[],
       //特效
@@ -111,6 +114,17 @@ export default {
     //单抽品质角标
     tagImg(){
       return this.tagImgFun(this.currPrizedata)
+    },
+    prizeList () {
+      return this.prizedata.prizeInfo?.map((item)=>{
+        return {
+          qualityName:this.tagTextFun(item),
+          qualityImg: this.tagImgFun(item),
+          img: item.image,
+          name:item.goods_name,
+          price:item.price
+        }
+      })||[]
     }
   },
   watch: {},
@@ -238,9 +252,11 @@ export default {
 	}
 	.prize_box {
 		width: 100%;
-		height: 1120rpx;
+		height: 100%;
 		position: relative;
+    display: flex;
 		flex-direction: column;
+    justify-content: center;
 		background: url(/static/image/result/guang@2x.png) no-repeat;
 		background-size: 100% auto;
 		background-position: top;
@@ -248,9 +264,10 @@ export default {
 		.prize_close {
 			width: 64rpx;
 			height: 64rpx;
-			top: 280rpx;
+			top: 40rpx;
 			right: 30rpx;
 			position: absolute;
+      z-index: 1;
 		}
     .prize-top {
       width: 528rpx;
@@ -262,62 +279,33 @@ export default {
         top: 40rpx;
       }
     }
-    .prize_footer {
-      width: 100%;
-      &-2 {
-        bottom: -114rpx;
-      }
+    
+    .prize_footer-v2{
+      display: flex;
+      justify-content: space-around;
+      margin-top: 80rpx;
       .btn {
+        width: 159px;
         height: 84rpx;
         border-radius: 16rpx;
-        position: absolute;
+        font-size: 38rpx;
+        text-align: center;
+        line-height: 86rpx;
+        color: #FFFFFF;
+        font-weight: bold;
       }
       .btn-1 {
-        bottom: 0rpx;
-		background-image: -webkit-linear-gradient(0deg, #89f7fe 0%, #66a6ff 100%);
-		font-size: 38rpx;
-		text-align: center;
-		line-height: 86rpx;
-		width: 159px;
-		border-radius: 8px;
-		position: absolute;
-		left: 40rpx;
-		color: #FFFFFF;
-		font-weight: bold;
+        background-image: -webkit-linear-gradient(0deg, #89f7fe 0%, #66a6ff 100%);
       }
       .btn-0 {
-         bottom: 0rpx;
-		 background-image: -webkit-linear-gradient(60deg, #ffc8de 0%, #ff67a4 100%);
-		 font-size: 38rpx;
-		 text-align: center;
-		 line-height: 86rpx;
-		 right: 40rpx;
-		 width: 159px;
-		 color: #FFFFFF;
-		 font-weight: bold;
+        background-image: -webkit-linear-gradient(60deg, #ffc8de 0%, #ff67a4 100%);
+ 
       }
     }
 	}
 	.shiwan {
 		background: url(/static/image/open/tanchuangbeijing@2x.png) no-repeat;
 		background-size: cover;
-	}
-	.prize_ul{
-		width: 566rpx;
-		// padding: 0 92rpx;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-    position: absolute;
-    top: 336rpx;
-    left: 92rpx;
-    &-2 {
-      top: 360rpx;
-    }
-		&::after{
-			content: "";
-			width: 176rpx;
-		}
 	}
 	// .scroll-view {
 	// 	width: 522rpx;
@@ -356,50 +344,6 @@ export default {
 			}
 		}
 	// }
-	.prize_shop {
-		transition: 1s;
-		position: absolute;
-		top: 336rpx;
-		left: 198rpx;
-		display: flex;
-		flex-direction: column;
-		.spining{
-			z-index: -1;
-			height: 150vh;
-			width: 150vh;
-			background-image: url('@/static/image/result/spining.png');
-			background-repeat: no-repeat;
-			background-size: 100% 100%;
-			position: absolute;
-		}
-		image {
-			width: 174rpx;
-			height: 235rpx;
-			margin-bottom: 20rpx;
-		}
-		text {
-			width: 70%;
-			font-size: 16rpx;
-			font-family: PingFangSC-Medium, PingFang SC;
-			font-weight: 500;
-			color: #171A20;
-			overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
-      text-align: center;
-		}
-		.colorblack{
-			font-size: 32rpx !important;
-			font-family: PingFangSC-Medium, PingFang SC;
-			font-weight: 500;
-			color: #171A20;
-		}
-		.left-top-tag{
-			width: 5rem;
-			height: 5rem;
-			.tag-text{
-				font-size: 1rem;
-			}
-		}
-	}
 	.tag-normal{
 		box-shadow: 0 0 40rpx 18rpx #9d85ff;
 	}
@@ -445,12 +389,24 @@ export default {
 }
 
 @keyframes rotate{
-    from{transform: rotate(0deg)}
-	to{transform: rotate(360deg)}
+    from{transform:translate(-50%, -50%) rotate(0deg)}
+	to{transform:translate(-50%, -50%) rotate(360deg)}
 }
+    
 .spining{
-    transition: 0.3s;
-    animation: rotate 10s linear infinite;  /*开始动画后无限循环，用来控制rotate*/
+  z-index: -1;
+  height: 150vh;
+  width: 150vh;
+  background-image: url('@/static/image/result/spining.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  transition: 0.3s;
+  animation: rotate 10s linear infinite;  /*开始动画后无限循环，用来控制rotate*/
 }
 
 </style>

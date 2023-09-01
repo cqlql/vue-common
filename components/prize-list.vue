@@ -1,30 +1,30 @@
 
 
 <template>
-  <div class="CardList small" >
-    <div v-for="i of 4" class="CardItem">
+  <div class="CardList" :class="{small,one}">
+    <div v-for="item of list" class="CardItem" >
       <div class="box">
         <div class="tag">
           <image
             class="tag-img"
-            src="/pagesA/static/tag-1.png"
+            :src="item.qualityImg"
           ></image>
           <div class="text">
-            普通
+            {{item.qualityName}}
           </div>
         </div>
         <div class="img-wrap">
-          <image mode="aspectFit" class="img" src="https://dxxshoptest.oss-cn-shenzhen.aliyuncs.com/backManager/bd08d463-6610-4066-a9cc-d763e522094a.png"></image>
+          <image mode="aspectFit" class="img" :src="item.img"></image>
         </div>
         <div class="name">
-          小米充电器头30W快充10s红米k40k30i闪充33w瓦note9K20cc9pro手机18w头6正品7数据线科瑞信原装27w8typec
+          {{ item.nae }}
         </div>
       </div>
       <div class="bott">
         <div class="label">一键分解</div>
         <div class="val">
           <image class="ico" src="/static/image/result/icon-qingtuan.png"></image>
-          1811.9
+          {{ item.price }}
         </div>
       </div>
     </div>
@@ -34,12 +34,38 @@
 <script>
 export default {
   components: {},
-  props: {},
-  data() {
-    return {};
+  props: {
+    list:Array
   },
-  computed: {},
-  watch: {},
+  data() {
+    return {
+      small:false,
+      one:false,
+      // list:[
+      //   {
+      //     qualityName:'普通',
+      //     qualityImg: '/pagesA/static/tag-1.png',
+      //     img: 'https://dxxshoptest.oss-cn-shenzhen.aliyuncs.com/backManager/bd08d463-6610-4066-a9cc-d763e522094a.png',
+      //     name:'小米充电器头30W快充10s红米k40k30i闪充33w瓦note9K20cc9pro手机18w头6正品7数据线科瑞信原装27w8typec',
+      //     price:'1183.3'
+      //   }
+      // ]
+    };
+  },
+  watch: {
+    list :{
+      handler () {
+        if (this.list.length===1) {
+          this.one=true
+        } else if (this.list.length>9) {
+          this.small = true
+        } else {
+          this.one=this.small=false
+        }
+      },
+      immediate: true
+    }
+  },
   methods: {},
 };
 </script>
@@ -87,7 +113,28 @@ $borderWidth:1px;
   justify-content: center;
 }
 
-$smallScale:0.7;
+$smallScale:0.75;
+$oneScale:1.2;
+.CardList.one {
+  --CardItemWidth:#{$CardItemWidth*$oneScale};
+  --CardItemHeight:#{$CardItemHeight*$oneScale};
+  --CardIListGap:#{$CardIListGap*$oneScale};
+  
+  --BottomMarginTop:#{$BottomMarginTop*$oneScale};
+  --CardItemBorderRadius:#{$CardItemBorderRadius*$oneScale};
+  --ImgWidth:#{$ImgWidth*$oneScale};
+  --ImgHeight:#{$ImgHeight*$oneScale};
+  --ImgMarginTop:#{$ImgMarginTop*$oneScale};
+  --NameTop:#{$NameTop*$oneScale};
+  --NameLeft:#{$NameLeft*$oneScale};
+
+  --TagWidth:#{$TagWidth*$oneScale};
+  --TagHeight:#{$TagHeight*$oneScale};
+  --TagLeft:#{$TagLeft*$oneScale};
+  --TagTop:#{$TagTop*$oneScale};
+
+  --borderWidth:#{$borderWidth*$smallScale};
+}
 .CardList.small {
   --CardItemWidth:#{$CardItemWidth*$smallScale};
   --CardItemHeight:#{$CardItemHeight*$smallScale};
@@ -124,6 +171,7 @@ $smallScale:0.7;
 
   .tag {
     position: absolute;
+    z-index: 1;
     width: var(--TagWidth);
     height: var(--TagHeight);
     left: var(--TagLeft);
@@ -179,6 +227,12 @@ $smallScale:0.7;
     }
     .val{
       font-weight: 700;
+    }
+    .ico {
+      width: 20rpx;
+      height: 20rpx;
+      display: inline-block;
+      margin-right: 4rpx;
     }
   }
 }
