@@ -17,7 +17,7 @@
           <image mode="aspectFit" class="img" :src="item.img"></image>
         </view>
         <view class="name">
-          {{item.recycled}}{{ item.name }}
+          {{ item.name }}
         </view>
       </view>
       
