@@ -1,34 +1,38 @@
 
 
 <template>
-  <div class="CardList" :class="{small,one}">
-    <div v-for="item of list" class="CardItem" >
-      <div class="box">
-        <div class="tag">
+  <view class="CardList" :class="{small,one}">
+    <view v-for="item of list" :key="item.goodId" class="CardItem" >
+      <view class="box">
+        <view class="tag">
           <image
             class="tag-img"
             :src="item.qualityImg"
           ></image>
-          <div class="text">
+          <view class="text">
             {{item.qualityName}}
-          </div>
-        </div>
-        <div class="img-wrap">
+          </view>
+        </view>
+        <view class="img-wrap">
           <image mode="aspectFit" class="img" :src="item.img"></image>
-        </div>
-        <div class="name">
-          {{ item.nae }}
-        </div>
-      </div>
-      <div class="bott">
-        <div class="label">一键分解</div>
-        <div class="val">
+        </view>
+        <view class="name">
+          {{item.recycled}}{{ item.name }}
+        </view>
+      </view>
+      
+      <view v-if="item.recycled" class="bott recycled">
+        <view class="label">已分解</view>
+      </view>
+      <view v-else class="bott" @click="recovery(item)">
+        <view class="label">一键分解</view>
+        <view class="val">
           <image class="ico" src="/static/image/result/icon-qingtuan.png"></image>
           {{ item.price }}
-        </div>
-      </div>
-    </div>
-  </div>
+        </view>
+      </view>
+    </view>
+  </view>
 
 </template>
 <script>
@@ -66,27 +70,47 @@ export default {
       immediate: true
     }
   },
-  methods: {},
+  methods: {
+    recovery(item){
+      uni.showModal({
+        cancelText: this.$t('取消'),
+        confirmText: this.$t('确认'),
+        title: this.$t('一键回收'),
+        content: this.$t('是否确认一键回收'),
+        success: res => {
+          if(res.confirm){
+            this.$api.exchange({record_ids:item.id}).then(res=>{
+              if (res.code === 1) {
+                uni.showToast({title:res.msg});
+                item.recycled = true;
+              }
+            })
+          }
+        }
+      })
+    }
+  },
 };
 </script>
 <style lang="scss" scoped>
-$CardItemWidth:115px;
-$CardItemHeight:135px;
-$CardIListGap:10px;
+$CardItemWidth:115rpx * 2;
+$CardItemHeight:135rpx * 2;
+$CardIListGap:10rpx * 2;
 
-$BottomMarginTop:8px;
-$CardItemBorderRadius:5px;
-$ImgWidth:80px;
-$ImgHeight:86px;
-$ImgMarginTop:10px;
-$NameTop:10px;
-$NameLeft:10px;
+$BottomHeight:34rpx * 2;
+$BottomMarginTop:8rpx * 2;
+$CardItemBorderRadius:5rpx * 2;
+$ImgWidth:80rpx * 2;
+$ImgHeight:86rpx * 2;
+$ImgMarginTop:10rpx * 2;
+$NameTop:10rpx * 2;
+$NameLeft:10rpx * 2;
 
-$TagWidth:48px;
-$TagHeight:48px;
-$TagLeft:-2px;
-$TagTop:-2px;
-$borderWidth:1px;
+$TagWidth:48rpx * 2;
+$TagHeight:48rpx * 2;
+$TagLeft:-2rpx * 2;
+$TagTop:-2rpx * 2;
+$borderWidth:1rpx * 2;
 .CardList {
   --CardItemWidth:#{$CardItemWidth};
   --CardItemHeight:#{$CardItemHeight};
@@ -191,11 +215,7 @@ $oneScale:1.2;
       width: 100%;
       height: 100%;
     }
-
-    &.normal{}
-    &.rare{}
-    &.supreme{}
-    &.legend{}
+    
   }
 
   .img-wrap {
@@ -222,6 +242,7 @@ $oneScale:1.2;
     margin-top: var(--BottomMarginTop);
     border: var(--borderWidth) solid #000;
     background-color: #fff;
+    height: 68rpx;
     .label{
       font-weight: 700;
     }
@@ -233,6 +254,10 @@ $oneScale:1.2;
       height: 20rpx;
       display: inline-block;
       margin-right: 4rpx;
+    }
+
+    &.recycled{
+      line-height: 68rpx;
     }
   }
 }

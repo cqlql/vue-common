@@ -81,6 +81,7 @@ export default {
     return {
       //奖品列表
       prizedata: {},
+      prizeList: [],
       // 盲盒中商品列表
       goodsList:[],
       //特效
@@ -115,19 +116,25 @@ export default {
     tagImg(){
       return this.tagImgFun(this.currPrizedata)
     },
-    prizeList () {
-      return this.prizedata.prizeInfo?.map((item)=>{
-        return {
-          qualityName:this.tagTextFun(item),
-          qualityImg: this.tagImgFun(item),
-          img: item.image,
-          name:item.goods_name,
-          price:item.price
-        }
-      })||[]
+  },
+  watch: {
+    'prizedata.prizeInfo':{
+      handler(){
+       this.prizeList = this.prizedata.prizeInfo?.map((item)=>{
+          return {
+            qualityName:this.tagTextFun(item),
+            qualityImg: this.tagImgFun(item),
+            img: item.image,
+            name:item.goods_name,
+            price:item.price,
+            recycled:false,
+            id:item.prize_id
+          }
+        })||[]
+      },
+      immediate:true
     }
   },
-  watch: {},
   methods: {
     animationEnd () {
       this.explode= true
@@ -224,7 +231,7 @@ export default {
 .onebox{height: 372rpx;width: 352rpx;border-radius:26rpx;background-color: #fff;}
 .twobox{height: 186rpx;width: 176rpx;border-radius:13rpx;background-color: #fff;}
 .result-popup-main{
-	z-index: 9999;
+	z-index: 999;
 	.result-popup{
 		// background-image: url('@/static/image/result/bg.jpg');
 		position: fixed;
