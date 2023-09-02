@@ -11,31 +11,6 @@
           </view -->
           <view v-if="prizeList.length===1" class="spining"></view>
           <prize-list :list="prizeList"></prize-list>
-          <div v-if="false">
-            <!-- 1开 -->
-            <view :class="['prize_shop', 'center', 'onebox', 'tag-' + tag, scale && 'prize_shop_scale']" v-if="mode == 0">
-              <view class="spining"></view>
-              <view class="left-top-tag">
-                <image class="tag-img" :src="tagImg" mode="aspectFit"></image>
-                <text class="tag-text">{{tagText}}</text>
-              </view>
-              <image class="one" v-if="prizedata&&prizedata.prizeInfo" :src="prizedata.prizeInfo[0].image" mode="widthFix"></image>
-              <text class="colorblack" v-if="prizedata&&prizedata.prizeInfo">{{ prizedata.prizeInfo[0].goods_name }}</text>
-            </view>
-            <!-- 5开or10开 -->
-            <view class="prize_ul" :class="`prize_ul-${mode}`" v-else>
-              <!-- <scroll-view scroll-x="true" class="scroll-view"> -->
-                <view :class="['prize_ul_li', 'twobox', 'flex', 'tag-' + tagFun(item)]" v-for="(item,index) in prizedata.prizeInfo" :key="index">
-                  <view class="left-top-tag">
-                    <image class="tag-img" :src="tagImgFun(item)" mode="aspectFit"></image>
-                    <text class="tag-text">{{tagTextFun(item)}}</text>
-                  </view>
-                  <image class="two" :src="item.image" mode="widthFix"></image>
-                  <text class="a">{{ item.goods_name }}</text>
-                </view>
-              <!-- </scroll-view> -->
-            </view>
-          </div>
           <view class="prize_footer-v2" v-if="type == 0">
             <!-- 立即收下 -->
             <view class="btn btn-1" @click="$emit('accept')">{{$t('立即收下')}}</view>
@@ -211,7 +186,7 @@ export default {
       }
     },
     recycle(){
-      this.$refs.prize.close()
+      // this.$refs.prize.close()
       uni.showModal({
         cancelText: this.$t('取消'),
         confirmText: this.$t('确认'),
@@ -220,6 +195,9 @@ export default {
         success: res => {
           if(res.confirm){
             this.$emit('recycle', this.prizedata)
+            this.prizeList.forEach(price =>{
+              price.recycled=true
+            })
           }
         }
       })
