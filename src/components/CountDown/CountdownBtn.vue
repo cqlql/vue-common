@@ -41,5 +41,7 @@ async function getCode() {
 }
 </script>
 <template>
-  <button class="get-code-btn" @click="getCode" :disabled="isBeginning">{{ codeBtnText }}</button>
+  <AButton class="get-code-btn" @click="getCode" :loading="loading" :disabled="isBeginning">{{
+    codeBtnText
+  }}</AButton>
 </template>
