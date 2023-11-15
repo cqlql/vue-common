@@ -109,6 +109,18 @@ const demos = [
       title: 'VideoAdd 视频增加',
     },
     component: () => import('@/views/VideoAdd/index.vue'),
+  },{
+    path: '/CountDown',
+    meta: {
+      title: 'CountDown 倒计时',
+    },
+    component: () => import('@/components/CountDown/CountDown.vue'),
+  },{
+    path: '/TimerDemo',
+    meta: {
+      title: 'TimerDemo',
+    },
+    component: () => import('@/utils/timer/TimerDemo.vue'),
   },
   {
     path: '/Search',
