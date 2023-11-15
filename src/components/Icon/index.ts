@@ -1,7 +1,7 @@
-import IconMain from './src/IconMain.vue'
+import Icon from './src/IconMain.vue'
 import SvgIcon from './src/SvgIcon.vue'
 // import IconPicker from './src/IconPicker.vue';
 
-export { IconMain, /* IconPicker, */ SvgIcon }
+export { Icon, /* IconPicker, */ SvgIcon }
 
-export default IconMain
+export default Icon

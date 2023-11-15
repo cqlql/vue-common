@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import showKeyWrod from '@/utils/keyword-highlight'
+import showKeyWrod from '@/utils/show-keyword'
 export default {
   data() {
     return {

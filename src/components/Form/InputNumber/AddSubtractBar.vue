@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import Icon from '@/components/Icon/src/IconMain.vue'
+import Icon from '@/components/Icon/src/Icon.vue'
 const emit = defineEmits<{
   (e: 'minus'): void
   (e: 'add'): void

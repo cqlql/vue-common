@@ -12,14 +12,14 @@
 </template>
 
 <script>
-import { createThrottle } from '../throttle'
+import { throttleInit } from '../throttle'
 import TimeRecord from './TimeRecord'
 export default {
   data () {
     return {
       timeRecord: new TimeRecord(),
       values: [],
-      throttle: createThrottle()
+      throttle: throttleInit()
     }
   },
   methods: {

@@ -30,3 +30,4 @@ function start() {
   timer.start()
 }
 </script>
+<style lang="scss"></style>

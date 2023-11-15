@@ -1,39 +1,29 @@
 import { ref } from 'vue'
 import Search from './search'
 
-export default function useSearch({
-  list,
-  getItemText,
-  buildItem,
-}: {
-  list: any[]
-  getItemText: (item: any) => string
-  buildItem: (p: { keyWrodText: string; rawItem: any }) => any
-}) {
+export default function useSearch(
+  searchList: string[],
+  debounceTime: number = 300,
+) {
   const s = new Search()
   const keyword = ref('')
 
-  const resultList = ref<any[]>([])
-  const isEmpty = ref(false)
+  const resultList = ref<string[] | null>([])
 
   function search() {
-    s.to({
-      keyword: keyword.value,
-      list,
-      getItemText,
-      buildItem,
-      cb(result: any) {
+    s.to(
+      keyword.value,
+      searchList,
+      (result) => {
         resultList.value = result
-        isEmpty.value = result.length === 0
       },
-      time: 300,
-    })
+      debounceTime,
+    )
   }
 
   return {
     keyword,
     resultList,
     search,
-    isEmpty,
   }
 }

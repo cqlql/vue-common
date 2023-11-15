@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import Icon from '@/components/Icon/src/IconMain.vue'
+import Icon from '@/components/Icon/src/Icon.vue'
 import SliderOnly from './SliderOnly.vue'
 import useSliderFast from './hooks/useSliderFast'
 import useSwipex from './hooks/useSwipex'

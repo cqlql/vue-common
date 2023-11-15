@@ -17,13 +17,6 @@ const demos = [
     },
     component: () => import('@/views/Animation/AnimationView.vue'),
   },
-  {
-    path: '/PreventBack',
-    meta: {
-      title: '返回阻止',
-    },
-    component: () => import('@/views/PreventBack/PreventBack.vue'),
-  },
   // {
   //   path: '/Skeleton',
   //   component: import('@/components/Skeleton/SkeletonDemo.vue'),
@@ -109,32 +102,6 @@ const demos = [
       title: 'VideoAdd 视频增加',
     },
     component: () => import('@/views/VideoAdd/index.vue'),
-  },{
-    path: '/CountDown',
-    meta: {
-      title: 'CountDown 倒计时',
-    },
-    component: () => import('@/components/CountDown/CountDown.vue'),
-  },{
-    path: '/TimerDemo',
-    meta: {
-      title: 'TimerDemo',
-    },
-    component: () => import('@/utils/timer/TimerDemo.vue'),
-  },
-  {
-    path: '/Search',
-    meta: {
-      title: 'Search 搜索',
-    },
-    component: () => import('@/utils/search/demo/SearchDemo.vue'),
-  },
-  {
-    path: '/UseSearchDemo',
-    meta: {
-      title: 'UseSearch 搜索',
-    },
-    component: () => import('@/utils/search/demo/UseSearchDemo.vue'),
   },
 ]
 
