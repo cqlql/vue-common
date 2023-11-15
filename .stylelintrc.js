@@ -4,26 +4,45 @@ module.exports = {
   ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts'],
   overrides: [
     {
-      files: ['**/*.vue'],
-      extends: ['stylelint-config-html'],
+      files: ['*.vue', '**/*.vue', '*.html', '**/*.html'],
+      extends: ['stylelint-config-recommended'],
     },
   ],
   rules: {
-    'color-no-invalid-hex': true, // 禁止无效的十六进制颜色。
-
-    'font-family-no-duplicate-names': true, // 不允许重复的字体系列名称。
-    // "font-family-no-missing-generic-family-keyword": true, // 不允许在字体名称列表中缺少通用。
+    // 禁止无效的十六进制颜色。
+    'color-no-invalid-hex': true,
+    // 不允许重复的字体系列名称。
+    'font-family-no-duplicate-names': true,
+    // 禁止未知单位。
+    'unit-no-unknown': true,
+    // 禁止未知属性
+    'property-no-unknown': true,
+    // 禁止@import样式表中的重复规则
+    'no-duplicate-at-import-rules': true,
+    // 不允许重复的选择器
+    'no-duplicate-selectors': true,
+    // 禁止空的 <style>
+    'no-empty-source': true,
+    // 不允许多余的分号。
+    'no-extra-semicolons': true,
+    // 空格规则
+    'at-rule-name-space-after': 'always-single-line',
+    'at-rule-semicolon-space-before': 'never',
+    //...CSS不支持的双斜线注释（）。
+    // "no-invalid-double-slash-comments": true,
+    // 禁止空的选择器
+    // "block-no-empty": true,
+    // 不允许在字体名称列表中缺少通用。
+    // "font-family-no-missing-generic-family-keyword": true,
 
     'function-calc-no-unspaced-operator': true,
     'function-linear-gradient-no-nonstandard-direction': true,
-
     'string-no-newline': true,
-
-    'unit-no-unknown': true, // 禁止未知单位。
-
-    'property-no-unknown': true, // 禁止未知属性
-
     'keyframe-declaration-no-important': true,
+    'declaration-block-no-shorthand-property-overrides': true,
+    'media-feature-name-no-unknown': true,
+    'comment-no-empty': true,
+    // "no-descending-specificity": true,
 
     'declaration-block-no-duplicate-properties': [
       true,
@@ -31,13 +50,10 @@ module.exports = {
         ignore: ['consecutive-duplicates-with-different-values'],
       },
     ],
-    'declaration-block-no-shorthand-property-overrides': true,
-
-    // "block-no-empty": true, // 禁止空的选择器
     'selector-pseudo-class-no-unknown': [
       true,
       {
-        ignorePseudoClasses: ['global', 'deep'],
+        ignorePseudoClasses: ['global', 'deep', 'slotted'],
       },
     ],
     'selector-pseudo-element-no-unknown': [
@@ -53,8 +69,6 @@ module.exports = {
       },
     ],
 
-    'media-feature-name-no-unknown': true,
-
     'at-rule-no-unknown': [
       true,
       {
@@ -62,25 +76,12 @@ module.exports = {
           // 允许 scss
           'include',
           'mixin',
-          'use',
+          'each',
         ],
       },
     ],
 
-    'comment-no-empty': true,
-
-    // "no-descending-specificity": true,
-    'no-duplicate-at-import-rules': true, // 禁止@import样式表中的重复规则
-    'no-duplicate-selectors': true, // 不允许重复的选择器
-    'no-empty-source': true, // 禁止空的 <style>
-    'no-extra-semicolons': true, // 不允许多余的分号。
-    // "no-invalid-double-slash-comments": true, //...CSS不支持的双斜线注释（）。
-
-    // 空格规则
-    'at-rule-name-space-after': 'always-single-line',
-    'at-rule-semicolon-space-before': 'never',
-
-    // 来自 stylelint-config-standard
+    // ----- 以下来自 stylelint-config-standard -----
     // https://github.com/stylelint/stylelint-config-standard/blob/master/index.js
     'at-rule-empty-line-before': [
       'always',
@@ -125,8 +126,7 @@ module.exports = {
     // 交给 prittier
     // 'declaration-block-trailing-semicolon': 'always',
 
-    // 'declaration-colon-newline-after': 'always-multi-line',
-    'declaration-colon-space-after': 'always-single-line',
+    'declaration-colon-newline-after': 'always-multi-line',
     'declaration-colon-space-before': 'never',
     'declaration-empty-line-before': [
       'always',
@@ -183,8 +183,9 @@ module.exports = {
     'selector-type-case': 'lower',
     'unit-case': 'lower',
     'value-keyword-case': 'lower',
+    'value-list-comma-newline-after': 'always-multi-line',
     'value-list-comma-space-after': 'always-single-line',
     'value-list-comma-space-before': 'never',
     'value-list-max-empty-lines': 0,
   },
-}
+};

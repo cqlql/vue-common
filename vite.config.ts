@@ -1,34 +1,18 @@
-/// <reference types="vitest" />
-import type { UserConfig, ConfigEnv } from 'vite'
-import { createVitePlugins } from './build/vite/plugin'
-import { resolve } from 'path'
+import { fileURLToPath, URL } from 'node:url'
 
-function pathResolve(dir: string) {
-  return resolve(process.cwd(), '.', dir)
-}
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
-export default ({ command, mode }: ConfigEnv): UserConfig => {
-  const isBuild = command === 'build'
-
-  return {
-    base: '',
-    resolve: {
-      alias: {
-        '@/': pathResolve('src') + '/', // 设置 @ 指向 src
-      },
-    },
-    plugins: createVitePlugins(isBuild),
-    server: {
-      // Listening on all local IPs
-      host: true,
-    },
-    build: {
-      target: 'es2015',
-      cssTarget: 'chrome70',
-      chunkSizeWarningLimit: 2000,
-    },
-    test: {
-      include: ['tests/unit/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-    },
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    vue(),
+    vueJsx(),
+  ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
   }
-}
+})
