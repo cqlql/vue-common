@@ -30,3 +30,4 @@ function start() {
   timer.start()
 }
 </script>
+./Timer

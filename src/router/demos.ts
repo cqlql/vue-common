@@ -25,6 +25,14 @@ const demos = [
   // //   component: import('@/components/CountDown/CountDown.vue'),
   // // },
   {
+    path: 'CountdownBtn',
+    name: 'CountdownBtn',
+    meta: {
+      title: 'CountdownBtn - 倒计时按钮',
+    },
+    component: () => import('@/components/CountDown/demos/CountdownBtnDemo.vue'),
+  },
+  {
     path: 'TurntableView',
     name: 'TurntableView',
     meta: {
