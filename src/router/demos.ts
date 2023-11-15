@@ -1,5 +1,3 @@
-import { h } from 'vue';
-import DemosNav from '@/views/comp/DemosNav.vue';
 import type { RouteRecordRaw } from 'vue-router';
 import LayoutIndexVue from '@/layout/LayoutIndex.vue';
 
@@ -28,6 +26,7 @@ const demos = [
   // // },
   {
     path: 'TurntableView',
+    name: 'TurntableView',
     meta: {
       title: 'TurntableView - 转盘抽奖',
     },
@@ -120,23 +119,12 @@ const demos = [
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/demos',
+    path: '/',
     component: LayoutIndexVue,
     name: 'demos',
-    meta: { title: 'demos', icon: 'el-icon-s-claim', orderNo: 999 },
+    meta: { title: 'demos' },
     children: demos,
   },
 ];
-
-routes.push({
-  path: '/:pathMatch(.*)',
-  component: {
-    render() {
-      return h(DemosNav, {
-        list: demos,
-      });
-    },
-  },
-});
 
 export default routes;

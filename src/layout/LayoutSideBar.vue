@@ -1,13 +1,15 @@
 <script lang="ts" setup>
-// eslint-disable-next-line prettier/prettier
-console.log('组件 LayoutSideBar',String.raw`file:///D:\_work\vue-common\src\layout\LayoutSideBar.vue`.replace(/\\/g,'/'))
+import demos from '@/router/demos';
+import DemosNav from '@/views/comp/DemosNav.vue';
 </script>
 <template>
-  <div class="LayoutSideBar"> LayoutSideBar </div>
+  <div class="LayoutSideBar">
+    <DemosNav :list="demos[0]?.children" />
+  </div>
 </template>
 
-<style lang="scss" scoped>
+<!-- <style lang="scss" scoped>
 .LayoutSideBar {
   //
 }
-</style>
+</style> -->

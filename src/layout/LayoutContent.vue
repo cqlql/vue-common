@@ -7,9 +7,9 @@ console.log('组件 LayoutContent',String.raw`file:///D:\_work\vue-common\src\la
     <router-view />
   </div>
 </template>
-
+<!-- 
 <style lang="scss" scoped>
 .LayoutContent {
   //
 }
-</style>
+</style> -->
