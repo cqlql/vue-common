@@ -40,6 +40,14 @@ const demos = [
     },
     component: () => import('@/views/Turntable/TurntableView.vue'),
   },
+  {
+    path: 'TabButtonsDemo',
+    name: 'TabButtonsDemo',
+    meta: {
+      title: 'TabButtonsDemo - 选项卡',
+    },
+    component: () => import('@/components/TabButtons/TabButtonsDemo.vue'),
+  },
   // {
   //   path: '/DigitalRandomAnimation',
   //   meta: {

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
-import TabButtons from './TabButtons.vue'
-const tabValue = ref('all')
+import { ref } from 'vue';
+import TabButtons from './TabButtons.vue';
+const tabValue = ref('all');
 const tabList = ref([
   {
     label: '首页',
@@ -19,38 +19,30 @@ const tabList = ref([
     label: '卡',
     value: 'card',
   },
-])
+]);
 
-const tabValue2 = ref('0')
-let list = []
+const tabValue2 = ref('0');
+const list = [];
 for (let index = 0; index < 30; index++) {
   const element = {
     label: 'Tab' + String(index),
     value: String(index),
-  }
-  list.push(element)
+  };
+  list.push(element);
 }
-const tabList2 = ref(list)
+const tabList2 = ref(list);
 </script>
 <template>
   <div>
-    <TabButtons v-model="tabValue" :list="tabList"></TabButtons>
+    <TabButtons v-model="tabValue" :list="tabList" />
 
     <div class="line"></div>
 
-    <TabButtons
-      class="scroll"
-      v-model="tabValue2"
-      :list="tabList2"
-    ></TabButtons>
+    <TabButtons class="scroll" v-model="tabValue2" :list="tabList2" />
 
     <div class="line"></div>
 
-    <TabButtons
-      class="vertical"
-      v-model="tabValue"
-      :list="tabList"
-    ></TabButtons>
+    <TabButtons class="vertical" v-model="tabValue" :list="tabList" />
   </div>
 </template>
 

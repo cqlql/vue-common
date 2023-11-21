@@ -1,25 +1,25 @@
 <script lang="ts" setup>
 type ItemType = {
-  label: string
-  value: string
-}
+  label: string;
+  value: string;
+};
 const props = defineProps<{
-  modelValue?: string
-  list: ItemType[]
-}>()
+  modelValue?: string;
+  list: ItemType[];
+}>();
 
 const emits = defineEmits<{
-  (e: 'update:modelValue', v: string): void
-  (e: 'change', v: string): void
-}>()
+  (e: 'update:modelValue', v: string): void;
+  (e: 'change', v: string): void;
+}>();
 
 function onSelect(index: number) {
-  let { list } = props
-  let pre = props.modelValue
-  let value = list[index].value
-  emits('update:modelValue', value)
+  const { list } = props;
+  const pre = props.modelValue;
+  const value = list[index].value;
+  emits('update:modelValue', value);
   if (pre !== value) {
-    emits('change', value)
+    emits('change', value);
   }
 }
 </script>
