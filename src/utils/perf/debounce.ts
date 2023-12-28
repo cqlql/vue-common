@@ -61,6 +61,7 @@ export function debounceCreate(params?: Options | number) {
 let debounceId: ReturnType<typeof setTimeout>;
 /**
  * 单例防抖
+ * 可用于输入事件，因为一次只能输入一个控件，不会发生冲突
  * @param cb
  * @param time
  */
