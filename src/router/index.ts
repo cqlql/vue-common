@@ -21,7 +21,7 @@ const routes: RouteRecordRaw[] = [
 ];
 
 export const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   routes: routes.concat(demos),
 });

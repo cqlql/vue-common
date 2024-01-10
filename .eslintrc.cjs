@@ -4,11 +4,14 @@ require('@rushstack/eslint-patch/modern-module-resolution');
 module.exports = {
   root: true,
   extends: [
-    'eslint:recommended',
     'plugin:vue/vue3-recommended',
+    'eslint:recommended',
     '@vue/eslint-config-typescript',
     'plugin:prettier/recommended',
   ],
+  // parserOptions: {
+  //   ecmaVersion: 'latest',
+  // },
   rules: {
     // 与 @typescript-eslint/no-unused-vars 重复
     'no-unused-vars': 'off',
