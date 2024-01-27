@@ -9,16 +9,16 @@
  * @param {Element, Array} el 不触发关闭的元素。可以是数组指定多个元素，非包含关系时有用
  * @param {Function} outside 点外面触发
  */
-export default function outsideClose ({ el: els, outside }) {
+export default function outsideClose({ el: els, outside }) {
   if (!els.forEach) {
     els = [els]
   }
   let isOutside = true
 
-  function inside () {
+  function inside() {
     isOutside = false
   }
-  function clickWindow () {
+  function clickWindow() {
     setTimeout(function () {
       if (isOutside) {
         outside()
@@ -27,7 +27,7 @@ export default function outsideClose ({ el: els, outside }) {
     }, 1)
   }
 
-  els.forEach(el => {
+  els.forEach((el) => {
     el.addEventListener('click', inside)
   })
 
@@ -46,12 +46,12 @@ export default function outsideClose ({ el: els, outside }) {
  * 提示：useCapture 特性，跟元素层级有关系,跟注册先后没关系，越顶层越先触发。比如body和子元素div，useCapture 为 true 情况，body先触发
  */
 export class CloseOutside {
-  constructor (close) {
+  constructor(close) {
     this.close = close
     this.init()
   }
 
-  init () {
+  init() {
     this.windowClick = () => {
       setTimeout(() => {
         if (this.isInside) {
@@ -64,11 +64,11 @@ export class CloseOutside {
     window.addEventListener('click', this.windowClick, true)
   }
 
-  clickInside () {
+  clickInside() {
     this.isInside = true
   }
 
-  destroy () {
+  destroy() {
     window.removeEventListener('click', this.windowClick, true)
   }
 }
