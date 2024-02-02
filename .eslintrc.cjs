@@ -1,5 +1,5 @@
 /* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution');
+require('@rushstack/eslint-patch/modern-module-resolution')
 
 module.exports = {
   root: true,
@@ -7,11 +7,17 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'eslint:recommended',
     '@vue/eslint-config-typescript',
-    'plugin:prettier/recommended',
+    'plugin:prettier/recommended'
   ],
-  // parserOptions: {
-  //   ecmaVersion: 'latest',
-  // },
+  overrides: [
+    {
+      files: ['cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}', 'cypress/support/**/*.{js,ts,jsx,tsx}'],
+      extends: ['plugin:cypress/recommended']
+    }
+  ],
+  parserOptions: {
+    ecmaVersion: 'latest'
+  },
   rules: {
     // 与 @typescript-eslint/no-unused-vars 重复
     'no-unused-vars': 'off',
@@ -36,8 +42,8 @@ module.exports = {
       'error',
       {
         argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-      },
+        varsIgnorePattern: '^_'
+      }
     ],
 
     'space-before-function-paren': 'off',
@@ -57,22 +63,22 @@ module.exports = {
         html: {
           void: 'always',
           normal: 'never',
-          component: 'always',
+          component: 'always'
         },
         svg: 'always',
-        math: 'always',
-      },
+        math: 'always'
+      }
     ],
     '@typescript-eslint/consistent-type-imports': [
       'error',
       {
         prefer: 'type-imports',
-        disallowTypeAnnotations: false,
-      },
+        disallowTypeAnnotations: false
+      }
     ],
     'vue/multi-word-component-names': 'off',
     'vue/no-mutating-props': 'off',
     'vue/v-on-event-hyphenation': 'off',
-    'vue/require-prop-types': 'off',
-  },
-};
+    'vue/require-prop-types': 'off'
+  }
+}
