@@ -31,4 +31,13 @@ describe('地址信息提取 ', () => {
     expect(extractPhoneNumbers('15977779999湖南省常德市桃源县陬市镇3000号')).toBe('15977779999')
     expect(extractPhoneNumbers('湖南省15977779999常德市桃源县陬市镇3000号')).toBeUndefined()
   })
+
+  test('省市区提取', () => {
+    // 从文本中提取省市区
+    function extractChineseRegion(text: string) {
+      const regionRegex = /[\u4e00-\u9fa5]+?(?:省|市|区|县|乡|镇|村|街道)/g
+      return text.match(regionRegex)
+    }
+    expect(extractChineseRegion('北京市朝阳区')).toEqual(['北京市', '朝阳区'])
+  })
 })
