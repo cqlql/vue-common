@@ -1,7 +1,16 @@
-import type { RouteRecordRaw } from 'vue-router';
-import LayoutIndexVue from '@/layout/LayoutIndex.vue';
+import type { RouteRecordRaw } from 'vue-router'
+import LayoutIndexVue from '@/layout/LayoutIndex.vue'
+import DemoIndex from '@/views/DemoIndex.vue'
 
 const demos = [
+  {
+    path: '/all',
+    name: 'DemoIndex',
+    meta: {
+      title: 'DemoIndex'
+    },
+    component: DemoIndex
+  },
   // {
   //   path: '/all',
   //   meta: {
@@ -28,26 +37,26 @@ const demos = [
     path: 'CountdownBtn',
     name: 'CountdownBtn',
     meta: {
-      title: 'CountdownBtn - 倒计时按钮',
+      title: 'CountdownBtn - 倒计时按钮'
     },
-    component: () => import('@/components/CountDown/demos/CountdownBtnDemo.vue'),
+    component: () => import('@/components/CountDown/demos/CountdownBtnDemo.vue')
   },
   {
     path: 'TurntableView',
     name: 'TurntableView',
     meta: {
-      title: 'TurntableView - 转盘抽奖',
+      title: 'TurntableView - 转盘抽奖'
     },
-    component: () => import('@/views/Turntable/TurntableView.vue'),
+    component: () => import('@/views/Turntable/TurntableView.vue')
   },
   {
     path: 'TabButtonsDemo',
     name: 'TabButtonsDemo',
     meta: {
-      title: 'TabButtonsDemo - 选项卡',
+      title: 'TabButtonsDemo - 选项卡'
     },
-    component: () => import('@/components/TabButtons/TabButtonsDemo.vue'),
-  },
+    component: () => import('@/components/TabButtons/TabButtonsDemo.vue')
+  }
   // {
   //   path: '/DigitalRandomAnimation',
   //   meta: {
@@ -131,7 +140,7 @@ const demos = [
   //   },
   //   component: () => import('@/utils/timer/TimerDemo.vue'),
   // },
-];
+]
 
 const routes: RouteRecordRaw[] = [
   {
@@ -139,8 +148,8 @@ const routes: RouteRecordRaw[] = [
     component: LayoutIndexVue,
     name: 'demos',
     meta: { title: 'demos' },
-    children: demos,
-  },
-];
+    children: demos
+  }
+]
 
-export default routes;
+export default routes
