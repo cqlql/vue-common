@@ -2,20 +2,52 @@
 const val = defineModel<boolean>()
 </script>
 <template>
-  <label class="label-switch">
+  <label class="label-switch mini">
     <input type="checkbox" v-model="val" />
     <div class="checkbox"></div>
   </label>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .label-switch {
+  --width: 52px;
+  --height: 32px;
+  --border-radius: 16px;
+  --before-left: 2px;
+  --before-top: 2px;
+  --before-width: 48px;
+  --before-height: 28px;
+  --after-left: 2px;
+  --after-top: 2px;
+  --after-width: 28px;
+  --after-height: 28px;
+  --after-radius: 28px;
+  --after-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  --translateX: 22px;
+
+  &.mini {
+    --width: calc(52px * 0.75);
+    --height: calc(32px * 0.75);
+    --border-radius: calc(16px * 0.75);
+    // --before-left: calc(2px * 0.75);
+    // --before-top: calc(2px * 0.75);
+    --before-width: calc(48px * 0.75);
+    --before-height: calc(28px * 0.75);
+    // --after-left: calc(2px * 0.75);
+    // --after-top: calc(2px * 0.75);
+    --after-box-shadow: 0 calc(2px * 0.75) calc(5px * 0.75) rgba(0, 0, 0, 0.4);
+    --after-width: calc(28px * 0.75);
+    --after-height: calc(28px * 0.75);
+    --after-radius: calc(28px * 0.75);
+    --translateX: calc(22px * 0.75);
+  }
+
+  width: var(--width);
+  border-radius: var(--border-radius);
+  height: var(--height);
   display: inline-block;
   vertical-align: middle;
-  width: 52px;
-  border-radius: 16px;
   box-sizing: border-box;
-  height: 32px;
   position: relative;
   cursor: pointer;
   -ms-flex-item-align: center;
@@ -24,10 +56,10 @@ const val = defineModel<boolean>()
 }
 
 .label-switch .checkbox {
-  width: 52px;
-  border-radius: 16px;
+  width: var(--width);
+  border-radius: var(--border-radius);
+  height: var(--height);
   box-sizing: border-box;
-  height: 32px;
   background: #e5e5e5;
   z-index: 0;
   margin: 0;
@@ -43,12 +75,12 @@ const val = defineModel<boolean>()
 .label-switch .checkbox::before {
   content: ' ';
   position: absolute;
-  left: 2px;
-  top: 2px;
-  width: 48px;
-  border-radius: 16px;
+  left: var(--before-left);
+  top: var(--before-top);
+  width: var(--before-width);
+  border-radius: var(--border-radius);
+  height: var(--before-height);
   box-sizing: border-box;
-  height: 28px;
   background: #fff;
   z-index: 1;
   transition-duration: 300ms;
@@ -57,15 +89,15 @@ const val = defineModel<boolean>()
 
 .label-switch .checkbox::after {
   content: ' ';
-  height: 28px;
-  width: 28px;
-  border-radius: 28px;
+  height: var(--after-height);
+  width: var(--after-width);
+  border-radius: var(--after-radius);
   background: #fff;
   position: absolute;
   z-index: 2;
-  top: 2px;
-  left: 2px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  top: var(--after-top);
+  left: var(--after-left);
+  box-shadow: var(--after-box-shadow);
   transform: translateX(0);
   transition-duration: 300ms;
 }
@@ -83,6 +115,6 @@ const val = defineModel<boolean>()
 }
 
 .label-switch input[type='checkbox']:checked + .checkbox::after {
-  transform: translateX(22px);
+  transform: translateX(var(--translateX));
 }
 </style>
