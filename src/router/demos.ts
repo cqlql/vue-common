@@ -1,6 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router'
 import LayoutIndexVue from '@/layout/LayoutIndex.vue'
 import DemoIndex from '@/views/DemoIndex.vue'
+import TimeLineDemo from '@/components/TimeLine/TimeLineDemo.vue'
 
 const demos = [
   {
@@ -33,6 +34,14 @@ const demos = [
   // //   path: '/CountDown',
   // //   component: import('@/components/CountDown/CountDown.vue'),
   // // },
+  {
+    path: 'TimeLine',
+    name: 'TimeLine',
+    meta: {
+      title: 'TimeLine - 时间线'
+    },
+    component: TimeLineDemo
+  },
   {
     path: 'CountdownBtn',
     name: 'CountdownBtn',
