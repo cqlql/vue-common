@@ -2,8 +2,7 @@ import passiveIsSupport from './passiveIsSupport'
 import type { TouchDragOptions } from './types'
 
 /**
- * 拖动基础-移动端
- * 针对移动端触摸事件实现
+ * 拖动基础-移动端--针对单指
  * 注意：只要触发onStart,即使没有onMove,都会触发onEnd
  * Created by cql on 2017/2/24.
  *
