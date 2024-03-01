@@ -1,6 +1,7 @@
+import 'normalize.css/normalize.css'
+import './styles/variables.css'
 import './styles/base.css'
 import './styles/animation.css'
-import './styles/main.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import { router, setupRouter } from './router'

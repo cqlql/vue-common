@@ -1,8 +1,8 @@
-import type { App } from 'vue';
-import type { RouteRecordRaw } from 'vue-router';
-import { createRouter, createWebHashHistory } from 'vue-router';
+import type { App } from 'vue'
+import type { RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 // import Home from '../views/Home.vue'
-import demos from './demos';
+import demos from './demos'
 
 const routes: RouteRecordRaw[] = [
   // {
@@ -18,15 +18,15 @@ const routes: RouteRecordRaw[] = [
   //   // which is lazy-loaded when the route is visited.
   //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   // }
-];
+]
 
 export const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  routes: routes.concat(demos),
-});
+  routes: routes.concat(demos)
+})
 
 // config router
 export function setupRouter(app: App<Element>) {
-  app.use(router);
+  app.use(router)
 }

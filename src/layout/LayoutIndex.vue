@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import LayoutContent from './LayoutContent.vue';
-import LayoutSideBar from './LayoutSideBar.vue';
+import LayoutContent from './LayoutContent.vue'
+import LayoutSideBar from './LayoutSideBar.vue'
 </script>
 <template>
   <div class="LayoutIndex">
@@ -16,9 +16,12 @@ import LayoutSideBar from './LayoutSideBar.vue';
 <style lang="scss" scoped>
 .LayoutIndex {
   display: flex;
+  height: 100vh;
 
   .left {
     width: 200px;
+    border-right: 1px solid var(--el-border-color);
+    padding: 10px;
   }
 
   .main {

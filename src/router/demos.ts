@@ -1,28 +1,30 @@
 import type { RouteRecordRaw } from 'vue-router'
 import LayoutIndexVue from '@/layout/LayoutIndex.vue'
-import DemoIndex from '@/views/DemoIndex.vue'
+import DemoAll from '@/views/DemoAll.vue'
 import TimeLineDemo from '@/components/TimeLine/TimeLineDemo.vue'
+import DragBarDemo from '@/components/DragBar/DragBarDemo.vue'
 
 const demos = [
   {
     path: '/all',
-    name: 'DemoIndex',
+    name: 'DemoAll',
     meta: {
-      title: 'DemoIndex'
+      title: 'DemoAll'
     },
-    component: DemoIndex
+    component: DemoAll
   },
-  // {
-  //   path: '/all',
-  //   meta: {
-  //     title: '所有常用组件',
-  //   },
-  //   component: () => import('@/views/AllComp/index.vue'),
-  // },
+  {
+    path: '/DragBar',
+    name: 'DragBar',
+    meta: {
+      title: 'DragBar--拖动条'
+    },
+    component: DragBarDemo
+  },
   // {
   //   path: '/animation',
   //   meta: {
-  //     title: 'animation - 动画',
+  //     title: 'animation--动画',
   //   },
   //   component: () => import('@/views/Animation/AnimationView.vue'),
   // },
@@ -38,7 +40,7 @@ const demos = [
     path: 'TimeLine',
     name: 'TimeLine',
     meta: {
-      title: 'TimeLine - 时间线'
+      title: 'TimeLine--时间线'
     },
     component: TimeLineDemo
   },
@@ -46,7 +48,7 @@ const demos = [
     path: 'CountdownBtn',
     name: 'CountdownBtn',
     meta: {
-      title: 'CountdownBtn - 倒计时按钮'
+      title: 'CountdownBtn--倒计时按钮'
     },
     component: () => import('@/components/CountDown/demos/CountdownBtnDemo.vue')
   },
@@ -54,7 +56,7 @@ const demos = [
     path: 'TurntableView',
     name: 'TurntableView',
     meta: {
-      title: 'TurntableView - 转盘抽奖'
+      title: 'TurntableView--转盘抽奖'
     },
     component: () => import('@/views/Turntable/TurntableView.vue')
   },
@@ -62,14 +64,14 @@ const demos = [
     path: 'TabButtonsDemo',
     name: 'TabButtonsDemo',
     meta: {
-      title: 'TabButtonsDemo - 选项卡'
+      title: 'TabButtonsDemo--选项卡'
     },
     component: () => import('@/components/TabButtons/TabButtonsDemo.vue')
   }
   // {
   //   path: '/DigitalRandomAnimation',
   //   meta: {
-  //     title: 'DigitalRandomAnimation - 随机数抽奖',
+  //     title: 'DigitalRandomAnimation--随机数抽奖',
   //   },
   //   component: () =>
   //     import('@/views/DigitalRandomAnimation/DigitalRandomAnimation.vue'),
@@ -77,21 +79,21 @@ const demos = [
   // {
   //   path: '/ClockView',
   //   meta: {
-  //     title: 'ClockView - 可拖动时钟',
+  //     title: 'ClockView--可拖动时钟',
   //   },
   //   component: () => import('@/views/ClockSimulation/ClockSimulation.vue'),
   // },
   // {
   //   path: '/DemoJSX',
   //   meta: {
-  //     title: 'DemoJSX - JSX 语法实验',
+  //     title: 'DemoJSX--JSX 语法实验',
   //   },
   //   component: () => import('@/views/DemoJSX/DemoJSX.vue'),
   // },
   // {
   //   path: '/PieChartCss',
   //   meta: {
-  //     title: 'PieChartCss - css饼图',
+  //     title: 'PieChartCss--css饼图',
   //   },
   //   component: () => import('@/views/PieChartCss/PieChartCss.vue'),
   // },
@@ -154,6 +156,7 @@ const demos = [
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
+    redirect: '/all',
     component: LayoutIndexVue,
     name: 'demos',
     meta: { title: 'demos' },
