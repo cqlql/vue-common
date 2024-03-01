@@ -1,5 +1,5 @@
-import dragPc from './drag-pc'
-import dragMobile from './drag-mobile'
+import dragPc from './drag-pc.js'
+import dragMobile from './drag-mobile.js'
 
 export default function drag (params) {
   let unbindDragPc = dragPc(params)

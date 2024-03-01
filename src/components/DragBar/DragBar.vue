@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import drag from '@/utils/drag/drag'
+import drag from '@/utils/dom/drag/drag'
 import type { ObjectDirective } from 'vue'
 
 const props = defineProps<{

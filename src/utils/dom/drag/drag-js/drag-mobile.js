@@ -1,4 +1,4 @@
-import passiveIsSupport from './passiveIsSupport'
+import passiveIsSupport from './passiveIsSupport.js'
 
 /**
  * 拖动基础-移动端

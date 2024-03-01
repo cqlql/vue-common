@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import swipex from '@/utils/drag/swipex'
+import swipex from '@/utils/dom/drag/swipex'
 import { ref, watch } from 'vue'
 const el = ref<HTMLDivElement | null>(null)
 watch(el, (elem) => {

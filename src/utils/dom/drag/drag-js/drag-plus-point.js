@@ -24,7 +24,7 @@
     })
  */
 
-import drag from './drag'
+import drag from './drag.js'
 
 export default function ({ elem, onMove, onDown, onStart = () => {}, onEnd }) {
   let prevX

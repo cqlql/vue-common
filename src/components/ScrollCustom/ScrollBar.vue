@@ -10,7 +10,7 @@
 
 <script>
 // import drag from '@/utils/drag/drag.js'
-import drag from '@/utils/drag/drag-plus2.js'
+import drag from '@/utils/dom/drag/drag-plus2.js'
 export default {
   props: {
     // height: {

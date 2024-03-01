@@ -1,5 +1,5 @@
 import autoprefix from '@/utils/css/autoprefix'
-import swipex from '@/utils/drag/swipex'
+import swipex from '@/utils/dom/drag/swipex'
 import type { Ref } from 'vue'
 import { watch } from 'vue'
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-import drag from '@/utils/drag/drag'
+import drag from '@/utils/dom/drag/drag'
 import { defineComponent, reactive, watch } from 'vue'
 export default defineComponent({
   name: 'ClockSimulation',

@@ -1,4 +1,4 @@
-import drag from './drag'
+import drag from './drag.js'
 
 /**
  * @param {function} onDown 可选 可在此处终止滑动开始
