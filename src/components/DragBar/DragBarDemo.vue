@@ -7,11 +7,12 @@ function change() {}
 
 <template>
   <div class="bd">
-    <!-- <h2>窗口宽拖动改变 - 简单、高度可配置</h2> -->
+    <h2>窗口宽拖动改变 - 简单、高度可配置</h2>
     <div class="box">
       <div class="left-box" :style="{ width: w + 'px' }">
         <div class="type-menu">
-          <h3>menu 宽度： {{ w }}</h3>
+          <h3>当前宽度： {{ w }}</h3>
+          <h3>最小宽度： 50</h3>
           <ul>
             <li>窗口宽度拖动改变</li>
             <li>css</li>
@@ -25,7 +26,7 @@ function change() {}
             <li>nodejs</li>
           </ul>
         </div>
-        <DragBar class="bar" v-model:w="w" :max="400" :min="50" @change="change" />
+        <DragBar class="bar" v-model:w="w" :max="400" :min-w="50" @change="change" />
       </div>
       <div class="right-box" :style="{ left: w + 'px' }">
         <section>内容</section>
@@ -38,6 +39,8 @@ function change() {}
 .bd {
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  padding-left: 10px;
 
   .bar {
     background-color: rgba(57, 152, 214, 0.6);
@@ -49,7 +52,7 @@ function change() {}
 .box {
   position: relative;
   display: flex;
-  height: 100vh;
+  flex: 1;
 }
 
 .left-box {

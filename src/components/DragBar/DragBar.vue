@@ -1,20 +1,23 @@
 <script lang="ts" setup>
 import drag from '@/utils/dom/drag/drag'
+import { isDef } from '@/utils/is'
 import type { ObjectDirective } from 'vue'
 
 const props = defineProps<{
   w?: number
   h?: number
-  min?: number
-  max?: number
+  minW?: number
+  maxW?: number
+  minH?: number
+  maxH?: number
   change?: Function
 }>()
 
 const emit = defineEmits<{
   (e: 'update:w', v: number): void
   (e: 'update:h', v: number): void
-  (e: 'change'): void
-  (e: 'start'): void
+  // (e: 'change'): void
+  // (e: 'start'): void
   (e: 'end'): void
 }>()
 
@@ -36,8 +39,24 @@ const vDrag: ObjectDirective = {
       onMove: (e, { pageX, pageY }) => {
         const moveLenX = pageX - prevX
         const moveLenY = pageY - prevY
-        emit('update:w', prevWidth + moveLenX)
-        emit('update:h', prevHeight + moveLenY)
+
+        let w = prevWidth + moveLenX
+        let h = prevHeight + moveLenY
+
+        if (isDef(props.minW) && w < props.minW) {
+          w = props.minW
+        } else if (isDef(props.maxW) && w > props.maxW) {
+          w = props.maxW
+        }
+
+        if (isDef(props.minH) && h < props.minH) {
+          h = props.minH
+        } else if (isDef(props.maxH) && h > props.maxH) {
+          h = props.maxH
+        }
+
+        emit('update:w', w)
+        emit('update:h', h)
       },
       onEnd: () => {
         emit('end')
