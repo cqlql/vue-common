@@ -12,7 +12,6 @@ const emit = defineEmits<{
 const vEditor = ref<HTMLElement>()
 
 let editor: ClassicEditor | null = null
-let isAutoSet = false
 let currentEditorValue = ''
 
 onUnmounted(() => {
@@ -21,7 +20,7 @@ onUnmounted(() => {
 
 watch(modelValue, (v) => {
   if (currentEditorValue === v) return
-  isAutoSet = true
+  // isAutoSet = true
   editor?.setData(v)
 })
 
@@ -32,16 +31,14 @@ function onLoadedSuccess(thisEditor: ClassicEditor) {
   thisEditor.setData(currentEditorValue)
 
   thisEditor.model.document.on('change:data', () => {
-    currentEditorValue = thisEditor.getData()
+    currentEditorValue = modelValue.value = thisEditor.getData()
     emit('change', currentEditorValue)
-    // 实现主动设置情况 不触发 inputValue
-    if (isAutoSet) {
-      isAutoSet = false
-      return
-    }
-
-    modelValue.value = currentEditorValue
-    emit('input', currentEditorValue)
+    // 实现改变 modelValue 情况 不触发 inputValue
+    // if (isAutoSet) {
+    //   isAutoSet = false
+    //   return
+    // }
+    // emit('input', currentEditorValue)
   })
 }
 
