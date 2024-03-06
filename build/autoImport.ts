@@ -27,9 +27,9 @@ export default function autoImport() {
         // IconsResolver({
         //   prefix: 'Icon',
         // }),
-      ]
+      ],
 
-      // dts: path.resolve(pathSrc, 'auto-imports.d.ts'),
+      dts: path.resolve(pathSrc, 'auto-imports.d.ts')
     }),
 
     Components({

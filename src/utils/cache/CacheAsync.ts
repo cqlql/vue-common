@@ -1,64 +1,64 @@
 class Queue<T = any> {
-  list: T[] = [];
+  list: T[] = []
   add(item: T) {
-    this.list.push(item);
+    this.list.push(item)
   }
   exec(cb: (item: T) => void) {
     this.list.forEach((item) => {
-      cb(item);
-    });
-    this.list = [];
+      cb(item)
+    })
+    this.list = []
   }
 }
 export default class CacheAsync<T = any> {
-  requestFn: () => Promise<T>;
-  cache?: T;
-  queue = new Queue();
-  success = false;
-  loading = false;
+  requestFn: () => Promise<T>
+  cache?: T
+  queue = new Queue()
+  success = false
+  loading = false
 
   constructor(requestFn: () => Promise<T>) {
-    this.requestFn = requestFn;
+    this.requestFn = requestFn
   }
 
   request(): Promise<T> {
     if (this.success) {
-      return Promise.resolve(this.cache!);
+      return Promise.resolve(this.cache!)
     }
 
-    const { queue } = this;
+    const { queue } = this
     if (this.loading) {
       return new Promise((resolve, reject) => {
-        queue.add({ resolve, reject });
-      });
+        queue.add({ resolve, reject })
+      })
     }
-    this.loading = true;
+    this.loading = true
     this.requestFn()
       .then((result) => {
-        this.cache = result;
+        this.cache = result
         queue.exec(({ resolve }) => {
-          resolve(this.cache);
-        });
-        this.success = true;
+          resolve(this.cache)
+        })
+        this.success = true
       })
       .catch(() => {
         queue.exec(({ reject }) => {
-          reject();
-        });
+          reject()
+        })
       })
       .finally(() => {
-        this.loading = false;
-      });
+        this.loading = false
+      })
 
     // 第一次
     return new Promise((resolve, reject) => {
-      queue.add({ resolve, reject });
-    });
+      queue.add({ resolve, reject })
+    })
   }
 
   clear() {
-    this.cache = undefined;
-    this.success = false;
-    this.loading = false;
+    this.cache = undefined
+    this.success = false
+    this.loading = false
   }
 }

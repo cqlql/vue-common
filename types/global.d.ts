@@ -1,10 +1,10 @@
 // 定义全局类型
 declare interface Fn<T = any, R = T> {
-  (...arg: T[]): R;
+  (...arg: T[]): R
 }
-declare type Nullable<T> = T | null;
-declare type Recordable<T = any> = Record<string, T>;
-declare type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>;
+declare type Nullable<T> = T | null
+declare type Recordable<T = any> = Record<string, T>
+declare type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>
 
 /**
  * 覆写类型
@@ -32,7 +32,7 @@ declare type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>;
  *   a: boolean;
  * }
  */
-declare type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
+declare type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N
 
 // 修改全局类型
 // declare namespace NodeJS {
@@ -53,28 +53,30 @@ declare type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 // declare type ReturnType<T extends (...args: any) => any> = T extends (...args: any) => infer R ? R : any;
 
 interface Option<T = string> {
-  label: string;
-  value: T;
+  label: string
+  value: T
 }
 
 interface OptionId<T = string> {
-  id: string;
-  name: T;
+  id: string
+  name: T
 }
 
 /**
  * setTimeout 返回值类型
  */
-type TimeoutHandle = ReturnType<typeof setTimeout>;
+type TimeoutHandle = ReturnType<typeof setTimeout>
 
 /**
  * setInterval 返回值类型
  */
-type IntervalHandle = ReturnType<typeof setInterval>;
+type IntervalHandle = ReturnType<typeof setInterval>
 
 /**泛型组件出口类型 */
 type GenericComponentExports<D extends (...p: any[]) => any> =
   //这里获取组件通用类型
   import('vue').ComponentPublicInstance &
     //这里获取defineExpose暴露的数据类型
-    Parameters<NonNullable<NonNullable<ReturnType<D>['__ctx']>['expose']>>[0];
+    Parameters<NonNullable<NonNullable<ReturnType<D>['__ctx']>['expose']>>[0]
+
+// declare const ClassicEditor: (typeof import('@ckeditor/ckeditor5-editor-classic'))['ClassicEditor']

@@ -3,6 +3,7 @@ import LayoutIndexVue from '@/layout/LayoutIndex.vue'
 import DemoAll from '@/views/DemoAll.vue'
 import TimeLineDemo from '@/components/TimeLine/TimeLineDemo.vue'
 import DragBarDemo from '@/components/DragBar/DragBarDemo.vue'
+import RichEditorDemo from '@/components/RichEditor/RichEditorDemo.vue'
 
 const demos = [
   {
@@ -12,6 +13,14 @@ const demos = [
       title: 'DemoAll'
     },
     component: DemoAll
+  },
+  {
+    path: '/RichEditorDemo',
+    name: 'RichEditorDemo',
+    meta: {
+      title: 'ckeditor--富文本编辑器'
+    },
+    component: RichEditorDemo
   },
   {
     path: '/DragBar',
