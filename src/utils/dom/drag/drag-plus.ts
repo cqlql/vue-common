@@ -7,7 +7,13 @@ import drag from './drag'
 import type { DragOptions } from './types'
 
 interface DragPlusOptions extends Omit<DragOptions, 'onMove'> {
-  onMove(params: { lx: number; ly: number; e: TouchEvent | MouseEvent }): void
+  onMove(params: {
+    lx: number
+    ly: number
+    mx: number
+    my: number
+    e: TouchEvent | MouseEvent
+  }): void
   getCurrentXY(): { x: number; y: number }
 }
 
@@ -39,9 +45,11 @@ export default function dragPlus({
       prevY = curr.y
     },
     onMove(e, { pageX, pageY }) {
-      const x = pageX - startX + prevX
-      const y = pageY - startY + prevY
-      onMove({ lx: x, ly: y, e })
+      const mx = pageX - startX
+      const my = pageY - startY
+      const x = mx + prevX
+      const y = my + prevY
+      onMove({ lx: x, ly: y, mx, my, e })
       curr.x = x
       curr.y = y
     },

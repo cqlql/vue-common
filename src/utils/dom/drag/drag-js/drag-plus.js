@@ -4,40 +4,34 @@
  *
  */
 
-import drag from './drag.js'
+import drag from './drag'
 
-export default function ({ elem, onMove, onDown, onStart = () => {}, onEnd }) {
-  const curr = {
-    x: 0,
-    y: 0
-  }
+export default function ({ elem, onMove, onDown, onStart = () => {}, onEnd, getCurrentXY }) {
   let startX
   let startY
   let prevX
   let prevY
   const unbind = drag({
     elem,
-    onMove (e) {
+    onMove(e) {
       const { pageX, pageY } = e.touches ? e.touches[0] : e
-      const x = pageX - startX + prevX
-      const y = pageY - startY + prevY
-      onMove({ lx: x, ly: y, e })
-      curr.x = x
-      curr.y = y
+      const mx = pageX - startX
+      const my = pageY - startY
+      const x = mx + prevX
+      const y = my + prevY
+      onMove({ lx: x, ly: y, mx, my, e })
     },
     onDown,
-    onStart (e) {
+    onStart(e) {
       onStart(e)
       const { pageX, pageY } = e.touches ? e.touches[0] : e
       startX = pageX
       startY = pageY
+      const curr = getCurrentXY()
       prevX = curr.x
       prevY = curr.y
     },
     onEnd
   })
-  return {
-    curr,
-    unbind
-  }
+  return unbind
 }
