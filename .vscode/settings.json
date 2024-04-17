@@ -7,18 +7,19 @@
   "cSpell.words": [
     "btns",
     "Icones",
+    "Iconify",
     "sortablejs"
   ],
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "*.ts": "$(capture).test.ts, $(capture).test.tsx, $(capture).demo.vue",
+    "*.ts": "$(capture).test.ts, $(capture).test.tsx,$(capture)Demo.vue",
     "*.tsx": "$(capture).test.ts, $(capture).test.tsx",
     "*.env": "$(capture).env.*",
     "package.json": "pnpm-lock.yaml,yarn.lock,LICENSE,README*,CHANGELOG*,CNAME,.gitattributes,.gitignore,.gitpod.yml,",
-    ".eslintrc.cjs": ".eslintignore,.prettierignore,.stylelintignore,.commitlintrc.js,.prettierrc.json,.stylelintrc.js",
+    ".eslintrc.cjs": ".eslintignore,.prettierignore,.stylelintignore,.commitlintrc.js,.prettierrc.json,.stylelintrc.cjs",
     "tsconfig.json": "tsconfig.app.json,tsconfig.node.json,tsconfig.vitest.json"
 
   },
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
 }

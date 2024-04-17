@@ -28,9 +28,13 @@ coverage
 *.sln
 *.sw?
 
-test-results/
-playwright-report/
+*.tsbuildinfo
 
 # 自动生成
 auto-imports.d.ts
 auto-components.d.ts
+
+# docs
+.cache/
+.temp/
+docs/docs/.vuepress/components/data.json
