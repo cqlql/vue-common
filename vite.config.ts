@@ -6,6 +6,7 @@ import autoImport from './build/autoImport';
 import { configHtmlPlugin } from './build/html';
 import Icons from 'unplugin-icons/vite';
 import tsNameof from 'vite-plugin-ts-nameof';
+import { analyzer } from 'vite-bundle-analyzer';
 // import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 
 // https://vitejs.dev/config/
@@ -31,10 +32,7 @@ export default defineConfig(({ command, mode }) => {
         autoInstall: true,
       }),
       autoImport(),
-
-      // 打包分析
-      // bundleAnalyzer({}),
-    ],
+    ].concat(mode === 'analyzer' ? [analyzer()] : []), // 打包分析
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
