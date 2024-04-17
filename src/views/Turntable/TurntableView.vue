@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import waitTime from '@/utils/timer/wait-time'
+import waitTime from '@/utils/time/wait-time'
 import VTurntable from './Turntable.vue'
 
 async function waitResult() {
