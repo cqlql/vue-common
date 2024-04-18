@@ -6,11 +6,11 @@ function onClick() {
 </script>
 <template>
   <v-button @click="onClick">
-    <v-icon icon="ic:baseline-add"></v-icon>
+    <!-- <v-icon icon="ic:baseline-add"></v-icon> -->
     <span>add</span>
   </v-button>
   <div>
-    <VideoView></VideoView>
+    <VideoView />
   </div>
 </template>
 

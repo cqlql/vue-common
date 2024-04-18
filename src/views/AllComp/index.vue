@@ -8,9 +8,9 @@ import CheckboxPlus from '@/components/CheckboxPlus/CheckboxPlusDemo.vue'
 import ButtonVue from '@/components/Button/ButtonVue.vue'
 import ButtonGreen from '@/components/Button/ButtonGreen.vue'
 import LoadingDemo from '../LoadingDemo/LoadingDemo.vue'
-import InputNumberDemo from '@/components/Form/InputNumber/demo/InputNumberDemo.vue'
+import InputNumberDemo from '@/components/Form/InputNumber/InputNumberDemo.vue'
 import InputNumberMinDemo from '@/components/Form/InputNumber/demo/InputNumberMinDemo.vue'
-import AddSubtractBar from '@/components/Form/InputNumber/AddSubtractBar.vue'
+import AddSubtractBar from '@/components/Form/InputNumber/ActionBar.vue'
 import Icon from '@/components/Icon/src/Icon.vue'
 </script>
 <template>

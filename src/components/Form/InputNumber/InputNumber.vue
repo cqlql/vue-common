@@ -1,50 +1,69 @@
 <script lang="ts" setup>
-let reg = /^-?(\d+\.?\d*)?$/
-// const min = 0
-// const max = 1000
-// const step = 5
+import Big from 'big.js'
+import { isDef } from '@/utils/is'
+import ActionBar from './ActionBar.vue'
+const modelValue = defineModel<string>()
+// const reg = /^[+-]?(\d+\.?\d*)?$/
 const props = defineProps<{
-  min?: number
-  modelValue: string
+  min?: string
+  max?: string
+  step?: string
+  precision?: string
 }>()
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', v: string): void
-}>()
+console.log(Big('0.1').toFixed(2, 0))
 
-// function minus() {
-//   let v = Number(props.modelValue) - step
-//   if (v < min) {
-//     v = min
-//   }
-//   emit('update:modelValue', String(v))
-// }
-// function add() {
-//   let v = Number(props.modelValue) + step
-//   if (v > max) {
-//     v = max
-//   }
-//   emit('update:modelValue', String(v))
-// }
+function plus() {
+  const big = new Big(modelValue.value || '0').plus(props.step || '1')
+  modelValue.value = toValue(fixMax(big) || big)
+}
 
-function input(e: Event) {
-  let target = e.target as HTMLInputElement
-  let v = target.value
+function minus() {
+  const big = new Big(modelValue.value || '0').minus(props.step || '1')
+  modelValue.value = toValue(fixMin(big) || big)
+}
 
-  let pass = reg.test(v)
-
-  if (pass) {
-    let min = props.min
-    if (min !== undefined) {
-      if (Number(v) < min) {
-        v = String(min)
-      }
+function fixMax(big: Big) {
+  const max = props.max
+  if (isDef(max)) {
+    if (big.gt(max)) {
+      return new Big(max)
     }
-  } else {
-    v = props.modelValue
+  }
+}
+
+function fixMin(big: Big) {
+  const min = props.min
+  if (isDef(min)) {
+    if (big.lt(min)) {
+      return new Big(min)
+    }
+  }
+}
+
+function toValue(big: Big) {
+  const precision = props.precision
+  if (isDef(precision)) {
+    return big.toFixed(Number(precision), 0)
   }
 
-  emit('update:modelValue', v)
+  return big.toString()
+}
+
+function change(e: Event) {
+  const target = e.target as HTMLInputElement
+
+  let v = target.value
+  try {
+    if (v) {
+      const big = new Big(v)
+      v = toValue(fixMax(big) || fixMin(big) || big)
+    }
+  } catch (e) {
+    v = modelValue.value || ''
+  }
+
+  modelValue.value = v
 
   // 同步
   if (v !== target.value) {
@@ -53,20 +72,46 @@ function input(e: Event) {
 }
 </script>
 <template>
-  <input type="text" :value="modelValue" @input="input" />
+  <div class="InputNumber">
+    <input
+      type="text"
+      :value="modelValue"
+      @change="change"
+      @keydown.up.prevent="plus"
+      @keydown.down.prevent="minus"
+    />
+    <ActionBar class="ActionBar" @plus="plus" @minus="minus" />
+  </div>
 </template>
 
-<style lang="less" scoped>
-input {
-  // width: 100%;
-  // height: 46px;
-  // text-align: center;
-  // background: transparent;
-  // border-radius: 0;
-  border: 1px solid #ddd;
+<style lang="scss" scoped>
+.InputNumber {
+  --InputNumber-color: #fff;
+  --InputNumber-border-color: #dcdfe6;
 
-  // &:focus {
-  //   outline: 1px solid #40a9ff;
-  // }
+  display: flex;
+  border: 1px solid var(--InputNumber-border-color);
+  border-radius: 4px;
+
+  input {
+    border-radius: 4px;
+    border: none;
+    flex: 1;
+    outline: none;
+    padding: 4px 10px;
+    font-size: inherit;
+    line-height: 22px;
+  }
+
+  .ActionBar {
+    // opacity: 0;
+    transition: opacity 0.2s linear 0.2s;
+  }
+
+  &:hover {
+    .ActionBar {
+      opacity: 1;
+    }
+  }
 }
 </style>

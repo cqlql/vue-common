@@ -11,6 +11,9 @@ importers:
       ant-design-vue:
         specifier: ^4.1.2
         version: 4.1.2(vue@3.4.23(typescript@5.4.5))
+      big.js:
+        specifier: ^6.2.1
+        version: 6.2.1
       dayjs:
         specifier: ^1.11.10
         version: 1.11.10
@@ -27,8 +30,8 @@ importers:
         specifier: ^3.4.23
         version: 3.4.23(typescript@5.4.5)
       vue-router:
-        specifier: ^4.3.0
-        version: 4.3.0(vue@3.4.23(typescript@5.4.5))
+        specifier: ^4.3.1
+        version: 4.3.1(vue@3.4.23(typescript@5.4.5))
     devDependencies:
       '@ckeditor/ckeditor5-core':
         specifier: ^41.1.0
@@ -51,6 +54,9 @@ importers:
       '@tsconfig/node20':
         specifier: ^20.1.4
         version: 20.1.4
+      '@types/big.js':
+        specifier: ^6.2.2
+        version: 6.2.2
       '@types/jsdom':
         specifier: ^21.1.6
         version: 21.1.6
@@ -833,6 +839,9 @@ packages:
   '@tsconfig/node20@20.1.4':
     resolution: {integrity: sha512-sqgsT69YFeLWf5NtJ4Xq/xAF8p4ZQHlmGW74Nu2tD4+g5fAsposc4ZfaaPixVu4y01BEiDCWLRDCvDM5JOsRxg==}
 
+  '@types/big.js@6.2.2':
+    resolution: {integrity: sha512-e2cOW9YlVzFY2iScnGBBkplKsrn2CsObHQ2Hiw4V1sSyiGbgWL8IyqE3zFi1Pt5o1pdAtYkDAIsF3KKUPjdzaA==}
+
   '@types/estree@1.0.5':
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
 
@@ -1232,6 +1241,9 @@ packages:
 
   bcrypt-pbkdf@1.0.2:
     resolution: {integrity: sha512-qeFIXtP4MSoi6NLqO12WfqARWWuCKi2Rn/9hJLEmtB5yTNr9DqFWkJRCf2qShWzPeAMRnOgCrq0sg/KLv5ES9w==}
+
+  big.js@6.2.1:
+    resolution: {integrity: sha512-bCtHMwL9LeDIozFn+oNhhFoq+yQ3BNdnsLSASUxLciOb1vgvpHsIO1dsENiGMgbb4SkP5TrzWzRiLddn8ahVOQ==}
 
   binary-extensions@2.2.0:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
@@ -3409,8 +3421,8 @@ packages:
     peerDependencies:
       eslint: '>=6.0.0'
 
-  vue-router@4.3.0:
-    resolution: {integrity: sha512-dqUcs8tUeG+ssgWhcPbjHvazML16Oga5w34uCUmsk7i0BcnskoLGwjpa15fqMr2Fa5JgVBrdL2MEgqz6XZ/6IQ==}
+  vue-router@4.3.1:
+    resolution: {integrity: sha512-D0h3oyP6vp28BOvxv2hVpiqFTjTJizCf1BuMmCibc8UW0Ll/N80SWqDd/hqPMaZfzW1j+s2s+aTRyBIP9ElzOw==}
     peerDependencies:
       vue: ^3.2.0
 
@@ -4239,6 +4251,8 @@ snapshots:
 
   '@tsconfig/node20@20.1.4': {}
 
+  '@types/big.js@6.2.2': {}
+
   '@types/estree@1.0.5': {}
 
   '@types/jsdom@21.1.6':
@@ -4761,6 +4775,8 @@ snapshots:
   bcrypt-pbkdf@1.0.2:
     dependencies:
       tweetnacl: 0.14.5
+
+  big.js@6.2.1: {}
 
   binary-extensions@2.2.0: {}
 
@@ -7113,7 +7129,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vue-router@4.3.0(vue@3.4.23(typescript@5.4.5)):
+  vue-router@4.3.1(vue@3.4.23(typescript@5.4.5)):
     dependencies:
       '@vue/devtools-api': 6.5.1
       vue: 3.4.23(typescript@5.4.5)

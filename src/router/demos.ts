@@ -4,31 +4,40 @@ import DemoAll from '@/views/DemoAll.vue'
 import TimeLineDemo from '@/components/TimeLine/TimeLineDemo.vue'
 import DragBarDemo from '@/components/DragBar/DragBarDemo.vue'
 import RichEditorDemo from '@/components/RichEditor/RichEditorDemo.vue'
+import InputNumberDemo from '@/components/Form/InputNumber/InputNumberDemo.vue'
 
 const demos = [
   {
     path: '/all',
     name: 'DemoAll',
     meta: {
-      title: 'DemoAll'
+      title: 'DemoAll',
     },
-    component: DemoAll
+    component: DemoAll,
+  },
+  {
+    path: '/NumberInputDemo',
+    name: 'NumberInputDemo',
+    meta: {
+      title: 'NumberInputDemo',
+    },
+    component: InputNumberDemo,
   },
   {
     path: '/RichEditorDemo',
     name: 'RichEditorDemo',
     meta: {
-      title: 'ckeditor--富文本编辑器'
+      title: 'ckeditor--富文本编辑器',
     },
-    component: RichEditorDemo
+    component: RichEditorDemo,
   },
   {
     path: '/DragBar',
     name: 'DragBar',
     meta: {
-      title: 'DragBar--拖动条'
+      title: 'DragBar--拖动条',
     },
-    component: DragBarDemo
+    component: DragBarDemo,
   },
   // {
   //   path: '/animation',
@@ -49,34 +58,34 @@ const demos = [
     path: 'TimeLine',
     name: 'TimeLine',
     meta: {
-      title: 'TimeLine--时间线'
+      title: 'TimeLine--时间线',
     },
-    component: TimeLineDemo
+    component: TimeLineDemo,
   },
   {
     path: 'CountdownBtn',
     name: 'CountdownBtn',
     meta: {
-      title: 'CountdownBtn--倒计时按钮'
+      title: 'CountdownBtn--倒计时按钮',
     },
-    component: () => import('@/components/CountDown/demos/CountdownBtnDemo.vue')
+    component: () => import('@/components/CountDown/demos/CountdownBtnDemo.vue'),
   },
   {
     path: 'TurntableView',
     name: 'TurntableView',
     meta: {
-      title: 'TurntableView--转盘抽奖'
+      title: 'TurntableView--转盘抽奖',
     },
-    component: () => import('@/views/Turntable/TurntableView.vue')
+    component: () => import('@/views/Turntable/TurntableView.vue'),
   },
   {
     path: 'TabButtonsDemo',
     name: 'TabButtonsDemo',
     meta: {
-      title: 'TabButtonsDemo--选项卡'
+      title: 'TabButtonsDemo--选项卡',
     },
-    component: () => import('@/components/TabButtons/TabButtonsDemo.vue')
-  }
+    component: () => import('@/components/TabButtons/TabButtonsDemo.vue'),
+  },
   // {
   //   path: '/DigitalRandomAnimation',
   //   meta: {
@@ -169,8 +178,8 @@ const routes: RouteRecordRaw[] = [
     component: LayoutIndexVue,
     name: 'demos',
     meta: { title: 'demos' },
-    children: demos
-  }
+    children: demos,
+  },
 ]
 
 export default routes

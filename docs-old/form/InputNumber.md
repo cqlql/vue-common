@@ -8,7 +8,7 @@ title: InputNumber
   <InputNumberDemo />
   <template #code>
 
-@[code{3-3} vue{}](/src/components/Form/InputNumber/demo/InputNumberDemo.vue)
+@[code{3-3} vue{}](/src/components/Form/InputNumber/InputNumberDemo.vue)
 
   </template>
 </demo-box>
@@ -25,6 +25,6 @@ title: InputNumber
 </demo-box>
 
 <script setup>
-  import InputNumberDemo from '@/components/Form/InputNumber/demo/InputNumberDemo.vue'
+  import InputNumberDemo from '@/components/Form/InputNumber/InputNumberDemo.vue'
   import InputNumberMinDemo from '@/components/Form/InputNumber/demo/InputNumberMinDemo.vue'
 </script>

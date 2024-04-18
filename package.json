@@ -18,12 +18,13 @@
   },
   "dependencies": {
     "ant-design-vue": "^4.1.2",
+    "big.js": "^6.2.1",
     "dayjs": "^1.11.10",
     "lodash-es": "^4.17.21",
     "normalize.css": "^8.0.1",
     "pinia": "^2.1.7",
     "vue": "^3.4.23",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.1"
   },
   "devDependencies": {
     "@ckeditor/ckeditor5-core": "^41.1.0",
@@ -33,6 +34,7 @@
     "@iconify/json": "^2.2.201",
     "@rushstack/eslint-patch": "^1.10.2",
     "@tsconfig/node20": "^20.1.4",
+    "@types/big.js": "^6.2.2",
     "@types/jsdom": "^21.1.6",
     "@types/node": "^20.12.7",
     "@typescript-nameof/common-types": "^0.0.7",
