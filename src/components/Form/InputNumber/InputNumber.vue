@@ -11,8 +11,6 @@ const props = defineProps<{
   precision?: string
 }>()
 
-console.log(Big('0.1').toFixed(2, 0))
-
 function plus() {
   const big = new Big(modelValue.value || '0').plus(props.step || '1')
   modelValue.value = toValue(fixMax(big) || big)
@@ -44,7 +42,10 @@ function fixMin(big: Big) {
 function toValue(big: Big) {
   const precision = props.precision
   if (isDef(precision)) {
-    return big.toFixed(Number(precision), 0)
+    const precisionVal = Number(precision)
+    if (big.c.length - 1 - big.e > precisionVal) {
+      return big.toFixed(precisionVal, 0)
+    }
   }
 
   return big.toString()
