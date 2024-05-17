@@ -27,10 +27,10 @@
     "vue-router": "^4.3.2"
   },
   "devDependencies": {
-    "@ckeditor/ckeditor5-core": "^41.1.0",
-    "@ckeditor/ckeditor5-editor-classic": "^41.1.0",
-    "@ckeditor/ckeditor5-image": "^41.1.0",
-    "@ckeditor/ckeditor5-watchdog": "^41.1.0",
+    "@ckeditor/ckeditor5-core": "41.4.1",
+    "@ckeditor/ckeditor5-editor-classic": "41.4.1",
+    "@ckeditor/ckeditor5-image": "41.4.1",
+    "@ckeditor/ckeditor5-watchdog": "41.4.1",
     "@iconify/json": "^2.2.210",
     "@rushstack/eslint-patch": "^1.10.2",
     "@tsconfig/node20": "^20.1.4",
