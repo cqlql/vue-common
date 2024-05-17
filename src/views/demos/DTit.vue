@@ -1,7 +1,14 @@
 <!-- 配合 DCont 使用 -->
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+defineProps<{
+  title?: string
+}>()
+</script>
 <template>
-  <h2 class="DemoTitle"><slot></slot></h2>
+  <h2 class="DemoTitle">
+    <slot v-if="$slots.default"></slot>
+    <template v-else>{{ title }}</template>
+  </h2>
 </template>
 
 <style lang="scss" scoped>

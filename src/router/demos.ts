@@ -1,10 +1,10 @@
 import type { RouteRecordRaw } from 'vue-router'
 import LayoutIndexVue from '@/layout/LayoutIndex.vue'
-import DemoAll from '@/views/DemoAll.vue'
 import TimeLineDemo from '@/components/TimeLine/TimeLineDemo.vue'
 import DragBarDemo from '@/components/DragBar/DragBarDemo.vue'
 import RichEditorDemo from '@/components/RichEditor/RichEditorDemo.vue'
 import InputNumberDemo from '@/components/Form/InputNumber/InputNumberDemo.vue'
+import DemoAll from '@/views/all/DemoAll.vue'
 
 const demos = [
   {

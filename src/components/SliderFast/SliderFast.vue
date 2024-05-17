@@ -1,23 +1,14 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import Icon from '@/components/Icon/src/Icon.vue'
 import SliderOnly from './SliderOnly.vue'
 import useSliderFast from './hooks/useSliderFast'
 import useSwipex from './hooks/useSwipex'
 
 const vSliderOnly = ref<{ $el: HTMLDivElement } | null>(null)
 
-let list = ref([
-  { id: 1 },
-  { id: 2 },
-  { id: 3 },
-  { id: 4 },
-  { id: 5 },
-  { id: 6 },
-])
+const list = ref([{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }])
 
-const { listView, inLeft, inRight, slideRestore, slideClass, transitionend } =
-  useSliderFast(list)
+const { listView, inLeft, inRight, slideRestore, slideClass, transitionend } = useSliderFast(list)
 
 const { transitionend: endSwipe } = useSwipex({
   vSliderOnly,
@@ -33,16 +24,10 @@ function handleTransitionend(direction: string) {
 </script>
 <template>
   <button @click="inLeft">
-    <Icon icon="ic:twotone-keyboard-arrow-left"></Icon>
+    <Icon icon="ic:twotone-keyboard-arrow-left" />
   </button>
-  <button @click="inRight"
-    ><Icon icon="ic:twotone-keyboard-arrow-right"></Icon
-  ></button>
-  <SliderOnly
-    ref="vSliderOnly"
-    v-model:slideClass="slideClass"
-    @end="handleTransitionend"
-  >
+  <button @click="inRight"><Icon icon="ic:twotone-keyboard-arrow-right" /></button>
+  <SliderOnly ref="vSliderOnly" v-model:slideClass="slideClass" @end="handleTransitionend">
     <div class="SliderOnly_item" v-for="item of listView" :key="item.id">
       {{ item.id }}
     </div>

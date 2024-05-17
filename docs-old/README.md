@@ -18,5 +18,5 @@
 
 <script setup>
 import SliderFast from '@/components/SliderFast/SliderFast.vue'
-import AllComp from '@/views/AllComp/index.vue'
+import AllComp from '@/views/all/index.vue'
 </script>

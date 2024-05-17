@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import BoxView from './comp/BoxView.vue'
 import Calendar from '@/components/Calendar/Calendar.vue'
 import SwipeX from '../SwipeX/SwipeX.vue'
 import SliderFast from '@/components/SliderFast/SliderFast.vue'
@@ -9,21 +8,31 @@ import ButtonVue from '@/components/Button/ButtonVue.vue'
 import ButtonGreen from '@/components/Button/ButtonGreen.vue'
 import LoadingDemo from '../LoadingDemo/LoadingDemo.vue'
 import InputNumberDemo from '@/components/Form/InputNumber/InputNumberDemo.vue'
-import InputNumberMinDemo from '@/components/Form/InputNumber/demo/InputNumberMinDemo.vue'
 import AddSubtractBar from '@/components/Form/InputNumber/ActionBar.vue'
-import Icon from '@/components/Icon/src/Icon.vue'
+import DCont from '../demos/DCont.vue'
+import DTit from '../demos/DTit.vue'
+import PageLoading from './PageLoading.vue'
+import BaseSwitch from '@/components/Form/BaseSwitch.vue'
+import Icon from '@/components/Icon/Icon.vue'
+import AnimationShakeX from './AnimationShakeX.vue'
 </script>
 <template>
-  <BoxView title="AddSubtractBar">
+  <DCont>
+    <DTit>动画</DTit>
+    可用于未勾选同意框时的动画
+    <AnimationShakeX />
+    <DTit title="开关" />
+    <BaseSwitch />
+    <DTit title="AddSubtractBar" />
     <AddSubtractBar>
       <template #minus>
-        <Icon icon="ic:baseline-keyboard-arrow-down"></Icon>
+        <Icon icon="ic:baseline-keyboard-arrow-down" />
       </template>
       <template #middle>
         <input type="text" />
       </template>
       <template #add>
-        <Icon icon="ic:baseline-keyboard-arrow-up"></Icon>
+        <Icon icon="ic:baseline-keyboard-arrow-up" />
       </template>
     </AddSubtractBar>
     <AddSubtractBar>
@@ -31,36 +40,32 @@ import Icon from '@/components/Icon/src/Icon.vue'
         <div class="value">123</div>
       </template>
     </AddSubtractBar>
-  </BoxView>
-  <BoxView title="InputNumber">
-    <p><InputNumberDemo></InputNumberDemo></p>
-    <p><InputNumberMinDemo></InputNumberMinDemo></p>
-  </BoxView>
-  <BoxView title="Loading">
-    <LoadingDemo></LoadingDemo>
-  </BoxView>
-  <BoxView title="ButtonGreen">
+
+    <DTit title="InputNumber" />
+    <p><InputNumberDemo /></p>
+
+    <DTit title="Loading" />
+    <LoadingDemo />
+    <PageLoading />
+
+    <DTit title="ButtonGreen" />
     <ButtonGreen> Button </ButtonGreen>
-  </BoxView>
-  <BoxView title="Button">
+
+    <DTit title="Button" />
     <ButtonVue> Button </ButtonVue>
-  </BoxView>
-  <BoxView title="CheckboxPlus">
-    <CheckboxPlus> </CheckboxPlus>
-  </BoxView>
-  <BoxView title="TabButtons">
-    <TabButtonsDemo></TabButtonsDemo>
-  </BoxView>
-  <BoxView>
-    <SliderFast></SliderFast>
-  </BoxView>
-  <BoxView>
+
+    <DTit title="CheckboxPlus" />
+    <CheckboxPlus />
+
+    <DTit title="TabButtons" />
+    <TabButtonsDemo />
+
+    <SliderFast />
+
     <v-button>确认</v-button>
-  </BoxView>
-  <BoxView>
-    <Calendar></Calendar>
-  </BoxView>
-  <BoxView>
-    <SwipeX></SwipeX>
-  </BoxView>
+
+    <Calendar />
+
+    <SwipeX />
+  </DCont>
 </template>
