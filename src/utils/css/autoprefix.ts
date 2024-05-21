@@ -1,10 +1,3 @@
-interface Propertys {
-  js: string
-  css: string
-}
-
-type ValueType = 'js' | 'css'
-
 /**
  * 自动加前缀
  * 检测浏览器支持的属性。如果直接支持便不处理
@@ -17,17 +10,22 @@ type ValueType = 'js' | 'css'
  */
 export default function autoprefix(
   cssPropertyName: string,
-  type: ValueType = 'js',
+  type: 'js' | 'css' = 'js',
 ): string | undefined {
   // 检测 cssPropertyName
-  if (process.env.NODE_ENV !== 'production') {
+  if (!import.meta.env.PROD) {
     if (/^(-webkit-|-Moz-|-ms-)/.test(cssPropertyName)) {
       throw new Error('不能带浏览器前缀')
     }
   }
 
   // 如果有直接返回
-  let propertyName: Propertys | undefined
+  let propertyName:
+    | {
+        js: string
+        css: string
+      }
+    | undefined
 
   const humpName = minusHump(cssPropertyName)
 
@@ -41,7 +39,7 @@ export default function autoprefix(
     }
   } else {
     const humpNameCapital = humpName.replace(/^\w/, (w) => w.toUpperCase())
-    const cssPrefixes = ['ms', 'Moz', 'webkit']
+    const cssPrefixes = ['webkit', 'Moz', 'ms']
     for (let i = cssPrefixes.length; i--; ) {
       const prefix = cssPrefixes[i]
       const jsName = prefix + humpNameCapital

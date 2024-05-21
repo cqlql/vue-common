@@ -1,4 +1,5 @@
-import 'normalize.css/normalize.css'
+import '@csstools/normalize.css'
+import '@csstools/normalize.css/opinionated.css'
 import './styles/variables.css'
 import './styles/base.css'
 import './styles/animation.css'

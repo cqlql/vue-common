@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Timing } from '@/utils/time/Timer';
+import { Timing } from '@/utils/time/timer';
 
 const props = defineProps<{
   get: () => Promise<any>;

@@ -5,6 +5,7 @@ import DragBarDemo from '@/components/DragBar/DragBarDemo.vue'
 import RichEditorDemo from '@/components/RichEditor/RichEditorDemo.vue'
 import InputNumberDemo from '@/components/Form/InputNumber/InputNumberDemo.vue'
 import DemoAll from '@/views/all/DemoAll.vue'
+import BannerDemo from '../components/Banner/BannerDemo.vue'
 
 const demos = [
   {
@@ -14,6 +15,14 @@ const demos = [
       title: 'DemoAll',
     },
     component: DemoAll,
+  },
+  {
+    path: '/BannerDemo',
+    name: 'BannerDemo',
+    meta: {
+      title: 'BannerDemo',
+    },
+    component: BannerDemo,
   },
   {
     path: '/NumberInputDemo',

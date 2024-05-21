@@ -17,6 +17,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@csstools/normalize.css": "^12.1.1",
     "ant-design-vue": "^4.2.1",
     "big.js": "^6.2.1",
     "dayjs": "^1.11.11",
