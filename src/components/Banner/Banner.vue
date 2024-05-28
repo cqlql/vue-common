@@ -193,8 +193,4 @@ async function loadImg(index: number) {
     object-fit: contain;
   }
 }
-
-.transitionActive {
-  transition: transform 0.3s ease;
-}
 </style>

@@ -1,24 +1,20 @@
-class Queue<T = any> {
-  list: T[] = []
-  add(item: T) {
-    this.list.push(item)
-  }
-  exec(cb: (item: T) => void) {
-    this.list.forEach((item) => {
-      cb(item)
-    })
-    this.list = []
-  }
-}
+/**
+ * 缓存异步请求
+ * @example
+ * const cacheAsync = new CacheAsync(getFormDesignBaseData);
+ * async getBaseOptions(): Promise<GetFormDesignBaseDataResult> {
+ *    return cacheAsync.request();
+ * }
+ */
 export default class CacheAsync<T = any> {
-  requestFn: () => Promise<T>
+  getData: () => Promise<T>
   cache?: T
   queue = new Queue()
   success = false
   loading = false
 
   constructor(requestFn: () => Promise<T>) {
-    this.requestFn = requestFn
+    this.getData = requestFn
   }
 
   request(): Promise<T> {
@@ -33,7 +29,7 @@ export default class CacheAsync<T = any> {
       })
     }
     this.loading = true
-    this.requestFn()
+    this.getData()
       .then((result) => {
         this.cache = result
         queue.exec(({ resolve }) => {
@@ -60,5 +56,18 @@ export default class CacheAsync<T = any> {
     this.cache = undefined
     this.success = false
     this.loading = false
+  }
+}
+
+class Queue<T = any> {
+  list: T[] = []
+  add(item: T) {
+    this.list.push(item)
+  }
+  exec(cb: (item: T) => void) {
+    this.list.forEach((item) => {
+      cb(item)
+    })
+    this.list = []
   }
 }
