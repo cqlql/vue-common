@@ -15,6 +15,7 @@ import PageLoading from './PageLoading.vue'
 import BaseSwitch from '@/components/Form/BaseSwitch.vue'
 import Icon from '@/components/Icon/Icon.vue'
 import AnimationShakeX from './AnimationShakeX.vue'
+import ProgressLoading from './ProgressLoading.vue'
 </script>
 <template>
   <DCont>
@@ -46,6 +47,7 @@ import AnimationShakeX from './AnimationShakeX.vue'
 
     <DTit title="Loading" />
     <LoadingDemo />
+    <ProgressLoading />
     <PageLoading />
 
     <DTit title="ButtonGreen" />
