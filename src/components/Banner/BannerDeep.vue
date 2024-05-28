@@ -14,10 +14,10 @@ const activeIndex = ref(0)
 const count = computed(() => imgs.value.length)
 
 function getClassName(index: number) {
-  let leftHideIndex = activeIndex.value - 2
-  if (leftHideIndex < 0) {
-    leftHideIndex = count.value + leftHideIndex
-  }
+  // let leftHideIndex = activeIndex.value - 2
+  // if (leftHideIndex < 0) {
+  //   leftHideIndex = count.value + leftHideIndex
+  // }
 
   let leftIndex = activeIndex.value - 1
   if (leftIndex < 0) {
@@ -38,10 +38,6 @@ function getClassName(index: number) {
     return 'active'
   }
 
-  if (index === leftHideIndex) {
-    return 'leftHide'
-  }
-
   if (index === rightHideIndex) {
     return 'rightHide'
   }
@@ -53,6 +49,11 @@ function getClassName(index: number) {
   if (index === rightIndex) {
     return 'right'
   }
+
+  // if (index === leftHideIndex) {
+  //   return 'leftHide'
+  // }
+  return 'leftHide'
 }
 // const vItemsRef = ref<HTMLElement[]>()
 
@@ -85,26 +86,22 @@ function swipeRight() {
   }
   activeIndex.value = index
 }
+
+defineExpose({ swipeLeft, swipeRight })
 </script>
 <template>
   <div class="BannerDeep">
-    <div class="container">
-      <ul class="list">
-        <li
-          v-for="(url, index) of imgs"
-          :key="index"
-          ref="vItemsRef"
-          class="item"
-          :class="getClassName(index)"
-        >
-          <img :src="url" />
-        </li>
-      </ul>
-    </div>
-    <div class="btns">
-      <button class="btn prev" @click="swipeRight">左边</button>
-      <button class="btn next" @click="swipeLeft">右边</button>
-    </div>
+    <ul class="list">
+      <li
+        v-for="(url, index) of imgs"
+        :key="index"
+        ref="vItemsRef"
+        class="item"
+        :class="getClassName(index)"
+      >
+        <img :src="url" />
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -113,11 +110,8 @@ function swipeRight() {
   width: 1200px;
   border: 1px solid red;
   overflow: hidden;
-
-  .container {
-    display: flex;
-    justify-content: center;
-  }
+  display: flex;
+  justify-content: center;
 
   .list {
     width: 500px;
@@ -135,8 +129,6 @@ function swipeRight() {
     transition-property: transform opacity;
     transition-duration: 800ms;
     transition-timing-function: ease;
-    transform: translateX(-300%) scale(0.5);
-    opacity: 0;
 
     img {
       width: 100%;
@@ -147,22 +139,20 @@ function swipeRight() {
 
   .active {
     transform: translateX(0) scale(1);
-    opacity: 1;
   }
 
   .left {
     transform: translateX(-100%) scale(0.8);
-    opacity: 1;
   }
 
   .right {
     transform: translateX(100%) scale(0.8);
-    opacity: 1;
   }
 
   .leftHide {
     transform: translateX(-200%) scale(0.5);
     opacity: 0;
+    pointer-events: none;
   }
 
   .rightHide {

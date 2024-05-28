@@ -62,7 +62,7 @@ watch(
 function timerStart() {
   if (multiple.value) {
     timer.start(() => {
-      swipeLeft()
+      swipeRight()
     }, 3000)
   }
 }
@@ -83,12 +83,12 @@ function swipeLeft() {
   if (locked) return
   locked = true
   let index = currentIndex.value
-  index++
+  index--
   loadImg(index)
   moveIndex(index)
   transitionendOnce(eMoveRef.value!, () => {
-    if (index >= count.value) {
-      index = 0
+    if (index < 0) {
+      index = count.value - 1
       directMoveIndex(index)
     }
     currentIndex.value = index
@@ -100,12 +100,12 @@ function swipeRight() {
   if (locked) return
   locked = true
   let index = currentIndex.value
-  index--
+  index++
   loadImg(index)
   moveIndex(index)
   transitionendOnce(eMoveRef.value!, () => {
-    if (index < 0) {
-      index = count.value - 1
+    if (index >= count.value) {
+      index = 0
       directMoveIndex(index)
     }
     currentIndex.value = index
@@ -139,34 +139,30 @@ async function loadImg(index: number) {
   const nextItem = list.value[index + 1] || firstItem.value
   preItem.isShow = nextItem.isShow = true
 }
+
+defineExpose({ swipeRight, swipeLeft })
 </script>
 <template>
   <div class="Banner">
-    <div class="container">
-      <ul
-        ref="eMoveRef"
-        class="move"
-        :style="{ transform: `translateX(${left})`, transitionProperty: transitionProperty }"
-      >
-        <li v-if="multiple" class="item">
-          <img v-if="lastItem.isShow" :src="lastItem.url" />
-        </li>
-        <li v-for="(item, index, key) of list" :key="key" class="item">
-          <img v-if="item.isShow" :src="item.url" />
-        </li>
-        <li v-if="multiple" class="item">
-          <img v-if="firstItem.isShow" :src="firstItem.url" />
-        </li>
-      </ul>
-    </div>
-    <div class="control">
-      <button class="btn prev" @click="swipeRight">左边</button>
-      <button class="btn next" @click="swipeLeft">右边</button>
-    </div>
+    <ul
+      ref="eMoveRef"
+      class="move"
+      :style="{ transform: `translateX(${left})`, transitionProperty: transitionProperty }"
+    >
+      <li v-if="multiple" class="item">
+        <img v-if="lastItem.isShow" :src="lastItem.url" />
+      </li>
+      <li v-for="(item, index, key) of list" :key="key" class="item">
+        <img v-if="item.isShow" :src="item.url" />
+      </li>
+      <li v-if="multiple" class="item">
+        <img v-if="firstItem.isShow" :src="firstItem.url" />
+      </li>
+    </ul>
   </div>
 </template>
 <style scoped>
-.container {
+.Banner {
   width: 100%;
   height: 470px;
   overflow: hidden;
