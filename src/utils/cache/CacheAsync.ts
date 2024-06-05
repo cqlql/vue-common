@@ -13,11 +13,11 @@ export default class CacheAsync<T = any> {
   success = false
   loading = false
 
-  constructor(requestFn: () => Promise<T>) {
-    this.getData = requestFn
+  constructor(getData: () => Promise<T> = () => Promise.resolve({} as T)) {
+    this.getData = getData
   }
 
-  request(): Promise<T> {
+  request(getData: () => Promise<T> = this.getData): Promise<T> {
     if (this.success) {
       return Promise.resolve(this.cache!)
     }
@@ -29,7 +29,7 @@ export default class CacheAsync<T = any> {
       })
     }
     this.loading = true
-    this.getData()
+    getData()
       .then((result) => {
         this.cache = result
         queue.exec(({ resolve }) => {
@@ -37,9 +37,9 @@ export default class CacheAsync<T = any> {
         })
         this.success = true
       })
-      .catch(() => {
+      .catch((err) => {
         queue.exec(({ reject }) => {
-          reject()
+          reject(err)
         })
       })
       .finally(() => {
