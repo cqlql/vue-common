@@ -6,6 +6,7 @@ import RichEditorDemo from '@/components/RichEditor/RichEditorDemo.vue'
 import InputNumberDemo from '@/components/Form/InputNumber/InputNumberDemo.vue'
 import DemoAll from '@/views/all/DemoAll.vue'
 import BannerDemo from '../components/Banner/BannerDemo.vue'
+import MenuTreeDemo from '@/components/Menu/MenuTreeDemo.vue'
 
 const demos = [
   {
@@ -15,6 +16,14 @@ const demos = [
       title: 'DemoAll',
     },
     component: DemoAll,
+  },
+  {
+    path: '/MenuTreeDemo',
+    name: 'MenuTreeDemo',
+    meta: {
+      title: 'MenuTreeDemo',
+    },
+    component: MenuTreeDemo,
   },
   {
     path: '/BannerDemo',

@@ -3,7 +3,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 // import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
-// import IconsResolver from 'unplugin-icons/resolver';
+import IconsResolver from 'unplugin-icons/resolver'
 
 export default function autoImport() {
   const pathSrc = path.resolve(process.cwd(), 'types')
@@ -19,17 +19,17 @@ export default function autoImport() {
       // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
       resolvers: [
         AntDesignVueResolver({
-          importStyle: false
-        })
+          importStyle: false,
+        }),
         // ElementPlusResolver(),
         // Auto import icon components
         // 自动导入图标组件
-        // IconsResolver({
-        //   prefix: 'Icon',
-        // }),
+        IconsResolver({
+          prefix: 'Icon',
+        }),
       ],
 
-      dts: path.resolve(pathSrc, 'auto-imports.d.ts')
+      dts: path.resolve(pathSrc, 'auto-imports.d.ts'),
     }),
 
     Components({
@@ -37,20 +37,20 @@ export default function autoImport() {
       include,
       resolvers: [
         AntDesignVueResolver({
-          importStyle: false
-        })
+          importStyle: false,
+        }),
 
         // Auto register icon components
         // 自动注册图标组件
-        // IconsResolver({
-        //   prefix: 'Icon',
-        // }),
+        IconsResolver({
+          prefix: 'Icon',
+        }),
         // Auto register Element Plus components
         // 自动导入 Element Plus 组件
         // ElementPlusResolver(),
       ],
 
-      dts: path.resolve(pathSrc, 'auto-components.d.ts')
-    })
+      dts: path.resolve(pathSrc, 'auto-components.d.ts'),
+    }),
   ]
 }

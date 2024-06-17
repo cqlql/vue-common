@@ -16,9 +16,15 @@ import BaseSwitch from '@/components/Form/BaseSwitch.vue'
 import Icon from '@/components/Icon/Icon.vue'
 import AnimationShakeX from './AnimationShakeX.vue'
 import ProgressLoading from './ProgressLoading.vue'
+import MenuBtn from '@/components/MenuBtn.vue'
+import MenuTreeDemo from '@/components/Menu/MenuTreeDemo.vue'
 </script>
 <template>
   <DCont>
+    <DTit>MenuTree</DTit>
+    <MenuTreeDemo />
+    <DTit>MenuBtn</DTit>
+    <MenuBtn />
     <DTit>动画</DTit>
     可用于未勾选同意框时的动画
     <AnimationShakeX />
