@@ -17,7 +17,7 @@ import Icon from '@/components/Icon/Icon.vue'
 import AnimationShakeX from './AnimationShakeX.vue'
 import ProgressLoading from './ProgressLoading.vue'
 import MenuBtn from '@/components/MenuBtn.vue'
-import MenuTreeDemo from '@/components/Menu/MenuTreeDemo.vue'
+import MenuTreeDemo from '@/components/MenuTree/MenuTreeDemo.vue'
 </script>
 <template>
   <DCont>

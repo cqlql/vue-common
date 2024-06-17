@@ -6,7 +6,7 @@ import RichEditorDemo from '@/components/RichEditor/RichEditorDemo.vue'
 import InputNumberDemo from '@/components/Form/InputNumber/InputNumberDemo.vue'
 import DemoAll from '@/views/all/DemoAll.vue'
 import BannerDemo from '../components/Banner/BannerDemo.vue'
-import MenuTreeDemo from '@/components/Menu/MenuTreeDemo.vue'
+import MenuTreeDemo from '@/components/MenuTree/MenuTreeDemo.vue'
 
 const demos = [
   {
