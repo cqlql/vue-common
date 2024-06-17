@@ -11,9 +11,6 @@ importers:
       '@csstools/normalize.css':
         specifier: ^12.1.1
         version: 12.1.1
-      '@formkit/auto-animate':
-        specifier: ^0.8.2
-        version: 0.8.2
       ant-design-vue:
         specifier: ^4.2.1
         version: 4.2.1(vue@3.4.27(typescript@5.4.5))
@@ -781,9 +778,6 @@ packages:
   '@eslint/js@8.57.0':
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-
-  '@formkit/auto-animate@0.8.2':
-    resolution: {integrity: sha512-SwPWfeRa5veb1hOIBMdzI+73te5puUBHmqqaF1Bu7FjvxlYSz/kJcZKSa9Cg60zL0uRNeJL2SbRxV6Jp6Q1nFQ==}
 
   '@hapi/hoek@9.3.0':
     resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==}
@@ -4517,16 +4511,13 @@ snapshots:
   '@ckeditor/ckeditor5-font@41.4.1':
     dependencies:
       ckeditor5: 41.4.1
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
 
   '@ckeditor/ckeditor5-heading@41.4.1':
-    dependencies:
-      ckeditor5: 41.4.1
-
-  '@ckeditor/ckeditor5-highlight@41.4.1':
-    dependencies:
-      ckeditor5: 41.4.1
-
-  '@ckeditor/ckeditor5-horizontal-line@41.4.1':
     dependencies:
       ckeditor5: 41.4.1
     transitivePeerDependencies:
@@ -4534,6 +4525,19 @@ snapshots:
       - canvas
       - supports-color
       - utf-8-validate
+
+  '@ckeditor/ckeditor5-highlight@41.4.1':
+    dependencies:
+      ckeditor5: 41.4.1
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
+
+  '@ckeditor/ckeditor5-horizontal-line@41.4.1':
+    dependencies:
+      ckeditor5: 41.4.1
 
   '@ckeditor/ckeditor5-html-embed@41.4.1':
     dependencies:
@@ -4548,11 +4552,6 @@ snapshots:
     dependencies:
       ckeditor5: 41.4.1
       lodash-es: 4.17.21
-    transitivePeerDependencies:
-      - bufferutil
-      - canvas
-      - supports-color
-      - utf-8-validate
 
   '@ckeditor/ckeditor5-image@41.4.1':
     dependencies:
@@ -4871,8 +4870,6 @@ snapshots:
       - supports-color
 
   '@eslint/js@8.57.0': {}
-
-  '@formkit/auto-animate@0.8.2': {}
 
   '@hapi/hoek@9.3.0': {}
 
