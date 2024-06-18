@@ -1,59 +1,79 @@
 <script lang="ts" setup>
-import MenuList from './MenuList.vue'
-import type { MenuDataItem } from './type'
+import MenuList from "./MenuList.vue";
+import type { MenuDataItem } from "./type";
 const props = defineProps<{
-  item: MenuDataItem
-}>()
-
-const expanded = ref(false)
-const hasChildren = computed(() => !!props.item.children?.length)
-const vMenuListRef = ref<InstanceType<typeof MenuList>>()
+  item: MenuDataItem;
+  level: number;
+}>();
+const emit = defineEmits<{
+  select: [];
+}>();
+const expanded = ref(false);
+const hasChildren = computed(() => !!props.item.children?.length);
+const vMenuListRef = ref<InstanceType<typeof MenuList>>();
 const eMenuList = computed(() => {
-  return vMenuListRef.value?.$el
-})
+  return vMenuListRef.value?.$el;
+});
 
 async function onClickItem() {
-  if (!hasChildren.value) return
-  expanded.value = !expanded.value
-
-  const eMenuListStyle = eMenuList.value!.style
-  const eMenuListClassList = eMenuList.value!.classList
+  props.item.onClick?.();
+  if (!hasChildren.value) {
+    emit("select");
+    return;
+  }
+  expanded.value = !expanded.value;
+  const eMenuListStyle = eMenuList.value!.style;
+  const eMenuListClassList = eMenuList.value!.classList;
 
   if (expanded.value) {
-    eMenuListStyle.height = 'auto'
-    eMenuListStyle.display = 'block'
-    const h = eMenuList.value.clientHeight
-    eMenuListStyle.height = '0'
-    eMenuListClassList.add('animated')
-    await new Promise((resolve) => setTimeout(resolve, 0))
-    eMenuListStyle.height = `${h}px`
+    eMenuListStyle.height = "auto";
+    eMenuListStyle.display = "block";
+    const h = eMenuList.value.clientHeight;
+    eMenuListStyle.height = "0";
+    eMenuListClassList.add("animated");
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    eMenuListStyle.height = `${h}px`;
   } else {
-    const h = eMenuList.value.clientHeight
-    eMenuListStyle.height = `${h}px`
-    eMenuListClassList.add('animated')
-    await new Promise((resolve) => setTimeout(resolve, 0))
-    eMenuListStyle.height = '0'
+    const h = eMenuList.value.clientHeight;
+    eMenuListStyle.height = `${h}px`;
+    eMenuListClassList.add("animated");
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    eMenuListStyle.height = "0";
   }
 
-  eMenuList.value.addEventListener('transitionend', () => {
-    eMenuListClassList.remove('animated')
+  eMenuList.value.addEventListener("transitionend", () => {
+    eMenuListClassList.remove("animated");
     if (expanded.value) {
-      eMenuListStyle.height = 'auto'
+      eMenuListStyle.height = "auto";
     } else {
-      eMenuListStyle.display = 'none'
+      eMenuListStyle.display = "none";
     }
-  })
+  });
 }
 </script>
 <template>
   <div class="MenuItem" :class="{ expanded }">
-    <div class="title-content" @click="onClickItem">
+    <a class="title-content" :href="item.href" @click="onClickItem">
       <div class="cont">
-        <span>{{ item.name }}</span>
-        <span v-if="hasChildren" class="arrows"><IconEpArrowDownBold class="icon" /></span>
+        <span class="name">
+          <span v-if="item.icon" class="name-icon">
+            <img :src="item.icon" />
+          </span>
+          <span class="val">{{ item.name }}</span>
+        </span>
+        <span v-if="hasChildren" class="arrows"
+          ><IconEpArrowDownBold class="icon"
+        /></span>
       </div>
-    </div>
-    <MenuList v-if="hasChildren" ref="vMenuListRef" class="MenuList" :list="item.children!" />
+    </a>
+    <MenuList
+      v-if="hasChildren"
+      ref="vMenuListRef"
+      class="MenuList"
+      :list="item.children!"
+      :level="level + 1"
+      @select="$emit('select')"
+    />
   </div>
 </template>
 
@@ -66,14 +86,15 @@ async function onClickItem() {
     // line-height: $h;
     cursor: pointer;
     padding: 0 20px;
+    display: block;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       left: 0;
       right: 0;
       height: $h;
-      background-color: #fff;
+      // background-color: #fff;
     }
 
     &:hover::before {
@@ -86,6 +107,17 @@ async function onClickItem() {
       height: $h;
       align-items: center;
       justify-content: space-between;
+    }
+
+    .name {
+      display: flex;
+      align-items: center;
+    }
+    .name-icon {
+      margin-right: 8px;
+      img {
+        display: block;
+      }
     }
 
     .arrows {
@@ -107,8 +139,7 @@ async function onClickItem() {
 
     &.animated {
       overflow: hidden;
-      transition:
-        height 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),
+      transition: height 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),
         opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
   }
