@@ -82,3 +82,33 @@ function checkUpdate(settings: settings) {
 setTimeout(() => {
   checkUpdate(settings)
 }, 10)
+
+
+
+/**
+ * 比较版本号大小。有新版返回 true
+ * @param currentVersion
+ * @param latestVersion
+ */
+function compareVersion(currentVersion: string, latestVersion: string): boolean {
+  const v1 = currentVersion.split('.');
+  const v2 = latestVersion.split('.');
+
+  const maxLength = Math.max(v1.length, v2.length);
+
+  for (let i = 0; i < maxLength; i++) {
+    const num1 = Number(v1[i] || 0);
+    const num2 = Number(v2[i] || 0);
+
+    if (num1 < num2) {
+      return true;
+    }
+
+    // 当前版本比服务器版本还要大？一般不会有这种情况。
+    // if (num1 > num2) {
+    //   return false;
+    // }
+  }
+
+  return false;
+}
