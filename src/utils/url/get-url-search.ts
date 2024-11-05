@@ -10,7 +10,6 @@ export default function (name: string, search = location.search) {
   if (search.substring(0, 1) !== '?') {
     search = '?' + search
   }
-  const reg = new RegExp(name + '=([^&]+)')
   const match = reg.exec(search)
 
   if (match) {
