@@ -1,21 +1,16 @@
-type Cb = (data: any) => void
-export default class {
-  private q: Cb[] = []
-  // constructor () {
-  //   this.q = []
-  // }
-  add (cb: Cb) {
+export default class QueueWait<T = any> {
+  private q: ((data: T) => void)[] = []
+  add(cb: (data: T) => void) {
     this.q.push(cb)
   }
   // 执行所有的队列
-  // ajax 情况将得到的 data 传入所有回调队列
-  excu (data: any) {
-    let fn = this.q.shift()
+  exec(data: T) {
+    const fn = this.q.shift()
     if (fn === undefined) return
     fn(data)
-    this.excu(data)
+    this.exec(data)
   }
-  clear () {
+  clear() {
     this.q = []
   }
 }

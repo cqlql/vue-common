@@ -1,17 +1,16 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "types/**/*.ts", "tests/**/*.ts"],
+  "include": ["env.d.ts", "src/**/*", "types/**/*.ts", "tests/**/*.ts"],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
-    "allowJs": true,
+    // "allowJs": true,
     // 不输出编译后的js文件，在 allowJs:true 后，会报js无法覆盖问题
-    // "noEmit": true,
+    "noEmit": true,
     // 去掉 composite设置 -- 解决报错：导出接口的属性“<variable name>”具有或正在使用专用名称“<private name>”。由 AutoImport 引起。目前没发现更好的解决办法
     // "composite": true,
     // "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-
     "baseUrl": ".",
-    "types": ["./node_modules/@typescript-nameof/types/index.d.cts","unplugin-icons/types/vue"],
+    "types": ["./node_modules/@typescript-nameof/types/index.d.cts", "unplugin-icons/types/vue"],
     "paths": {
       "@/*": ["./src/*"]
     }
