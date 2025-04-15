@@ -1,5 +1,9 @@
 import drag from './drag';
 
+/**
+ * 目前只处理Y方向
+ * swipex 为旧实现，待弃用
+ */
 export function swipe({
   elem,
   onDown,
