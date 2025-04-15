@@ -1,12 +1,12 @@
-import type { RouteRecordRaw } from 'vue-router'
-import LayoutIndexVue from '@/layout/LayoutIndex.vue'
-import TimeLineDemo from '@/components/TimeLine/TimeLineDemo.vue'
-import DragBarDemo from '@/components/DragBar/DragBarDemo.vue'
-import RichEditorDemo from '@/components/RichEditor/RichEditorDemo.vue'
-import InputNumberDemo from '@/components/Form/InputNumber/InputNumberDemo.vue'
-import DemoAll from '@/views/all/DemoAll.vue'
-import BannerDemo from '../components/Banner/BannerDemo.vue'
-import MenuTreeDemo from '@/components/MenuTree/MenuTreeDemo.vue'
+import type { RouteRecordRaw } from 'vue-router';
+import LayoutIndexVue from '@/layout/LayoutIndex.vue';
+import TimeLineDemo from '@/components/TimeLine/TimeLineDemo.vue';
+import DragBarDemo from '@/components/DragBar/DragBarDemo.vue';
+import RichEditorDemo from '@/components/RichEditor/RichEditorDemo.vue';
+import InputNumberDemo from '@/components/Form/InputNumber/InputNumberDemo.vue';
+import DemoAll from '@/views/all/DemoAll.vue';
+import BannerDemo from '../components/Banner/BannerDemo.vue';
+import MenuTreeDemo from '@/components/MenuTree/MenuTreeDemo.vue';
 
 const demos = [
   {
@@ -17,6 +17,7 @@ const demos = [
     },
     component: DemoAll,
   },
+
   {
     path: '/MenuTreeDemo',
     name: 'MenuTreeDemo',
@@ -187,7 +188,7 @@ const demos = [
   //   },
   //   component: () => import('@/utils/timer/TimerDemo.vue'),
   // },
-]
+];
 
 const routes: RouteRecordRaw[] = [
   {
@@ -198,6 +199,14 @@ const routes: RouteRecordRaw[] = [
     meta: { title: 'demos' },
     children: demos,
   },
-]
+  {
+    path: '/swipe',
+    name: 'swipe',
+    meta: {
+      title: 'swipe',
+    },
+    component: import('@/utils/dom/drag/swipe.demo.vue'),
+  },
+];
 
-export default routes
+export default routes;

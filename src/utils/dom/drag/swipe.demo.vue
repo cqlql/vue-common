@@ -28,8 +28,13 @@ const vDom: ObjectDirective<HTMLElement> = {
 
 <style lang="scss" scoped>
 .SwipeDemo {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 300px;
-  height: 300px;
+  width: 100%;
+  height: 600px;
+  height: 100%;
   background: #ddd;
 }
 </style>
